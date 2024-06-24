@@ -1,5 +1,52 @@
-import React from "react";
 import styled from "styled-components";
+import flecha from "../assets/flecha.svg";
+
+import { v } from "../styles/theme";
+import foto from "../assets/yo.svg";
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown } from "react-icons/fa";
+
+const Presentation = () => {
+  return (
+    <Section id="home">
+      <Container>
+        <div className="texto">
+          <p className="text1">Hola, soy Jesus Calles</p>
+          <p className="text2">TSU en informáyica y desarrolador front-end</p>
+        </div>
+
+        <div className="botones">
+          <a href="https://github.com/yimonk" target="_blank" className="boton">
+            <p>GitHub</p>
+            <FaGithub className="icono" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/jesus-calles/"
+            target="_blank"
+            className="boton"
+          >
+            <p>Linkedin</p>
+            <FaLinkedin className="icono" />
+          </a>
+          <a href="https://github.com/yimonk" target="_blank" className="boton">
+            <p>CV</p>
+            <FaArrowDown className="icono" />
+          </a>
+          <a href="mailto:jactcalles@gmail.com" target="_blank" className="boton">
+            <p>Contacto</p>
+            <FaEnvelope className="icono" />
+          </a>
+        </div>
+
+        <img className="imagen" src={flecha} />
+        <img className="imagen2" src={foto} />
+      </Container>
+    </Section>
+  );
+};
+
+export default Presentation;
+
+//#region styles
 
 const Section = styled.div`
   height: 100vh;
@@ -15,98 +62,108 @@ const Container = styled.div`
   height: 100%;
   scroll-snap-align: center;
   width: 1300px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
+  display: grid;
+  gap: 20px;
+  grid-template:
+    "texto imagen" 40%
+    "texto imagen" 15%
+    "botones imagen" 25%/
+    1.5fr 0.5fr;
 
-const Left = styled.div`
-  flex: 2;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 30px;
-  background-color: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(10px);
-  border-radius: 30px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
-  padding: 40px;
-`;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 
-const Title = styled.h1`
-  font-size: 2.1rem;
-  font-weight: 900;
-`;
+  .texto {
+    grid-area: texto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .text1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+    }
+    .text2 {
+      font-size: 1.2rem;
+      letter-spacing: 5px;
+    }
+  }
 
-const SubTitle = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 200;
-  display: flex;
-  justify-content: center;
-`;
+  .imagen {
+    margin: 45% 10%;
+    grid-area: imagen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65vh;
+    animation: float 3.5s ease-in-out infinite;
+    filter: blur(5px);
+  }
 
-const Desc = styled.p`
-  color: var(--color-5);
-  font-size: 1.4rem;
-  font-weight: 200;
-`;
+  .imagen2 {
+    margin: 25% 5px;
+    grid-area: imagen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65vh;
+    animation: float 3.5s ease-in-out infinite;
+  }
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-80px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 
-const Contact = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-`;
+  .botones {
+    grid-area: botones;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 
-const Icon = styled.img`
-  width: 50px;
-  cursor: pointer;
+    .boton {
+      text-transform: uppercase;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 20px;
+      justify-self: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.3s ease;
+      background-color: ${v.color4};
+      color: ${v.color6};
+      font-weight: 500;
+      letter-spacing: 3px;
+      box-shadow: inset 0.04rem 0.04rem 0.5rem ${v.color1},
+        inset -0.04rem -0.04rem 0.4rem ${v.color5};
 
-`;
+      p {
+        padding-right: 15px;
+      }
 
-const Right = styled.div`
-  flex: 3;
-  position: relative;
-`;
-
-const Img = styled.img`
-  height: 35rem;
-  object-fit: contain;
-  position: absolute;
-  top: 0;
-  margin: auto;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  animation: animate 2s infinite ease alternate;
-
-  @keyframes animate {
-    to {
-      transform: translateY(20px);
+      .icono {
+        font-size: 35px;
+        border: none;
+        letter-spacing: inherit;
+        color: inherit;
+        text-align: inherit;
+        padding: 0;
+        font-family: inherit;
+        outline: none;
+      }
     }
   }
 `;
 
-const Presentation = () => {
-  return (
-    <Section>
-      <Container>
-        <Left>
-          <Title>DESARROLLADOR WEB</Title>
-          <SubTitle>-Frontend-</SubTitle>
-          <Desc>
-            Admirador del diseño y arquitecto de experiencias digitales.
-          </Desc>
-          <Contact>
-            <Icon src="./img/Github.svg" />
-            <Icon src="./img/Linkedin.svg" />
-            <Icon src="./img/Gmail.svg" />
-          </Contact>
-        </Left>
-        <Right>
-          <Img src="./img/img.png" />
-        </Right>
-      </Container>
-    </Section>
-  );
-};
-
-export default Presentation;
+//#endregion

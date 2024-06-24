@@ -1,92 +1,147 @@
 import React from "react";
+import { FaCode } from "react-icons/fa";
 import styled from "styled-components";
+import { v } from "../styles/theme";
 
-const data = ["Desarrollo", "Diseño", "ilustracion"];
-
-const Section = styled.div`
-  height: 100vh;
-  scroll-snap-align: center;
-  display: flex;
-  position: relative;
-  justify-content: space-between;
-  font-size: 14px;
-  font-weight: 300;
-  padding-left: 10vh;
-`;
-
-const Container = styled.div`
-  width: 1400px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Left = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const List = styled.ul`
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-
-const ListItem = styled.li`
-  font-size: 90px;
-  font-weight: bold;
-  cursor: pointer;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--color-1);
-  position: relative;
-
-  &::after {
-    content: "${(props) => props.text}";
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: var(--color-4);
-    width: 0px;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  &:hover {
-    -webkit-text-stroke: 0px ;
-    &::after {
-      animation: movetext 0.5s linear both;
-      @keyframes movetext {
-        to {
-          width: 100%;
-        }
-      }
-    }
-  }
-`;
-
-const Right = styled.div`
-  flex: 1;
-`;
-
-const Works = () => {
+const Teclonogias = () => {
   return (
-    <Section>
+    <Section id="works">
       <Container>
-        <Left>
-          <List>
-            {data.map((item) => (
-              <ListItem key={item} text={item}>
-                {item}
-              </ListItem>
-            ))}
-          </List>
-        </Left>
-        <Right></Right>
+        <Title>- Proyectos -</Title>
+
+        <Content>
+          <SubTitle> en desarrollo </SubTitle>
+          <ContainerCards>
+            <Glass data-text="Proximamente" rotate={15}>
+              <Icon alt="Proximamente">
+                <FaCode />
+              </Icon>
+            </Glass>
+
+            <Glass data-text="Proximamente" rotate={-15}>
+              <Icon alt="Proximamente">
+                <FaCode />
+              </Icon>
+            </Glass>
+
+            <Glass data-text="Proximamente" rotate={25}>
+              <Icon alt="Proximamente">
+                <FaCode />
+              </Icon>
+            </Glass>
+
+            <Glass data-text="Proximamente" rotate={-25}>
+              <Icon alt="Proximamente">
+                <FaCode />
+              </Icon>
+            </Glass>
+          </ContainerCards>
+        </Content>
       </Container>
     </Section>
   );
 };
 
-export default Works;
+export default Teclonogias;
+
+//#region  style
+
+const Section = styled.div`
+  padding-top: 10%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Container = styled.div`
+  height: 100%;
+  scroll-snap-align: center;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5rem;
+`;
+
+const Content = styled.div`
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 50px;
+`;
+
+const Icon = styled.div`
+  display: flex;
+  align-items: center;
+  transition: 0.5s;
+  transform: scale(9);
+  padding-bottom: 4px;
+`;
+
+const Glass = styled.div`
+  position: relative;
+  width: 200px;
+  height: 240px;
+  background: linear-gradient(rgba(0, 0, 0, 0.25), transparent);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 25px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 10px;
+  margin: 0 -45px;
+  transform: rotate(${(props) => props.rotate}deg);
+  font-weight: 600;
+  letter-spacing: 3px;
+
+  &::before {
+    content: attr(data-text);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background: ${v.color3};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+const ContainerCards = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  &:hover ${Glass} {
+    transform: rotate(0deg);
+    margin: 0 25px;
+  }
+`;
+
+const Title = styled.h1`
+  display: flex;
+  justify-content: center;
+  color: var(--color-5);
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 40px;
+`;
+
+const SubTitle = styled.h1`
+  display: flex;
+  justify-content: center;
+  color: var(--color-5);
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-right: 20px;
+`;
+
+//#endregion

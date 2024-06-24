@@ -1,113 +1,165 @@
-import React from "react";
 import styled from "styled-components";
+import { v } from "../styles/theme";
 
-const Section = styled.div`
-  height: 100vh;
-  scroll-snap-align: center;
-  display: flex;
-  justify-content: center;
-`;
-
-const Container = styled.div`
-  height: 100%;
-  scroll-snap-align: center;
-  width: 1300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5rem;
-`;
-
-const Content = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-`;
-
-const Left = styled.div`
-  flex: 1;
-  position: relative;
-`;
-
-const Img = styled.img`
-  height: 25rem;
-  object-fit: contain;
-  position: absolute;
-  top: 0;
-  margin: auto;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  animation: animate 2s infinite ease alternate;
-
-  @keyframes animate {
-    to {
-      transform: translateY(20px);
-    }
-  }
-`;
-
-const Right = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 25px;
-  background-color: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(10px);
-  border-radius: 30px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
-  padding: 50px;
-`;
-
-const Title = styled.h1`
-  display: flex;
-  justify-content: center;
-  padding-bottom: 5rem;
-  color: var(--color-5);
-  font-size: 3rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 40px;
-`;
-
-const SubTitle = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 200;
-  display: flex;
-  justify-content: center;
-`;
-
-const Desc = styled.p`
-  color: var(--color-5);
-  font-size: 1rem;
-  font-weight: 200;
-`;
+import {
+  RiCss3Fill,
+  RiHtml5Fill,
+  RiJavascriptFill,
+  RiNodejsFill,
+  RiReactjsFill,
+} from "react-icons/ri";
+import { SiAdobeillustrator, SiAdobephotoshop, SiFigma } from "react-icons/si";
 
 const AboutMe = () => {
   return (
-    <Section>
+    <Section id="aboutMe">
       <Container>
-        <Title>Sobre Mi</Title>
-        <Content>
-          <Left>
-            <Img src="./img/img.png" />
-          </Left>
-          <Right>
-            <SubTitle>Hola! Me llamo Jesus</SubTitle>
+        <div className="contenido">
+          <p>
+            Soy un Desarrollador web con orientación al front-end, mis
+            habilidades no se centran solo en el código, sino también he sido
+            freelance como diseñador gráfico e ilustración digital. Gran parte
+            de mis conocimientos los he adquirido de manera autodidacta.
+          </p>
+        </div>
 
-            <Desc>
-              Soy un entusiasta programador web junior con formación técnica en
-              informática. Mi pasión no se limita a la codificación, entre mis
-              hobbies estan el diseño gráfico y la creacion de diseños e
-              ilustraciones, los videojuegos y el anime.
-            </Desc>
-          </Right>
-        </Content>
+        <Tools>
+          <h1>Herramientas que manejo</h1>
+
+          <div className="Tools">
+            <ul className="contentTools">
+              {HerramientasArray.map(({ icon, tittle }) => (
+                <li className="card" key={tittle}>
+                  <span className="text">{tittle}</span>
+                  <div className="icon">{icon}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Tools>
       </Container>
     </Section>
   );
 };
 
 export default AboutMe;
+
+//#region Data links
+const HerramientasArray = [
+  {
+    tittle: "JavaScript",
+    icon: <RiJavascriptFill />,
+  },
+  {
+    tittle: "HTML",
+    icon: <RiHtml5Fill />,
+  },
+  {
+    tittle: "CSS",
+    icon: <RiCss3Fill />,
+  },
+  {
+    tittle: "React",
+    icon: <RiReactjsFill />,
+  },
+  {
+    tittle: "NodeJs",
+    icon: <RiNodejsFill />,
+  },
+  {
+    tittle: "Figma",
+    icon: <SiFigma />,
+  },
+  {
+    tittle: "PhotoShop",
+    icon: <SiAdobephotoshop />,
+  },
+  {
+    tittle: "Illustrator",
+    icon: <SiAdobeillustrator />,
+  },
+];
+
+//#endregion
+
+//#region {nombre de region}
+const Section = styled.div`
+  height: 100vh;
+  scroll-snap-align: center;
+`;
+
+const Container = styled.div`
+    display: flex;
+    padding-top: 10%;
+    gap: 15vh;
+    scroll-snap-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+  .contenido {
+    height: 20%;
+    width: 60%;
+    text-align: center;
+    p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.7rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+    }
+  }
+`;
+
+const Tools = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .Tools {
+    max-width: 90vw;
+    padding: 20px;
+    cursor: pointer;
+
+    .contentTools {
+      padding-block: 1rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      padding: 0.8rem;
+      background: ${v.color3};
+      border-radius: 10px;
+      box-shadow: 0 0.5rem 1rem -0.25rem ${v.color1};
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      height: 2.5rem;
+      &:hover {
+        transform: scale(1.15);
+        transition: 0.5s ease-in-out;
+      }
+
+      .text {
+        letter-spacing: 2px;
+        padding: 8px 5px;
+      }
+
+      .icon {
+        font-size: 1.5rem;
+
+        padding: 8px 10px;
+      }
+    }
+  }
+`;
+
+//#endregion

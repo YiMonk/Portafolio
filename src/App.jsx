@@ -1,19 +1,19 @@
 import styled from "styled-components";
-import AboutMe from "./Components/AboutMe";
-import Works from "./Components/Works";
-import Header from "./Components/Header";
-import Presentation from "./Components/Presentation";
-import Footer from "./Components/Footer";
-
+import { Header } from "./Components/Home/Header";
+import { Presentation } from "./Components/Home/Presentation";
 import { v } from "./styles/theme";
+import AboutMe from "./Components/AboutMe/AboutMe";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   return (
     <Container>
-      <Header />
-      <Presentation />
+      <Home>
+        <Header />
+        <Presentation />
+      </Home>
       <AboutMe />
-      <Works />
+      {/* <Projects /> */}
       <Footer />
     </Container>
   );
@@ -24,16 +24,16 @@ export default App;
 //#region styles
 
 const Container = styled.div`
-  height: 100vh;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  overflow-y: auto;
-  color: ${v.color6};
   background: ${v.color2};
+  color: ${v.color9};
+`;
 
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
+const Home = styled.div`
+  height: 100vh;
+  
+  @media (max-width: 640px) {
+    height: 100%;
+    padding-bottom: 3rem;
   }
 `;
 

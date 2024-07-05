@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { v } from "../styles/theme";
+import { v } from "../../styles/theme";
 
 import {
   RiCss3Fill,
@@ -12,33 +12,29 @@ import { SiAdobeillustrator, SiAdobephotoshop, SiFigma } from "react-icons/si";
 
 const AboutMe = () => {
   return (
-    <Section id="aboutMe">
-      <Container>
-        <div className="contenido">
-          <p>
-            Soy un Desarrollador web con orientación al front-end, mis
-            habilidades no se centran solo en el código, sino también he sido
-            freelance como diseñador gráfico e ilustración digital. Gran parte
-            de mis conocimientos los he adquirido de manera autodidacta.
-          </p>
+    <Container id="SobreMi">
+      <p>
+        Soy un Desarrollador web con orientación al front-end, mis habilidades
+        no se centran solo en el código, sino también he sido freelance como
+        diseñador gráfico e ilustración digital. Gran parte de mis conocimientos
+        los he adquirido de manera autodidacta.
+      </p>
+
+      <Tools id="Tecnologias">
+        <h1>Herramientas que manejo</h1>
+
+        <div className="Tools">
+          <ul className="contentTools">
+            {HerramientasArray.map(({ icon, tittle }) => (
+              <li className="card" key={tittle}>
+                <span className="text">{tittle}</span>
+                <div className="icon">{icon}</div>
+              </li>
+            ))}
+          </ul>
         </div>
-
-        <Tools>
-          <h1>Herramientas que manejo</h1>
-
-          <div className="Tools">
-            <ul className="contentTools">
-              {HerramientasArray.map(({ icon, tittle }) => (
-                <li className="card" key={tittle}>
-                  <span className="text">{tittle}</span>
-                  <div className="icon">{icon}</div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Tools>
-      </Container>
-    </Section>
+      </Tools>
+    </Container>
   );
 };
 
@@ -83,30 +79,24 @@ const HerramientasArray = [
 //#endregion
 
 //#region {nombre de region}
-const Section = styled.div`
-  height: 100vh;
-  scroll-snap-align: center;
-`;
 
 const Container = styled.div`
-    display: flex;
-    padding-top: 10%;
-    gap: 15vh;
-    scroll-snap-align: center;
-    flex-wrap: wrap;
-    justify-content: center;
+  width: 80%;
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
 
-  .contenido {
-    height: 20%;
-    width: 60%;
-    text-align: center;
-    p {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.7rem;
-      font-weight: 400;
+  p {
+    padding-top: 4rem;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    line-height: 2;
+
+    @media (max-width: 940px) {
+      padding-top: 2rem;
+      font-size: 0.9rem;
       letter-spacing: 2px;
+      line-height: 1.5;
     }
   }
 `;
@@ -116,15 +106,21 @@ const Tools = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-top: 4rem;
 
   h1 {
     font-size: 2.5rem;
   }
 
+  @media (max-width: 940px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+
   .Tools {
     max-width: 90vw;
     padding: 20px;
-    cursor: pointer;
 
     .contentTools {
       padding-block: 1rem;
@@ -154,9 +150,10 @@ const Tools = styled.div`
       }
 
       .icon {
+        display: flex;
+        align-items: cneter;
         font-size: 1.5rem;
-
-        padding: 8px 10px;
+        padding: auto 10px;
       }
     }
   }

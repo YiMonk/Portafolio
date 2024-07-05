@@ -1,9 +1,9 @@
 import React from "react";
 import { FaCode } from "react-icons/fa";
 import styled from "styled-components";
-import { v } from "../styles/theme";
+import { v } from "../../styles/theme";
 
-const Teclonogias = () => {
+export function Projects() {
   return (
     <Section id="works">
       <Container>
@@ -40,9 +40,7 @@ const Teclonogias = () => {
       </Container>
     </Section>
   );
-};
-
-export default Teclonogias;
+}
 
 //#region  style
 

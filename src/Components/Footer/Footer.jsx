@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { v } from "../styles/theme";
+import { v } from "../../styles/theme";
 
-import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -48,8 +48,6 @@ const Container = styled.div`
     text-decoration: none;
     color: inherit;
   }
-
-  
 
   .tittle {
     h1 {

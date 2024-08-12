@@ -4,6 +4,7 @@ import { Presentation } from "./Components/Home/Presentation";
 import { v } from "./styles/theme";
 import AboutMe from "./Components/AboutMe/AboutMe";
 import Footer from "./Components/Footer/Footer";
+import { Projects } from "./Components/Projects/Projects";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Presentation />
       </Home>
       <AboutMe />
-      {/* <Projects /> */}
+      <Projects /> 
       <Footer />
     </Container>
   );
@@ -29,11 +30,8 @@ const Container = styled.div`
 `;
 
 const Home = styled.div`
-  height: 100vh;
-  
+
   @media (max-width: 640px) {
-    height: 100%;
-    padding-bottom: 3rem;
   }
 `;
 

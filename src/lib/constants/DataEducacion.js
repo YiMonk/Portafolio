@@ -1,0 +1,48 @@
+export const EDUCACION = [
+  {
+    id: 1,
+    titulo: "Tecnico Superior en Informatica",
+    institucion:
+      "IUTA- Instituto Universitario de Tecnología de Administración Industrial",
+    periodo: "2021 - 2023",
+    link: "",
+    tipo: "Diploma",
+    icono: "🎓",
+  },
+  {
+    id: 2,
+    titulo: "Curso profesional de GIT",
+    institucion: "Códigofacilito",
+    periodo: "2025",
+    link: "https://drive.google.com/file/d/1VvLmvmzrvDS-Azn265Zr6p8mJaS7L0UL/view?usp=sharing",
+    tipo: "Certificado",
+    icono: "😺",
+  },
+  {
+    id: 3,
+    titulo: "Bacula: La solución empresarial de copias de seguridad",
+    institucion: "Udemy",
+    periodo: "2025",
+    link: "https://www.udemy.com/certificate/UC-43b90df3-5c08-4281-a817-f8c8816a6d7c/",
+    tipo: "Certificado",
+    icono: "💻",
+  },
+  {
+    id: 4,
+    titulo: "Introduccion a la Programación, Nivel 1 y 2",
+    institucion: "UCV - C.E.N.E.A.C.",
+    periodo: "2019",
+    link: "https://drive.google.com/file/d/1g7E_20LbrC6QrTvJtrLmEmbBm445uCNN/view?usp=sharing",
+    tipo: "Certificado",
+    icono: "💻",
+  },
+  {
+    id: 5,
+    titulo: "Programa de Formación Pensamiento Computacional",
+    institucion: "UCAB - Superatec",
+    periodo: "2028",
+    link: "https://drive.google.com/file/d/17GtsXHu2BmpbwpYxNTqbqWZRKkAR6UyY/view?usp=sharing",
+    tipo: "Certificado",
+    icono: "💻",
+  },
+];

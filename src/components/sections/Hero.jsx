@@ -13,7 +13,7 @@ export function Hero({ darkMode }) {
         } rounded-4xl flex items-center justify-center`}
       >
         <img
-          src="../public/foto.png"
+          src="../src/img/foto.png"
           alt="Foto de perfil"
           className="w-full h-full rounded-4xl object-cover"
         />

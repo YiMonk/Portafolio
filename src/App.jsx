@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Home } from "./app/Home";
-import "./styles/global.css";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);

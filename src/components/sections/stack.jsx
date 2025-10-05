@@ -69,7 +69,7 @@ export function Stack({ darkMode }) {
         {cards.map((item, idx) => (
           <div
             key={idx}
-            className={`inline-block align-middle mx-4 p-6 rounded-2xl shadow-lg justify-center items-center text-xl min-w-[180px] max-w-xs transition-all duration-300 hover:scale-105 ${
+            className={`inline-block align-middle mx-4 p-6 rounded-2xl shadow-lg justify-center items-center text-xl min-w-[180px] max-w-xs transition-all duration-300 hover:scale-105 hover:bg-blue-300 ${
               darkMode
                 ? "bg-slate-700/60 text-slate-100"
                 : "bg-gray-200/60 text-slate-800"

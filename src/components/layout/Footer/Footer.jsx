@@ -60,7 +60,7 @@ export function Footer({ darkMode }) {
             </h3>
             <div className="space-y-3">
               <a
-                href="mailto:jesuscalles@email.com"
+                href="mailto:jactcalles@gmail.com"
                 className={`flex items-center space-x-3 transition-colors group ${
                   darkMode
                     ? "text-slate-300 hover:text-slate-100"
@@ -76,7 +76,7 @@ export function Footer({ darkMode }) {
                 >
                   <VscMail className="text-xl" />
                 </div>
-                <span className="text-sm">jesuscalles@email.com</span>
+                <span className="text-sm">jactcalles@gmail.com</span>
               </a>
 
               <a
@@ -102,7 +102,7 @@ export function Footer({ darkMode }) {
               </a>
 
               <a
-                href="https://linkedin.com/in/jesuscalles"
+                href="https://www.linkedin.com/in/jesus-calles/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex items-center space-x-3 transition-colors group ${
@@ -124,7 +124,7 @@ export function Footer({ darkMode }) {
               </a>
 
               <a
-                href="https://wa.me/584241234567"
+                href="https://wa.me/584241306265"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex items-center space-x-3 transition-colors group ${
@@ -213,7 +213,7 @@ export function Footer({ darkMode }) {
                 darkMode ? "text-slate-400" : "text-slate-800"
               }`}
             >
-              © {currentYear} Jesús Calles. Todos los derechos reservados.
+              © {currentYear} Jesús Calles.
             </div>
             <div
               className={`text-sm ${

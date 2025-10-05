@@ -1,14 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-
+import { SiAdobeillustrator, SiAdobephotoshop, SiCss3, SiFigma, SiHtml5, SiJavascript, SiNodedotjs, SiReact, SiTailwindcss } from "react-icons/si";
+import { TbBat } from "react-icons/tb";
 // Lista de tecnologías a mostrar en el carrusel
 const tecnologias = [
-  { tecnologia: "React", icono: "⚛️" },
-  { tecnologia: "Vue", icono: "🟩" },
-  { tecnologia: "Angular", icono: "🅰️" },
-  { tecnologia: "Svelte", icono: "🔥" },
-  { tecnologia: "Node.js", icono: "🟢" },
-  { tecnologia: "TypeScript", icono: "🔷" },
-  { tecnologia: "Tailwind", icono: "🌬️" },
+  { tecnologia: "React", icono: <SiReact /> },
+  { tecnologia: "JavaScript", icono: <SiJavascript /> },
+  { tecnologia: "Node.js", icono: <SiNodedotjs /> },
+  { tecnologia: "Tailwind", icono: <SiTailwindcss /> },
+  { tecnologia: "CSS", icono: <SiCss3 /> },
+  { tecnologia: "HTML", icono: <SiHtml5 /> },
+  { tecnologia: "Bacula", icono: <TbBat /> },
+  { tecnologia: "Figma", icono: <SiFigma /> },
+  { tecnologia: "Photoshop", icono: <SiAdobephotoshop /> },
+  { tecnologia: "Illustrator", icono: <SiAdobeillustrator /> },
 ];
 
 export function Stack({ darkMode }) {
@@ -31,7 +35,7 @@ export function Stack({ darkMode }) {
   useEffect(() => {
     const carousel = carouselRef.current;
     let animationFrame;
-    const scrollAmount = 1; // velocidad del scroll aumentada
+    const scrollAmount = 0.6; // velocidad del scroll aumentada
 
     function animate() {
       if (!paused && carousel) {

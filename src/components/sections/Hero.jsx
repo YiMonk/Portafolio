@@ -12,7 +12,11 @@ export function Hero({ darkMode }) {
           darkMode ? "bg-slate-700" : "bg-gray-300"
         } rounded-4xl flex items-center justify-center`}
       >
-        foto
+        <img
+          src="../public/foto.png"
+          alt="Foto de perfil"
+          className="w-full h-full rounded-4xl object-cover"
+        />
       </section>
 
       <section className="w-3/5 flex flex-col items-start justify-center space-y-5">
@@ -36,7 +40,7 @@ export function Hero({ darkMode }) {
         </p>
 
         <div className="mt-4 w-full flex gap-4 justify-end">
-          <div
+          <a href="https://github.com/YiMonk" target="_blank" rel="noreferrer"
             className={`bg-slate-400/40 shadow-xl p-5 rounded-2xl text-2xl transition-colors cursor-pointer ${
               darkMode
                 ? "text-slate-200 hover:bg-slate-700 hover:text-slate-400"
@@ -44,8 +48,8 @@ export function Hero({ darkMode }) {
             }`}
           >
             <VscGithub />
-          </div>
-          <div
+          </a>
+          {/* <div
             className={`bg-slate-400/40 shadow-xl p-5 rounded-2xl text-2xl transition-colors cursor-pointer ${
               darkMode
                 ? "text-slate-200 hover:bg-slate-700 hover:text-slate-400"
@@ -53,8 +57,8 @@ export function Hero({ darkMode }) {
             }`}
           >
             <VscMail />
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className={`bg-slate-400/40 shadow-xl p-5 rounded-2xl text-2xl transition-colors cursor-pointer ${
               darkMode
                 ? "text-slate-200 hover:bg-slate-700 hover:text-slate-400"
@@ -62,7 +66,7 @@ export function Hero({ darkMode }) {
             }`}
           >
             <VscArrowCircleDown />
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

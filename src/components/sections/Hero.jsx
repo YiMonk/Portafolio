@@ -1,4 +1,5 @@
 import { VscArrowCircleDown, VscGithub, VscMail } from "react-icons/vsc";
+import foto from "../img/foto.png";
 
 export function Hero({ darkMode }) {
   return (
@@ -13,9 +14,9 @@ export function Hero({ darkMode }) {
         } rounded-4xl flex items-center justify-center`}
       >
         <img
-          src="../src/img/foto.png"
+          src={foto}
           alt="Foto de perfil"
-          className="w-full h-full rounded-4xl object-cover"
+          className="w-full h-full object-cover"
         />
       </section>
 

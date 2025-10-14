@@ -1,5 +1,5 @@
 import { VscArrowCircleDown, VscGithub, VscMail } from "react-icons/vsc";
-import foto from "../img/foto.png";
+import foto from "../../img/foto.png";
 
 export function Hero({ darkMode }) {
   return (

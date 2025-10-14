@@ -16,7 +16,7 @@ export function Hero({ darkMode }) {
         <img
           src={foto}
           alt="Foto de perfil"
-          className="w-full h-full object-cover"
+           className="w-full h-full object-cover rounded-4xl"
         />
       </section>
 

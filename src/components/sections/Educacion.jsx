@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { EDUCACION } from "../../lib/constants/DataEducacion";
 
-export function Educacion({ darkMode }) {
-  const [open, setOpen] = useState(false);
+export function Educacion({ darkMode, open, setOpen }) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = typeof open === "boolean" && typeof setOpen === "function";
+  const modalOpen = isControlled ? open : internalOpen;
+  const setModalOpen = isControlled ? setOpen : setInternalOpen;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Carrusel automático
@@ -22,8 +25,8 @@ export function Educacion({ darkMode }) {
     <>
       {/* Div principal con estilo cristal y carrusel - MÁS GRANDE */}
       <div
-        className="relative w-2/3 h-36 cursor-pointer group"
-        onClick={() => setOpen(true)}
+        className="relative w-full sm:w-2/3 h-28 sm:h-36 cursor-pointer group"
+        onClick={() => setModalOpen(true)}
       >
         {/* Fondo cristal */}
         <div className={`absolute inset-0 backdrop-blur-md rounded-xl border shadow-lg group-hover:shadow-xl transition-all duration-300 ${
@@ -75,10 +78,10 @@ export function Educacion({ darkMode }) {
       </div>
 
       {/* Modal expandida */}
-      {open && (
+      {modalOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-          onClick={() => setOpen(false)}
+          onClick={() => setModalOpen(false)}
         >
           <div
             className={`rounded-2xl shadow-2xl p-8 w-full max-w-5xl h-[85vh] relative animate-fadeIn overflow-hidden ${
@@ -92,7 +95,7 @@ export function Educacion({ darkMode }) {
                   ? "text-slate-400 hover:text-slate-200" 
                   : "text-gray-400 hover:text-gray-700"
               }`}
-              onClick={() => setOpen(false)}
+              onClick={() => setModalOpen(false)}
               aria-label="Cerrar"
             >
               ×

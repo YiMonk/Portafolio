@@ -53,7 +53,7 @@ export function Stack({ darkMode }) {
   }, [paused]);
 
   return (
-    <div className="w-full flex justify-center items-center py-16">
+    <div className="w-full flex justify-center items-center py-8 sm:py-16">
       <div
         ref={carouselRef}
         className="overflow-x-auto no-scrollbar w-[90vw] max-w-7xl whitespace-nowrap select-none relative"
@@ -69,16 +69,16 @@ export function Stack({ darkMode }) {
         {cards.map((item, idx) => (
           <div
             key={idx}
-            className={`inline-block align-middle mx-4 p-6 rounded-2xl shadow-lg justify-center items-center text-xl min-w-[180px] max-w-xs transition-all duration-300 hover:scale-105 hover:bg-blue-300 ${
+            className={`inline-block align-middle mx-3 sm:mx-4 p-4 sm:p-6 rounded-2xl shadow-lg justify-center items-center text-lg sm:text-xl min-w-[160px] sm:min-w-[180px] max-w-xs transition-all duration-300 hover:scale-105 hover:bg-blue-300 ${
               darkMode
                 ? "bg-slate-700/60 text-slate-100"
                 : "bg-gray-200/60 text-slate-800"
             }`}
-            style={{ boxShadow: "0 4px 24px #0001", minWidth: "180px" }}
+            style={{ boxShadow: "0 4px 24px #0001", minWidth: "160px" }}
           >
             <div className="flex flex-row items-center justify-center gap-2 w-full h-full">
-              <span className="text-3xl">{item.icono}</span>
-              <span className="text-lg font-semibold tracking-wide text-center">
+              <span className="text-2xl sm:text-3xl">{item.icono}</span>
+              <span className="text-base sm:text-lg font-semibold tracking-wide text-center">
                 {item.tecnologia}
               </span>
             </div>

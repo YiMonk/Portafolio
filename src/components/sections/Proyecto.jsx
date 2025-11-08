@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { PROJECTS } from "../../lib/constants/DataProjets";
 
-export function Proyecto({ darkMode }) {
-  const [open, setOpen] = useState(false);
+export function Proyecto({ darkMode, open, setOpen }) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = typeof open === "boolean" && typeof setOpen === "function";
+  const modalOpen = isControlled ? open : internalOpen;
+  const setModalOpen = isControlled ? setOpen : setInternalOpen;
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
 
   // Carrusel automático
@@ -20,8 +23,8 @@ export function Proyecto({ darkMode }) {
     <>
       {/* Div principal con estilo cristal y carrusel - MÁS GRANDE */}
       <div
-        className="relative w-2/3 h-36 cursor-pointer group"
-        onClick={() => setOpen(true)}
+        className="relative w-full sm:w-2/3 h-28 sm:h-36 cursor-pointer group"
+        onClick={() => setModalOpen(true)}
       >
         {/* Fondo cristal */}
         <div
@@ -103,10 +106,10 @@ export function Proyecto({ darkMode }) {
       </div>
 
       {/* Modal expandida */}
-      {open && (
+      {modalOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-          onClick={() => setOpen(false)}
+          onClick={() => setModalOpen(false)}
         >
           <div
             className={`rounded-2xl shadow-2xl p-8 w-full max-w-6xl h-[90vh] relative animate-fadeIn overflow-hidden ${
@@ -120,7 +123,7 @@ export function Proyecto({ darkMode }) {
                   ? "text-slate-400 hover:text-slate-200"
                   : "text-gray-400 hover:text-gray-700"
               }`}
-              onClick={() => setOpen(false)}
+              onClick={() => setModalOpen(false)}
               aria-label="Cerrar"
             >
               ×

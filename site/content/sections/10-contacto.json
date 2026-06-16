@@ -1,0 +1,11 @@
+{
+  "id": "contacto",
+  "section_number": "10",
+  "section_label": "CONTACTO",
+  "marquee_words": ["CONSTRUYAMOS", "TU IDEA", "TU PRODUCTO", "TU MARCA", "TRABAJEMOS", "JUNTOS"],
+  "email": "jactcalles@gmail.com",
+  "cta": {
+    "text": "Hablemos",
+    "action": "open-modal"
+  }
+}

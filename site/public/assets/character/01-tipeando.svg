@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="380" viewBox="0 0 280 380">
+  <rect width="280" height="380" fill="#EDEAE3" rx="4"/>
+  <rect width="280" height="380" fill="none" stroke="rgba(10,10,10,0.15)" stroke-width="1" rx="4"/>
+  <!-- Cabeza -->
+  <circle cx="140" cy="90" r="44" fill="none" stroke="#0A0A0A" stroke-width="2.5"/>
+  <!-- Cuello -->
+  <line x1="140" y1="134" x2="140" y2="165" stroke="#0A0A0A" stroke-width="2.5"/>
+  <!-- Cuerpo (inclinado levemente) -->
+  <rect x="95" y="165" width="90" height="110" rx="8" fill="none" stroke="#0A0A0A" stroke-width="2.5"/>
+  <!-- Brazos hacia adelante (tipeando) -->
+  <path d="M95 190 Q50 220 55 255" fill="none" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M185 190 Q228 220 224 255" fill="none" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Manos -->
+  <rect x="40" y="255" width="28" height="14" rx="4" fill="none" stroke="#0A0A0A" stroke-width="2"/>
+  <rect x="210" y="255" width="28" height="14" rx="4" fill="none" stroke="#0A0A0A" stroke-width="2"/>
+  <!-- Teclado hint -->
+  <rect x="70" y="290" width="140" height="30" rx="4" fill="none" stroke="rgba(44,95,246,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- Etiqueta -->
+  <text x="140" y="344" font-family="monospace" font-size="11" fill="#2C5FF6" text-anchor="middle" letter-spacing="2">TIPEANDO · §01</text>
+  <text x="140" y="362" font-family="monospace" font-size="9" fill="rgba(10,10,10,0.4)" text-anchor="middle" letter-spacing="1">PLACEHOLDER</text>
+</svg>

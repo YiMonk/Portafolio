@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "id": "mermis",
+      "order": 1,
+      "title": "Mermis",
+      "subtitle": "SaaS de gestión de mermas para gastronomía",
+      "categories": ["DEV", "UX/UI"],
+      "tags": ["React", "SaaS", "Diseño de producto"],
+      "year": 2026,
+      "status": "in_progress",
+      "featured": true,
+      "cover": { "image": "/assets/projects/mermis/Login.png", "aspect_ratio": "4:5" },
+      "case_study": { "enabled": true, "slug": "mermis" },
+      "links": { "live": null, "github": null },
+      "visible": true
+    },
+    {
+      "id": "proyecto-placeholder-1",
+      "order": 2,
+      "title": "Proyecto Dev",
+      "subtitle": "Descripción pendiente",
+      "categories": ["DEV"],
+      "tags": [],
+      "year": 2025,
+      "status": "completed",
+      "featured": false,
+      "cover": { "image": null, "aspect_ratio": "4:3" },
+      "case_study": { "enabled": false, "slug": null },
+      "links": { "live": null, "github": null },
+      "visible": false
+    },
+    {
+      "id": "proyecto-placeholder-2",
+      "order": 3,
+      "title": "Proyecto UX/UI",
+      "subtitle": "Descripción pendiente",
+      "categories": ["UX/UI"],
+      "tags": [],
+      "year": 2025,
+      "status": "completed",
+      "featured": false,
+      "cover": { "image": null, "aspect_ratio": "4:3" },
+      "case_study": { "enabled": false, "slug": null },
+      "links": { "live": null, "github": null },
+      "visible": false
+    }
+  ]
+}

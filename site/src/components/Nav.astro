@@ -1,0 +1,248 @@
+---
+import siteData from '../../content/global/site.json';
+
+const { nav } = siteData;
+const sectionsJson = JSON.stringify(nav.center.sections);
+---
+
+<header class="nav" role="banner" data-sections={sectionsJson}>
+  <div class="nav__left">
+    <span class="nav__name">{nav.left.name}</span>
+    <span class="nav__clock" id="nav-clock">--:-- · GMT-4 · VENEZUELA</span>
+  </div>
+
+  <div class="nav__center">
+    <span class="nav__section-indicator" id="nav-section">§ 00 · INICIO</span>
+  </div>
+
+  <nav class="nav__right" aria-label="Navegación principal">
+    {nav.right.map((item) => (
+      <a
+        href={item.href}
+        class={`nav__link${item.highlight ? ' nav__link--highlight' : ''}`}
+      >
+        {item.label}
+        {item.highlight && <span aria-hidden="true"> ↗</span>}
+      </a>
+    ))}
+    <button
+      class="nav__theme-toggle"
+      id="theme-toggle"
+      type="button"
+      aria-label="Cambiar tema"
+      title="Cambiar tema"
+    >
+      <span class="nav__theme-icon" aria-hidden="true">◑</span>
+    </button>
+  </nav>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    z-index: 100;
+    background-color: var(--color-cream);
+    border-bottom: 1px solid var(--color-gray-10);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--space-4);
+  }
+
+  .nav__left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+  }
+
+  .nav__name,
+  .nav__clock {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    white-space: nowrap;
+  }
+
+  .nav__clock {
+    color: var(--color-gray-60);
+  }
+
+  .nav__center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav__section-indicator {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    white-space: nowrap;
+    transition: opacity var(--transition-fast);
+  }
+
+  .nav__right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .nav__link {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color var(--transition-fast);
+  }
+
+  .nav__link:hover {
+    color: var(--color-blue);
+  }
+
+  .nav__link--highlight {
+    color: var(--color-blue);
+  }
+
+  .nav__theme-toggle {
+    background: none;
+    border: 1px solid var(--color-gray-30);
+    border-radius: var(--radius-sm);
+    color: var(--color-black);
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    line-height: 1;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+    display: flex;
+    align-items: center;
+  }
+
+  .nav__theme-toggle:hover {
+    border-color: var(--color-black);
+    color: var(--color-blue);
+  }
+
+  .nav__theme-toggle:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+  }
+
+  .nav__theme-icon {
+    font-size: 0.75rem;
+    line-height: 1;
+    display: block;
+  }
+
+  @media (max-width: 1023px) {
+    .nav__right {
+      gap: var(--space-1);
+      font-size: 0.55rem;
+    }
+  }
+
+  /* Mobile: ocultar nav derecho */
+  @media (max-width: 767px) {
+    .nav {
+      padding: 0 var(--space-2);
+    }
+
+    .nav__right :not(.nav__theme-toggle) {
+      display: none;
+    }
+
+    .nav__name {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Reloj en tiempo real — GMT-4 (Venezuela, sin cambio de horario)
+  const clockEl = document.getElementById('nav-clock');
+
+  function updateClock() {
+    const now = new Date();
+    const vzTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/Caracas' }));
+    const h = String(vzTime.getHours()).padStart(2, '0');
+    const m = String(vzTime.getMinutes()).padStart(2, '0');
+    if (clockEl) clockEl.textContent = `${h}:${m} · GMT-4 · VENEZUELA`;
+  }
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  updateClock();
+  const interval = setInterval(updateClock, reduced ? 60000 : 1000);
+  window.addEventListener('unload', () => clearInterval(interval));
+</script>
+
+<script>
+  // Tema claro / oscuro
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = themeToggle?.querySelector('.nav__theme-icon');
+
+  function applyTheme(theme: string) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (themeIcon) themeIcon.textContent = theme === 'dark' ? '◐' : '◑';
+    if (themeToggle) themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+  }
+
+  // Sincronizar ícono con el tema actual al cargar
+  const currentTheme = document.documentElement.getAttribute('data-theme') ?? 'light';
+  if (themeIcon) themeIcon.textContent = currentTheme === 'dark' ? '◐' : '◑';
+  if (themeToggle) themeToggle.setAttribute('aria-label', currentTheme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+
+  themeToggle?.addEventListener('click', () => {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(theme);
+  });
+
+  // Indicador de sección — IntersectionObserver
+  const header = document.querySelector('.nav[data-sections]') as HTMLElement | null;
+  const sectionEl = document.getElementById('nav-section');
+
+  if (header && sectionEl) {
+    const sections: Array<{ number: string; label: string }> = JSON.parse(
+      header.dataset.sections ?? '[]'
+    );
+
+    const sectionMap = new Map(sections.map((s) => [s.number, s]));
+
+    function setSectionText(number: string) {
+      const s = sectionMap.get(number);
+      if (!s || !sectionEl) return;
+      sectionEl.style.opacity = '0';
+      requestAnimationFrame(() => {
+        sectionEl!.textContent = `§ ${s.number} · ${s.label}`;
+        sectionEl!.style.opacity = '1';
+      });
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const id = (entry.target as HTMLElement).dataset.sectionNumber ?? '';
+            setSectionText(id);
+          }
+        }
+      },
+      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
+    );
+
+    // Observar secciones con data-section-number="NN"
+    document.querySelectorAll<HTMLElement>('[data-section-number]').forEach((el) => {
+      observer.observe(el);
+    });
+  }
+</script>

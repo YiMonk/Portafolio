@@ -1,0 +1,303 @@
+---
+import seccionData from '../../content/sections/04-proyectos.json';
+import proyectosData from '../../content/collections/proyectos.json';
+
+const { section_number, section_label, filters } = seccionData;
+const items = proyectosData.items
+  .filter(p => p.visible)
+  .sort((a, b) => a.order - b.order)
+  .map(p => ({
+    ...p,
+    cssAspectRatio: p.cover.aspect_ratio.replace(':', ' / '),
+    usePlaceholder: !p.cover.image,
+  }));
+---
+
+<section id="section-04" data-section-number="04" class="proyectos">
+  <div class="proyectos__inner">
+    <p class="proyectos__section-label">§ {section_number}</p>
+
+    <div class="proyectos__filters" role="group" aria-label="Filtrar proyectos">
+      {filters.map((f: string) => (
+        <button
+          class:list={['proyectos__filter-btn', { 'is-active': f === 'TODOS' }]}
+          data-filter={f}
+          aria-pressed={f === 'TODOS' ? 'true' : 'false'}
+          type="button"
+        >
+          {f}
+        </button>
+      ))}
+    </div>
+
+    <div class="proyectos__grid" id="proyectos-grid">
+      {items.map((item) => (
+        <article
+          class:list={['proyectos__card', { 'proyectos__card--featured': item.featured }]}
+          data-categories={item.categories.join(',')}
+        >
+          <div class="proyectos__cover" style={`aspect-ratio: ${item.cssAspectRatio}`}>
+            {item.usePlaceholder ? (
+              <div class="proyectos__cover-placeholder" aria-hidden="true" />
+            ) : (
+              <img src={item.cover.image} alt={item.title} loading="lazy" class="proyectos__cover-img" />
+            )}
+
+            {item.status === 'in_progress' && (
+              <span class="proyectos__badge">EN DESARROLLO</span>
+            )}
+
+            <div class="proyectos__overlay" aria-hidden="true">
+              <p class="proyectos__overlay-category">{item.categories.join(' · ')}</p>
+              <h3 class="proyectos__overlay-title">{item.title}</h3>
+              <ul class="proyectos__overlay-tags">
+                {item.tags.map((t: string) => <li>{t}</li>)}
+              </ul>
+            </div>
+          </div>
+
+          {item.case_study?.enabled && (
+            <a
+              href={`/proyectos/${item.case_study.slug}`}
+              class="proyectos__card-link"
+              aria-label={`Ver caso de estudio de ${item.title}`}
+            />
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .proyectos {
+    min-height: 100vh;
+    padding: var(--space-8);
+    background-color: var(--color-cream);
+  }
+
+  .proyectos__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .proyectos__section-label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-gray-60);
+    margin: 0;
+  }
+
+  .proyectos__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .proyectos__filter-btn {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid var(--color-gray-30);
+    border-radius: var(--radius-sm);
+    color: var(--color-gray-60);
+    padding: 0.4em 1em;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .proyectos__filter-btn.is-active,
+  .proyectos__filter-btn[aria-pressed="true"] {
+    background-color: var(--color-black);
+    color: var(--color-cream);
+    border-color: var(--color-black);
+  }
+
+  .proyectos__filter-btn:hover:not(.is-active) {
+    border-color: var(--color-black);
+    color: var(--color-black);
+  }
+
+  .proyectos__grid {
+    columns: 3;
+    column-gap: var(--space-3);
+  }
+
+  .proyectos__card {
+    break-inside: avoid;
+    margin-bottom: var(--space-3);
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: opacity var(--transition-base), visibility var(--transition-base);
+  }
+
+  .proyectos__card.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .proyectos__cover {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-gray-10);
+  }
+
+  .proyectos__cover-placeholder {
+    position: absolute;
+    inset: 0;
+    border: 1px dashed var(--color-gray-30);
+  }
+
+  .proyectos__cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .proyectos__badge {
+    position: absolute;
+    top: var(--space-2);
+    left: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.5rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background-color: var(--color-blue);
+    color: var(--color-cream);
+    border-radius: var(--radius-sm);
+    padding: 0.25em 0.6em;
+    z-index: 2;
+  }
+
+  .proyectos__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-gray-75);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-3);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    z-index: 1;
+  }
+
+  .proyectos__card:hover .proyectos__overlay,
+  .proyectos__card:focus-within .proyectos__overlay {
+    opacity: 1;
+  }
+
+  .proyectos__overlay-category {
+    font-family: var(--font-body);
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-blue);
+    margin: 0 0 var(--space-1) 0;
+  }
+
+  .proyectos__overlay-title {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 700;
+    color: var(--color-cream);
+    margin: 0 0 var(--space-2) 0;
+    line-height: 1.1;
+  }
+
+  .proyectos__overlay-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .proyectos__overlay-tags li {
+    font-family: var(--font-body);
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-cream-75);
+    border: 1px solid var(--color-cream-75);
+    border-radius: var(--radius-sm);
+    padding: 0.15em 0.5em;
+  }
+
+  .proyectos__card-link {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+  }
+
+  .proyectos__card:has(:focus-visible) {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 1199px) {
+    .proyectos__grid {
+      columns: 2;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .proyectos {
+      padding: var(--space-4);
+    }
+
+    .proyectos__grid {
+      columns: 1;
+    }
+  }
+</style>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.proyectos__filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.proyectos__card');
+
+  btns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btns.forEach((b) => {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      const filter = btn.dataset.filter ?? 'TODOS';
+
+      cards.forEach((card) => {
+        if (filter === 'TODOS') {
+          card.classList.remove('is-hidden');
+          card.removeAttribute('aria-hidden');
+        } else {
+          const cats = card.dataset.categories ?? '';
+          if (cats.split(',').includes(filter)) {
+            card.classList.remove('is-hidden');
+            card.removeAttribute('aria-hidden');
+          } else {
+            card.classList.add('is-hidden');
+            card.setAttribute('aria-hidden', 'true');
+          }
+        }
+      });
+    });
+  });
+</script>

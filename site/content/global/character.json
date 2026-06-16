@@ -1,0 +1,125 @@
+{
+  "poses": [
+    {
+      "section": "00",
+      "label": "Hero",
+      "pose": "saludo",
+      "mode": "hidden",
+      "position": null,
+      "src_png": "/assets/character/00-saludo.png",
+      "src_webp": null,
+      "src_mobile_png": null,
+      "src_mobile_webp": null
+    },
+    {
+      "section": "01",
+      "label": "Mermis",
+      "pose": "tipeando",
+      "mode": "hidden",
+      "position": null,
+      "src_png": "/assets/character/01-tipeando.png",
+      "src_webp": null,
+      "src_mobile_png": null,
+      "src_mobile_webp": null
+    },
+    {
+      "section": "02",
+      "label": "Bifurcación",
+      "pose": null,
+      "mode": "hidden",
+      "position": null,
+      "src_png": "/assets/character/02-bifurcacion.png",
+      "src_webp": null,
+      "src_mobile_png": null,
+      "src_mobile_webp": null
+    },
+    {
+      "section": "03",
+      "label": "Sobre mí",
+      "pose": "pensativo",
+      "mode": "partial",
+      "position": "right",
+      "src_png": "/assets/character/03-pensativo.png",
+      "src_webp": null,
+      "src_mobile_png": null,
+      "src_mobile_webp": null
+    },
+    {
+      "section": "04",
+      "label": "Proyectos",
+      "pose": "asomado",
+      "mode": "peek",
+      "position": "bottom",
+      "src_png": "/assets/character/04-07-asomado.png",
+      "src_webp": null,
+      "src_mobile_png": null,
+      "src_mobile_webp": null
+    },
+    {
+      "section": "05",
+      "label": "Stack",
+      "pose": "rodeado-herramientas",
+      "mode": "hidden",
+      "position": null,
+      "src_png": "/assets/character/05-herramientas.png",
+      "src_webp": null,
+      "src_mobile_png": null,
+      "src_mobile_webp": null
+    },
+    {
+      "section": "06",
+      "label": "Servicios",
+      "pose": "handshake",
+      "mode": "hidden",
+      "position": null,
+      "src_png": "/assets/character/06-handshake.png",
+      "src_webp": null,
+      "src_mobile_png": null,
+      "src_mobile_webp": null
+    },
+    {
+      "section": "07",
+      "label": "Tienda",
+      "pose": "asomado",
+      "mode": "peek",
+      "position": "bottom",
+      "src_png": "/assets/character/04-07-asomado.png",
+      "src_webp": null,
+      "src_mobile_png": null,
+      "src_mobile_webp": null
+    },
+    {
+      "section": "08",
+      "label": "Educación",
+      "pose": "leyendo",
+      "mode": "partial",
+      "position": "corner",
+      "src_png": "/assets/character/08-leyendo.png",
+      "src_webp": null,
+      "src_mobile_png": null,
+      "src_mobile_webp": null
+    },
+    {
+      "section": "09",
+      "label": "Ahora",
+      "pose": "pose-actual",
+      "mode": "partial",
+      "position": "right",
+      "src_png": "/assets/character/09-pose-actual.png",
+      "src_webp": null,
+      "src_mobile_png": null,
+      "src_mobile_webp": null
+    },
+    {
+      "section": "10",
+      "label": "Contacto",
+      "pose": "despedida",
+      "mode": "hidden",
+      "position": null,
+      "src_png": "/assets/character/10-despedida.png",
+      "src_webp": null,
+      "src_mobile_png": null,
+      "src_mobile_webp": null
+    }
+  ]
+}

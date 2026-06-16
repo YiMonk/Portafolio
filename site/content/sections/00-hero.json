@@ -1,0 +1,18 @@
+{
+  "id": "hero",
+  "section_number": "00",
+  "section_label": "INICIO",
+  "tagline": {
+    "line_1": "Lo imaginas.",
+    "line_2": "Lo construyo.",
+    "highlight": "line_2"
+  },
+  "subtitle": "Frontend, UX/UI y diseño visual.",
+  "identity": {
+    "greeting": "¡HOLA! ME LLAMO JESÚS",
+    "role": "DEVELOPER FRONTEND",
+    "location": "VENEZUELA · TRABAJO REMOTO",
+    "availability": "DISPONIBLE PARA PROYECTOS · 2026"
+  },
+  "scroll_indicator": "SIGUE BAJANDO ↓"
+}

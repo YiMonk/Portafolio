@@ -1,0 +1,323 @@
+---
+import characterData from '../../content/global/character.json';
+
+const { poses } = characterData;
+---
+
+<div class="character-layer" aria-hidden="true">
+  {poses.map((pose) => {
+    if (pose.mode === 'hidden') return null;
+
+    const hasAsset = pose.src_webp !== null || pose.src_png !== null;
+
+    return (
+      <div
+        class={`character character--${pose.mode} character--pos-${(pose.position ?? 'center').replace(/\s+/g, '-')}`}
+        data-section={pose.section}
+      >
+        {/* Inner: solo animación. El outer maneja el posicionamiento (transform de centrado). */}
+        <div class="character__anim">
+          {hasAsset && (
+            <picture>
+              {pose.src_webp && (
+                <source srcset={pose.src_webp} type="image/webp" />
+              )}
+              {pose.src_png && (
+                <img
+                  src={pose.src_png}
+                  alt=""
+                  aria-hidden="true"
+                  draggable="false"
+                  loading={pose.section === '00' ? 'eager' : 'lazy'}
+                />
+              )}
+            </picture>
+          )}
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+<style>
+  .character-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* Outer: solo posicionamiento */
+  .character {
+    position: absolute;
+  }
+
+  /* Inner: estado base invisible */
+  .character__anim {
+    opacity: 0;
+    /* --dash-tx / --dash-ty: vector de dirección calculado en JS */
+    --dash-tx: 0px;
+    --dash-ty: 20px;
+  }
+
+  /* Estado estable activo (sin animación) */
+  .character.is-active .character__anim {
+    opacity: 0.92;
+    transform: translate(0, 0) scale(1);
+  }
+
+  /* ── Entrada: viene desde la posición del personaje anterior ── */
+  @keyframes char-dash-in {
+    0% {
+      opacity: 0;
+      transform: translate(calc(var(--dash-tx) * -1), calc(var(--dash-ty) * -1)) scale(0.82);
+    }
+    65% {
+      opacity: 1;
+      transform: translate(calc(var(--dash-tx) * 0.04), calc(var(--dash-ty) * 0.04)) scale(1.04);
+    }
+    100% {
+      opacity: 0.92;
+      transform: translate(0, 0) scale(1);
+    }
+  }
+
+  /* ── Salida: se lanza hacia la posición del personaje entrante ── */
+  @keyframes char-dash-out {
+    0% {
+      opacity: 0.92;
+      transform: translate(0, 0) scale(1);
+    }
+    18% {
+      /* Pequeña compresión antes del dash (como preparar el impulso) */
+      transform: translate(calc(var(--dash-tx) * -0.04), calc(var(--dash-ty) * -0.04)) scale(1.03);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--dash-tx), var(--dash-ty)) scale(0.82);
+    }
+  }
+
+  .character.is-entering .character__anim {
+    animation: char-dash-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .character.is-exiting .character__anim {
+    animation: char-dash-out 210ms cubic-bezier(0.55, 0, 1, 0.45) both;
+  }
+
+  /* Reduced motion: solo fade, sin translate */
+  @media (prefers-reduced-motion: reduce) {
+    .character__anim {
+      transition: opacity 300ms ease !important;
+      animation: none !important;
+      transform: none !important;
+    }
+    .character.is-active .character__anim    { opacity: 0.92; }
+    .character.is-exiting .character__anim   { opacity: 0; }
+    .character.is-entering .character__anim  { opacity: 0.92; }
+  }
+
+  /* ── Modos ── */
+  .character--full    { width: clamp(240px, 38vw, 520px); }
+  .character--partial { width: clamp(160px, 24vw, 340px); }
+  .character--peek    { width: clamp(120px, 18vw, 260px); }
+
+  /* ── Posiciones ── */
+  .character--pos-center-right {
+    right: var(--space-8);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .character--pos-center-right.character--full {
+    top: 45%;
+  }
+  .character--pos-bottom-left {
+    left: var(--space-6);
+    bottom: var(--space-4);
+  }
+  .character--pos-right {
+    right: var(--space-6);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .character--pos-bottom {
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%) translateY(var(--peek-offset, 40%));
+  }
+  .character--pos-center {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .character--pos-left {
+    left: var(--space-6);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .character--pos-corner {
+    right: var(--space-4);
+    bottom: var(--space-4);
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .character--full    { width: clamp(140px, 50vw, 240px); }
+    .character--partial { width: clamp(100px, 35vw, 180px); }
+    .character--peek    { width: clamp(80px, 28vw, 140px); }
+
+    .character.is-active .character__anim,
+    .character.is-entering .character__anim { opacity: 0.35; }
+  }
+
+  .character img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+</style>
+
+<script>
+  const layer = document.querySelector('.character-layer');
+  if (!layer) throw new Error('character-layer not found');
+
+  const sectionMap = new Map<string, HTMLElement>();
+  layer.querySelectorAll<HTMLElement>('.character[data-section]').forEach((el) => {
+    const sec = el.dataset.section;
+    if (sec) sectionMap.set(sec, el);
+  });
+
+  const sectionEls = new Map<string, HTMLElement>();
+  document.querySelectorAll<HTMLElement>('[data-section-number]').forEach((el) => {
+    const num = el.dataset.sectionNumber;
+    if (num) sectionEls.set(num, el);
+  });
+
+  let currentActive: HTMLElement | null = null;
+  let currentNum = '';
+  let rafId: number | null = null;
+  const visible = new Set<string>();
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /** Centro en viewport de un elemento del personaje (ya está en el layout aunque sea invisible) */
+  function charCenter(el: HTMLElement) {
+    const r = el.getBoundingClientRect();
+    return { x: (r.left + r.right) / 2, y: (r.top + r.bottom) / 2 };
+  }
+
+  function prefetchNext(num: string) {
+    const nextNum = String(parseInt(num) + 1).padStart(2, '0');
+    const nextEl = sectionMap.get(nextNum);
+    if (!nextEl) return;
+    const src = nextEl.querySelector('img')?.src;
+    if (src && !document.head.querySelector(`link[rel="prefetch"][href="${src}"]`)) {
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = src;
+      document.head.appendChild(link);
+    }
+  }
+
+  function activateChar(next: HTMLElement | null, num: string) {
+    const prev = currentActive;
+    if (next === prev) return;
+
+    // Calcular vector de dirección prev → next (30% del desplazamiento real)
+    // Los elementos están en el DOM aunque sean invisibles, así que getBoundingClientRect funciona.
+    let tx = 0, ty = 0;
+    if (!reducedMotion && prev && next) {
+      const pC = charCenter(prev);
+      const nC = charCenter(next);
+      tx = (nC.x - pC.x) * 0.30;
+      ty = (nC.y - pC.y) * 0.30;
+    } else if (!reducedMotion) {
+      // Sin prev (primera activación): entrada genérica desde abajo
+      ty = 22;
+    }
+
+    // ── Salida del anterior ──
+    if (prev) {
+      const anim = prev.querySelector<HTMLElement>('.character__anim');
+      if (anim) {
+        anim.style.setProperty('--dash-tx', `${tx}px`);
+        anim.style.setProperty('--dash-ty', `${ty}px`);
+      }
+      prev.classList.remove('is-active', 'is-entering');
+      prev.classList.add('is-exiting');
+      anim?.addEventListener('animationend', () => {
+        prev.classList.remove('is-exiting');
+        anim.style.removeProperty('--dash-tx');
+        anim.style.removeProperty('--dash-ty');
+      }, { once: true });
+    }
+
+    // ── Entrada del siguiente ──
+    if (next) {
+      const anim = next.querySelector<HTMLElement>('.character__anim');
+      if (anim) {
+        // Llega desde la posición contraria: negativo del vector
+        anim.style.setProperty('--dash-tx', `${tx}px`);
+        anim.style.setProperty('--dash-ty', `${ty}px`);
+      }
+      next.classList.remove('is-exiting');
+      next.classList.add('is-active', 'is-entering');
+      anim?.addEventListener('animationend', () => {
+        next.classList.remove('is-entering');
+        anim.style.removeProperty('--dash-tx');
+        anim.style.removeProperty('--dash-ty');
+      }, { once: true });
+      prefetchNext(num);
+    }
+
+    currentActive = next;
+    currentNum = num;
+  }
+
+  function updateCharacter() {
+    if (visible.size === 0) {
+      if (currentActive) activateChar(null, '');
+      return;
+    }
+
+    const vpCenter = window.innerHeight / 2;
+    let bestNum = '', bestDist = Infinity;
+
+    visible.forEach((num) => {
+      const el = sectionEls.get(num);
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const dist = Math.abs((rect.top + rect.bottom) / 2 - vpCenter);
+      if (dist < bestDist) { bestDist = dist; bestNum = num; }
+    });
+
+    const next = bestNum ? (sectionMap.get(bestNum) ?? null) : null;
+    activateChar(next, bestNum);
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const num = (entry.target as HTMLElement).dataset.sectionNumber ?? '';
+        if (!num) return;
+        if (entry.isIntersecting) visible.add(num);
+        else visible.delete(num);
+      });
+
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => { updateCharacter(); rafId = null; });
+    },
+    { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0] }
+  );
+
+  sectionEls.forEach((el) => observer.observe(el));
+
+  // Estado inicial
+  sectionEls.forEach((el, num) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.bottom > 0 && rect.top < window.innerHeight) visible.add(num);
+  });
+  updateCharacter();
+</script>

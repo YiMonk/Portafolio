@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Mermis from '../components/Mermis.astro';
+import Bifurcacion from '../components/Bifurcacion.astro';
+import SobreMi from '../components/SobreMi.astro';
+import Proyectos from '../components/Proyectos.astro';
+import Stack from '../components/Stack.astro';
+import Servicios from '../components/Servicios.astro';
+import Tienda from '../components/Tienda.astro';
+import Educacion from '../components/Educacion.astro';
+import Ahora from '../components/Ahora.astro';
+import Contacto from '../components/Contacto.astro';
+import seo from '../../content/global/seo.json';
+---
+
+<BaseLayout title={seo.title} description={seo.description}>
+  <Hero />
+  <Mermis />
+  <Bifurcacion />
+  <SobreMi />
+  <Proyectos />
+  <Stack />
+  <Servicios />
+  <Tienda />
+  <Educacion />
+  <Ahora />
+  <Contacto />
+</BaseLayout>

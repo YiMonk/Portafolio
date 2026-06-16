@@ -1,0 +1,28 @@
+{
+  "id": "bifurcacion",
+  "section_number": "02",
+  "section_label": "RUTAS",
+  "cards": [
+    {
+      "id": "servicios",
+      "route_number": "01",
+      "headline": "¿Tienes una idea? Hablemos.",
+      "description": "Frontend, UX/UI y diseño visual por encargo. Para equipos y founders.",
+      "cta": { "text": "EXPLORAR SERVICIOS ↗", "href": "#section-06" }
+    },
+    {
+      "id": "trabajo",
+      "route_number": "02",
+      "headline": "Mira lo que he hecho.",
+      "description": "Proyectos, casos de diseño e identidad visual.",
+      "cta": { "text": "VER PROYECTOS ↗", "href": "#section-04" }
+    },
+    {
+      "id": "tienda",
+      "route_number": "03",
+      "headline": "Recursos listos para usar.",
+      "description": "Iconos, logos y plantillas. Descarga o personaliza.",
+      "cta": { "text": "VER RECURSOS ↗", "href": "#section-07" }
+    }
+  ]
+}

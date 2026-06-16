@@ -1,0 +1,23 @@
+{
+  "slug": "mermis",
+  "title": "Mermis",
+  "subtitle": "SaaS de gestión de mermas para negocios gastronómicos",
+  "badges": ["DEV", "UX/UI", "En desarrollo"],
+  "links": { "live": null, "github": null },
+  "meta": {
+    "rol": "Frontend & UX/UI",
+    "año": "2026",
+    "stack": "Next.js, Tailwind CSS",
+    "estado": "En desarrollo",
+    "cliente": "Proyecto propio"
+  },
+  "hero_image": "/assets/projects/mermis/dashboard.png",
+  "blocks": [
+    { "type": "section", "heading": "El reto", "text": "Pendiente." },
+    { "type": "gallery", "images": ["/assets/images/mermis/dashboard.png", "/assets/images/mermis/dashboard.png"] },
+    { "type": "section", "heading": "El proceso", "text": "Pendiente." },
+    { "type": "image", "src": "/assets/projects/mermis/dashboard.png", "caption": "Dashboard principal" },
+    { "type": "section", "heading": "El resultado", "text": "Pendiente." }
+  ],
+  "next_project": null
+}

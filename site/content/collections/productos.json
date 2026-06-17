@@ -14,7 +14,7 @@
       "pricing": { "type": "fixed", "amount": null, "currency": "USD" },
       "cta": { "text": "Comprar", "action": "contact", "prefill_subject": "Compra · Pack de Iconos Línea" },
       "badge": "DISPONIBLE",
-      "visible": true
+      "visible": false
     },
     {
       "id": "plantilla-figma-dashboard",

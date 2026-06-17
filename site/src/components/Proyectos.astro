@@ -174,7 +174,7 @@ const items = proyectosData.items
     top: var(--space-2);
     left: var(--space-2);
     font-family: var(--font-body);
-    font-size: 0.5rem;
+    font-size: 0.625rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     background-color: var(--color-blue);
@@ -187,7 +187,7 @@ const items = proyectosData.items
   .proyectos__overlay {
     position: absolute;
     inset: 0;
-    background-color: var(--color-gray-75);
+    background-color: rgba(10, 10, 10, 0.75);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -204,7 +204,7 @@ const items = proyectosData.items
 
   .proyectos__overlay-category {
     font-family: var(--font-body);
-    font-size: 0.5rem;
+    font-size: 0.625rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--color-blue);
@@ -231,7 +231,7 @@ const items = proyectosData.items
 
   .proyectos__overlay-tags li {
     font-family: var(--font-body);
-    font-size: 0.5rem;
+    font-size: 0.625rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-cream-75);
@@ -264,6 +264,11 @@ const items = proyectosData.items
 
     .proyectos__grid {
       columns: 1;
+    }
+
+    /* Overlay siempre visible en touch — no hay hover */
+    .proyectos__overlay {
+      opacity: 1;
     }
   }
 </style>

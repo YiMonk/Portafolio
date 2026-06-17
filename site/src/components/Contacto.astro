@@ -50,7 +50,7 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
           </a>
         )}
         {githubChannel?.value && (
-          <a href={`https://${githubChannel.value}`} target="_blank" rel="noopener noreferrer" class="contacto__direct-link">
+          <a href={githubChannel.value} target="_blank" rel="noopener noreferrer" class="contacto__direct-link">
             {githubChannel.value} ↗
           </a>
         )}
@@ -104,7 +104,7 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
                 data-channel={ch.id}
                 data-channel-type={ch.type}
               >
-                {ch.label} ↗
+                Ver en {ch.label} ↗
               </a>
             )
             : (
@@ -116,7 +116,7 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
                 data-method={ch.method}
                 data-value={ch.value}
               >
-                {ch.label}
+                Enviar por {ch.label}
               </button>
             )
         ))}
@@ -236,13 +236,13 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
         window.open(`https://wa.me/${value}?text=${encodeURIComponent(body)}`, '_blank', 'noopener');
         modal?.close();
       } else if (channel === 'telegram') {
-        if (!value) { showFeedback('Canal no disponible aún.'); return; }
+        if (!value) { showFeedback('Telegram no está configurado aún.'); return; }
         navigator.clipboard.writeText(body).then(() => {
           showFeedback('Mensaje copiado. Abriendo Telegram...');
           setTimeout(() => window.open(`https://t.me/${value}`, '_blank', 'noopener'), 1200);
           modal?.close();
         }).catch(() => {
-          showFeedback('Canal no disponible aún.');
+          showFeedback('No se pudo copiar. Abre Telegram y pega el mensaje manualmente.');
         });
       }
     });
@@ -368,6 +368,9 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
     color: var(--color-gray-60);
     text-decoration: none;
     transition: color var(--transition-fast);
+    display: inline-block;
+    padding: 0.5rem 0;
+    min-height: 1.5rem;
   }
 
   .contacto__direct-link:hover {
@@ -380,7 +383,8 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
     border: none;
     border-radius: var(--radius-pill);
     font-family: var(--font-body);
-    font-size: 0.875rem;
+    font-size: 1.25rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     padding: var(--space-2) var(--space-6);
@@ -542,7 +546,7 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
   .contacto__modal-feedback {
     font-family: var(--font-body);
     font-size: 0.625rem;
-    color: var(--color-blue);
+    color: var(--color-gray-75);
     margin: 0;
   }
 

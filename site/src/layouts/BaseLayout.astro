@@ -57,9 +57,10 @@ const fullTitle = `${title} — Jesús Calles`;
     <title>{fullTitle}</title>
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido</a>
     <Nav />
     <Character />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <Footer />

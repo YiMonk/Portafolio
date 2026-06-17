@@ -147,7 +147,7 @@ const sectionsJson = JSON.stringify(nav.center.sections);
   @media (max-width: 1023px) {
     .nav__right {
       gap: var(--space-1);
-      font-size: 0.55rem;
+      font-size: 0.625rem;
     }
   }
 
@@ -182,7 +182,7 @@ const sectionsJson = JSON.stringify(nav.center.sections);
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   updateClock();
   const interval = setInterval(updateClock, reduced ? 60000 : 1000);
-  window.addEventListener('unload', () => clearInterval(interval));
+  window.addEventListener('pagehide', () => clearInterval(interval));
 </script>
 
 <script>

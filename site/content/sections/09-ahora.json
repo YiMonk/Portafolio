@@ -13,8 +13,8 @@
   "updated": "2026",
   "location": "Venezuela — Disponible remotamente",
   "states": [
-    { "label": "CONSTRUYENDO", "text": "Mi portfolio v2 y mejoras incrementales en mis proyectos públicos en GitHub." },
-    { "label": "APRENDIENDO", "text": "Next.js, TypeScript y patrones de arquitectura frontend para apps medianas." },
+    { "label": "CONSTRUYENDO", "text": "Terminando detalles con Mermis y mejoras incrementales en mis proyectos públicos en GitHub." },
+    { "label": "APRENDIENDO", "text": "SDD, agentes, skills y automatización de flujos de trabajo con IA. Next.js y TypeScript en paralelo." },
     { "label": "TRABAJANDO", "text": "Freelance ligero — diseño UI e ilustración para clientes independientes." },
     { "label": "DISPONIBLE", "text": "Abierto a roles frontend junior/mid-junior remotos, y a proyectos freelance pequeños." },
     { "label": "LEYENDO", "text": "Refactoring UI · Designing Data-Intensive Applications · documentación de Next.js." }

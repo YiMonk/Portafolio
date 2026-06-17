@@ -110,6 +110,7 @@ const productos = productosData.items
     font-weight: 900;
     line-height: 1.05;
     color: var(--color-black);
+    text-wrap: balance;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -168,7 +169,8 @@ const productos = productosData.items
     border-bottom: 1px solid var(--color-gray-10);
     text-decoration: none;
     cursor: pointer;
-    transition: background-color 200ms ease, color 200ms ease;
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent;
+    transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease, border-bottom-color 200ms ease;
   }
 
   .tienda__row.is-hidden {
@@ -177,10 +179,7 @@ const productos = productosData.items
 
   .tienda__row:hover {
     background-color: var(--color-black);
-    padding-left: var(--space-3);
-    padding-right: var(--space-3);
-    margin-left: calc(-1 * var(--space-3));
-    margin-right: calc(-1 * var(--space-3));
+    box-shadow: var(--space-3) 0 0 0 var(--color-black), calc(-1 * var(--space-3)) 0 0 0 var(--color-black);
     border-radius: 2px;
     border-bottom-color: transparent;
   }
@@ -198,7 +197,7 @@ const productos = productosData.items
   }
 
   .tienda__row:hover .tienda__row-num {
-    -webkit-text-stroke-color: rgba(237, 234, 227, 0.3);
+    -webkit-text-stroke-color: var(--color-cream-30);
   }
 
   .tienda__row-info {
@@ -209,7 +208,7 @@ const productos = productosData.items
 
   .tienda__row-type {
     font-family: var(--font-body);
-    font-size: 0.5rem;
+    font-size: 0.625rem;
     text-transform: uppercase;
     letter-spacing: 0.14em;
     color: var(--color-gray-60);
@@ -218,7 +217,7 @@ const productos = productosData.items
   }
 
   .tienda__row:hover .tienda__row-type {
-    color: rgba(237, 234, 227, 0.5);
+    color: var(--color-cream-50);
   }
 
   .tienda__row-name {
@@ -247,7 +246,7 @@ const productos = productosData.items
   }
 
   .tienda__row:hover .tienda__row-includes {
-    color: rgba(237, 234, 227, 0.5);
+    color: var(--color-cream-50);
   }
 
   .tienda__row-meta {
@@ -274,7 +273,7 @@ const productos = productosData.items
 
   .tienda__row-badge {
     font-family: var(--font-body);
-    font-size: 0.5rem;
+    font-size: 0.625rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     padding: 0.25em 0.75em;
@@ -294,8 +293,8 @@ const productos = productosData.items
   }
 
   .tienda__row:hover .tienda__row-badge {
-    border-color: rgba(237, 234, 227, 0.5);
-    color: rgba(237, 234, 227, 0.7);
+    border-color: var(--color-cream-50);
+    color: var(--color-cream-75);
   }
 
   .tienda__row-cta {
@@ -361,10 +360,7 @@ const productos = productosData.items
     }
 
     .tienda__row:hover {
-      padding-left: var(--space-2);
-      padding-right: var(--space-2);
-      margin-left: calc(-1 * var(--space-2));
-      margin-right: calc(-1 * var(--space-2));
+      box-shadow: var(--space-2) 0 0 0 var(--color-black), calc(-1 * var(--space-2)) 0 0 0 var(--color-black);
     }
   }
 </style>

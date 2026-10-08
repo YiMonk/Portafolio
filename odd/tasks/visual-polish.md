@@ -29,6 +29,7 @@ Only T1-T3 below. Everything else from the audit (modal, Tienda hover, theme tra
 - [x] T4 Unify portrait treatment: consistent frame (border, radius, shadow, tint) for the rectangular character photos across Hero/SobreMi/Stack/Servicios/Educacion/Ahora/Contacto/Mermis (route: delegated writer)
 - [x] T5 Proyectos layout: full-width featured card, uncropped image (aspect-ratio), no empty 2/3 when few projects (route: delegated writer)
 - [x] T6 Reveal polish: remove data-reveal from Hero h1 (LCP), earlier trigger (rootMargin), shorter title duration (route: delegated writer)
+- [x] T7 Mobile layout fixes at 375x812: nav clock hidden, hero stacked rows, partial fixed portraits hidden, Proyectos caption below cover (route: delegated writer)
 
 ## Acceptance
 - T1: card title/tags readable in both themes.
@@ -42,6 +43,7 @@ Only T1-T3 below. Everything else from the audit (modal, Tienda hover, theme tra
 - T6 done: Hero has no data-reveal (h1 visible on load), observer rootMargin -4% + 10% ratio, elements already in the initial viewport reveal immediately, --reveal-duration-title 500ms for h1-h3. Route: delegated writer. Checks: pnpm build ok; visual check at 1440x900: hero h1 visible immediately. No test runner -> structural exception.
 - T5 done: Proyectos grid is CSS grid auto-fit (minmax 320px), featured card spans full row, cover uses real ratio (Login.png is 1286:673, json aspect_ratio fixed from 4:5), .is-hidden uses display:none so filters leave no gaps. Reasoned for 1/2/6 cards; verified with 1 real card at 1440x900 (uncropped, full width). pnpm build ok. No test runner -> structural exception.
 - T4 done: shared `.portrait` frame in global.css (1px border, radius-md, overflow hidden, shadow, blue tint overlay) applied to Hero/Stack/Servicios/Contacto/Mermis wrappers and to the fixed layer's `.character__anim` (visual-only, no transform changes). Hero height = 100dvh - nav and portrait height capped so feet are visible. Checks: pnpm build ok; visual check at 1440x900 for Hero, Servicios, Ahora (fixed layer framed). Ahora spacing to title left as is (fixed layer position owned by character.json). No test runner -> structural exception.
+- T7 done (commits 8752954 nav, 1a08eac hero/character, then projects caption): at 375x812 nav shows only section label + 40px toggle (also fixed `.nav__right :not(...)` that hid the toggle icon); hero is tagline / framed portrait / identity with no overlap; partial poses 03/08/09 are `visibility:hidden` on mobile (layout kept for dash vectors); Proyectos cover is clean with caption below. Desktop 1440x900 hero unchanged, overlay still absolute over cover. pnpm build ok per commit. No test runner -> structural exception.
 
 ## Next step
 Visual check in browser, then native review decision (assessment was unassessable due to untracked root files, treated as high risk).

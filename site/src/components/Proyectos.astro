@@ -47,14 +47,15 @@ const items = proyectosData.items
             {item.status === 'in_progress' && (
               <span class="proyectos__badge">EN DESARROLLO</span>
             )}
+          </div>
 
-            <div class="proyectos__overlay" aria-hidden="true">
-              <p class="proyectos__overlay-category">{item.categories.join(' · ')}</p>
-              <h3 class="proyectos__overlay-title">{item.title}</h3>
-              <ul class="proyectos__overlay-tags">
-                {item.tags.map((t: string) => <li>{t}</li>)}
-              </ul>
-            </div>
+          {/* Sibling of the cover: absolute overlay on desktop, caption below the image on mobile */}
+          <div class="proyectos__overlay" aria-hidden="true">
+            <p class="proyectos__overlay-category">{item.categories.join(' · ')}</p>
+            <h3 class="proyectos__overlay-title">{item.title}</h3>
+            <ul class="proyectos__overlay-tags">
+              {item.tags.map((t: string) => <li>{t}</li>)}
+            </ul>
           </div>
 
           {item.case_study?.enabled && (
@@ -265,9 +266,21 @@ const items = proyectosData.items
       padding: var(--space-4);
     }
 
-    /* Overlay siempre visible en touch — no hay hover */
+    /* No hover on touch: show the cover clean and the info as a caption below it */
     .proyectos__overlay {
+      position: static;
       opacity: 1;
+      background: none;
+      padding: var(--space-2) 0 0;
+    }
+
+    .proyectos__overlay-title {
+      color: var(--color-black);
+    }
+
+    .proyectos__overlay-tags li {
+      color: var(--color-gray-60);
+      border-color: var(--color-gray-30);
     }
   }
 </style>

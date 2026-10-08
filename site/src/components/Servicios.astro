@@ -24,9 +24,9 @@ const servicios = serviciosData.items
 
 <section id="section-06" data-section-number="06" class="servicios">
   <!-- Header centrado -->
-  <div class="servicios__header">
-    <p class="servicios__section-label">§ {section_number} · {section_label}</p>
-    <h2 class="servicios__title">
+  <div class="servicios__header" data-reveal-group>
+    <p class="servicios__section-label" data-reveal>§ {section_number} · {section_label}</p>
+    <h2 class="servicios__title" data-reveal>
       <span class="servicios__title-line">{title.line_1}</span>
       <span class="servicios__title-line">{title.line_2}</span>
     </h2>
@@ -34,9 +34,9 @@ const servicios = serviciosData.items
 
   <!-- Body: cards izquierda + personaje derecha -->
   <div class="servicios__body">
-    <div class="servicios__cards">
+    <div class="servicios__cards" data-reveal-group>
       {servicios.map((s) => (
-        <article class="servicios__card">
+        <article class="servicios__card" data-reveal>
           <header class="servicios__card-header">
             <h3 class="servicios__card-name">{s.name}</h3>
             <span class="servicios__card-price">{s.priceLabel}</span>
@@ -63,7 +63,7 @@ const servicios = serviciosData.items
     </div>
 
     {handshakePose?.src_png && (
-      <div class="servicios__character" aria-hidden="true">
+      <div class="servicios__character" aria-hidden="true" data-reveal>
         <picture>
           {handshakePose.src_mobile_webp && (
             <source srcset={handshakePose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />

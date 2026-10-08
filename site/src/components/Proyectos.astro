@@ -15,9 +15,9 @@ const items = proyectosData.items
 
 <section id="section-04" data-section-number="04" class="proyectos">
   <div class="proyectos__inner">
-    <p class="proyectos__section-label">§ {section_number}</p>
+    <p class="proyectos__section-label" data-reveal>§ {section_number}</p>
 
-    <div class="proyectos__filters" role="group" aria-label="Filtrar proyectos">
+    <div class="proyectos__filters" role="group" aria-label="Filtrar proyectos" data-reveal>
       {filters.map((f: string) => (
         <button
           class:list={['proyectos__filter-btn', { 'is-active': f === 'TODOS' }]}
@@ -30,11 +30,12 @@ const items = proyectosData.items
       ))}
     </div>
 
-    <div class="proyectos__grid" id="proyectos-grid">
+    <div class="proyectos__grid" id="proyectos-grid" data-reveal-group>
       {items.map((item) => (
         <article
           class:list={['proyectos__card', { 'proyectos__card--featured': item.featured }]}
           data-categories={item.categories.join(',')}
+          data-reveal
         >
           <div class="proyectos__cover" style={`aspect-ratio: ${item.cssAspectRatio}`}>
             {item.usePlaceholder ? (

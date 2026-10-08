@@ -18,15 +18,15 @@ const groups = [...stackData.groups]
 <section id="section-05" data-section-number="05" class="stack">
   <div class="stack__inner">
     <header class="stack__header">
-      <div class="stack__header-text">
-        <p class="stack__label">§ {section_number} · {section_label}</p>
-        <h2 class="stack__title">
+      <div class="stack__header-text" data-reveal-group>
+        <p class="stack__label" data-reveal>§ {section_number} · {section_label}</p>
+        <h2 class="stack__title" data-reveal>
           <span class="stack__title-line">{title.line_1}</span>
           <span class="stack__title-line stack__highlight">{title.line_2}</span>
         </h2>
       </div>
       {herramientasPose?.src_png && (
-        <div class="stack__header-character" aria-hidden="true">
+        <div class="stack__header-character" aria-hidden="true" data-reveal>
           <picture>
             {herramientasPose.src_mobile_webp && (
               <source srcset={herramientasPose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />
@@ -38,10 +38,10 @@ const groups = [...stackData.groups]
       )}
     </header>
 
-    <div class="stack__table">
+    <div class="stack__table" data-reveal-group>
       {
         groups.map((group) => (
-          <div class="stack__row">
+          <div class="stack__row" data-reveal>
             <span class="stack__row-label">{group.label}</span>
             <ul class="stack__row-tools">
               {group.tools.map((tool, i) => (

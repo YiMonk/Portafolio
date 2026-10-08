@@ -1,5 +1,6 @@
 @import './reset.css';
 @import './tokens.css';
+@import './reveal.css';
 
 html {
   scroll-snap-type: y mandatory;

@@ -36,7 +36,7 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
 
   <!-- Cuerpo: datos de contacto izquierda + personaje derecha -->
   <div class="contacto__body">
-    <div class="contacto__center">
+    <div class="contacto__center" data-reveal>
       <button class="contacto__pill" id="open-modal-pill" type="button">
         {cta?.text ?? 'Hablemos'} ↗
       </button>
@@ -58,7 +58,7 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
     </div>
 
     {despedidaPose?.src_png && (
-      <div class="contacto__character" aria-hidden="true">
+      <div class="contacto__character" aria-hidden="true" data-reveal>
         <picture>
           {despedidaPose.src_mobile_webp && (
             <source srcset={despedidaPose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />

@@ -25,7 +25,7 @@ Only T1-T3 below. Everything else from the audit (modal, Tienda hover, theme tra
 ## Tasks
 - [x] T1 Fix dark-mode overlay text contrast in Proyectos (route: inline, 1 file)
 - [x] T2 Optimize character/project images: generate AVIF/WebP + mobile variants with sharp script, wire `character.json` + `Character.astro` `<picture>`, add width/height, remove duplicate Mermis assets (route: delegated writer, multi-file)
-- [ ] T3 Scroll-reveal system: motion tokens (easing/duration/distance), one IntersectionObserver in global script, `data-reveal` on section content and images (clip-path + scale), reduced-motion safe (route: delegated writer, multi-file)
+- [x] T3 Scroll-reveal system: motion tokens (easing/duration/distance), one IntersectionObserver in global script, `data-reveal` on section content and images (clip-path + scale), reduced-motion safe (route: delegated writer, multi-file)
 
 ## Acceptance
 - T1: card title/tags readable in both themes.
@@ -35,6 +35,7 @@ Only T1-T3 below. Everything else from the audit (modal, Tienda hover, theme tra
 ## Progress / evidence
 - T1 done, commit bdf29d0: Proyectos overlay title/tags use hardcoded light colors so dark mode stays readable. Route: inline (1 file). No runnable test; structural check only. Visual check in browser pending.
 - T2 done: character assets 21.4 MB PNG -> 370 KB WebP desktop / 116 KB mobile; <picture> + width/height wired in Character/Hero/Stack/Servicios/Contacto/Mermis; Mermis duplicate dir removed (mermis.json repointed). Route: delegated writer + parent finish. Checks: pnpm optimize:images ok, pnpm build ok, path existence ok (only pre-existing hidden 02-bifurcacion.png missing). No test runner -> structural exception. Also added Grafana/Zabbix to stack.json (user request).
+- T3 done: motion tokens, reveal.css, reveal.ts (single IntersectionObserver, html.js-reveal set by inline head script, data-reveal removed after transition), 74 data-reveal tags across 12 components. Route: delegated writer. Checks: pnpm build ok (parent re-ran), structural dist check ok. Not verified visually in a browser.
 
 ## Next step
-T2.
+Visual check in browser, then native review decision (assessment was unassessable due to untracked root files, treated as high risk).

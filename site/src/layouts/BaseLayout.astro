@@ -29,6 +29,14 @@ const fullTitle = `${title} — Jesús Calles`;
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
+    <!-- Scroll reveal: hide [data-reveal] only when JS + IntersectionObserver are available and motion is allowed -->
+    <script is:inline>
+      (function() {
+        if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('js-reveal');
+        }
+      })();
+    </script>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -64,6 +72,9 @@ const fullTitle = `${title} — Jesús Calles`;
       <slot />
     </main>
     <Footer />
+    <script>
+      import '../scripts/reveal.ts';
+    </script>
   </body>
 </html>
 

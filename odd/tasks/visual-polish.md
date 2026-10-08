@@ -46,4 +46,4 @@ Only T1-T3 below. Everything else from the audit (modal, Tienda hover, theme tra
 - T7 done (commits 8752954 nav, 1a08eac hero/character, then projects caption): at 375x812 nav shows only section label + 40px toggle (also fixed `.nav__right :not(...)` that hid the toggle icon); hero is tagline / framed portrait / identity with no overlap; partial poses 03/08/09 are `visibility:hidden` on mobile (layout kept for dash vectors); Proyectos cover is clean with caption below. Desktop 1440x900 hero unchanged, overlay still absolute over cover. pnpm build ok per commit. No test runner -> structural exception.
 
 ## Next step
-Visual check in browser, then native review decision (assessment was unassessable due to untracked root files, treated as high risk).
+Visual checks done (desktop dark/light, mobile). Remaining: native review decision (assessment unassessable due to untracked root files, treated as high risk) and user's call on push/PR.

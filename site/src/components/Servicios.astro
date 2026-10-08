@@ -64,7 +64,13 @@ const servicios = serviciosData.items
 
     {handshakePose?.src_png && (
       <div class="servicios__character" aria-hidden="true">
-        <img src={handshakePose.src_png} alt="" loading="lazy" />
+        <picture>
+          {handshakePose.src_mobile_webp && (
+            <source srcset={handshakePose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />
+          )}
+          {handshakePose.src_webp && <source srcset={handshakePose.src_webp} type="image/webp" />}
+          <img src={handshakePose.src_png} width={handshakePose.width} height={handshakePose.height} alt="" loading="lazy" />
+        </picture>
       </div>
     )}
   </div>

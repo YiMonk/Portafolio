@@ -7,9 +7,11 @@
       "mode": "hidden",
       "position": null,
       "src_png": "/assets/character/00-saludo.png",
-      "src_webp": null,
+      "src_webp": "/assets/character/00-saludo.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/00-saludo-mobile.webp",
+      "width": 928,
+      "height": 1152
     },
     {
       "section": "01",
@@ -18,9 +20,11 @@
       "mode": "hidden",
       "position": null,
       "src_png": "/assets/character/01-tipeando.png",
-      "src_webp": null,
+      "src_webp": "/assets/character/01-tipeando.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/01-tipeando-mobile.webp",
+      "width": 928,
+      "height": 1152
     },
     {
       "section": "02",
@@ -40,9 +44,11 @@
       "mode": "partial",
       "position": "right",
       "src_png": "/assets/character/03-pensativo.png",
-      "src_webp": null,
+      "src_webp": "/assets/character/03-pensativo.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/03-pensativo-mobile.webp",
+      "width": 928,
+      "height": 1152
     },
     {
       "section": "04",
@@ -51,9 +57,11 @@
       "mode": "peek",
       "position": "bottom",
       "src_png": "/assets/character/04-07-asomado.png",
-      "src_webp": null,
+      "src_webp": "/assets/character/04-07-asomado.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/04-07-asomado-mobile.webp",
+      "width": 928,
+      "height": 1152
     },
     {
       "section": "05",
@@ -62,9 +70,11 @@
       "mode": "hidden",
       "position": null,
       "src_png": "/assets/character/05-herramientas.png",
-      "src_webp": null,
+      "src_webp": "/assets/character/05-herramientas.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/05-herramientas-mobile.webp",
+      "width": 928,
+      "height": 1152
     },
     {
       "section": "06",
@@ -73,9 +83,11 @@
       "mode": "hidden",
       "position": null,
       "src_png": "/assets/character/06-handshake.png",
-      "src_webp": null,
+      "src_webp": "/assets/character/06-handshake.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/06-handshake-mobile.webp",
+      "width": 928,
+      "height": 1152
     },
     {
       "section": "07",
@@ -84,9 +96,11 @@
       "mode": "peek",
       "position": "bottom",
       "src_png": "/assets/character/04-07-asomado.png",
-      "src_webp": null,
+      "src_webp": "/assets/character/04-07-asomado.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/04-07-asomado-mobile.webp",
+      "width": 928,
+      "height": 1152
     },
     {
       "section": "08",
@@ -95,9 +109,11 @@
       "mode": "partial",
       "position": "corner",
       "src_png": "/assets/character/08-leyendo.png",
-      "src_webp": null,
+      "src_webp": "/assets/character/08-leyendo.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/08-leyendo-mobile.webp",
+      "width": 928,
+      "height": 1152
     },
     {
       "section": "09",
@@ -106,9 +122,11 @@
       "mode": "partial",
       "position": "right",
       "src_png": "/assets/character/09-pose-actual.png",
-      "src_webp": null,
+      "src_webp": "/assets/character/09-pose-actual.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/09-pose-actual-mobile.webp",
+      "width": 928,
+      "height": 1152
     },
     {
       "section": "10",
@@ -117,9 +135,11 @@
       "mode": "hidden",
       "position": null,
       "src_png": "/assets/character/10-despedida.png",
-      "src_webp": null,
+      "src_webp": "/assets/character/10-despedida.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/10-despedida-mobile.webp",
+      "width": 928,
+      "height": 1152
     }
   ]
 }

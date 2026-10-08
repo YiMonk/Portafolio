@@ -19,12 +19,17 @@ const { poses } = characterData;
         <div class="character__anim">
           {hasAsset && (
             <picture>
+              {pose.src_mobile_webp && (
+                <source srcset={pose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />
+              )}
               {pose.src_webp && (
                 <source srcset={pose.src_webp} type="image/webp" />
               )}
               {pose.src_png && (
                 <img
                   src={pose.src_png}
+                  width={pose.width}
+                  height={pose.height}
                   alt=""
                   aria-hidden="true"
                   draggable="false"
@@ -212,7 +217,11 @@ const { poses } = characterData;
     const nextNum = String(parseInt(num) + 1).padStart(2, '0');
     const nextEl = sectionMap.get(nextNum);
     if (!nextEl) return;
-    const src = nextEl.querySelector('img')?.src;
+    // Prefetch the WebP variant for the current viewport, never the heavy PNG fallback.
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const sources = nextEl.querySelectorAll<HTMLSourceElement>('source');
+    const match = isMobile ? sources[0] : sources[sources.length - 1];
+    const src = match?.srcset ?? nextEl.querySelector('img')?.src;
     if (src && !document.head.querySelector(`link[rel="prefetch"][href="${src}"]`)) {
       const link = document.createElement('link');
       link.rel = 'prefetch';

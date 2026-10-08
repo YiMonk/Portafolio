@@ -19,7 +19,22 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
 
   {saludoPose?.src_png && (
     <div class="hero__character" aria-hidden="true">
-      <img src={saludoPose.src_png} alt="" draggable="false" loading="eager" />
+      <picture>
+        {saludoPose.src_mobile_webp && (
+          <source srcset={saludoPose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />
+        )}
+        {saludoPose.src_webp && <source srcset={saludoPose.src_webp} type="image/webp" />}
+        <img
+          src={saludoPose.src_png}
+          width={saludoPose.width}
+          height={saludoPose.height}
+          alt=""
+          draggable="false"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
     </div>
   )}
 
@@ -109,6 +124,7 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
 
   .hero__character img {
     width: clamp(260px, 44vw, 580px);
+    height: auto;
     max-height: 90vh;
     object-fit: contain;
     display: block;

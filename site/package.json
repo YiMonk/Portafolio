@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "optimize:images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "@iconify-json/devicon": "^1.2.62",
@@ -17,5 +18,8 @@
     "@iconify-json/simple-icons": "^1.2.84",
     "astro": "^6.3.7",
     "astro-icon": "^1.1.5"
+  },
+  "devDependencies": {
+    "sharp": "0.34.5"
   }
 }

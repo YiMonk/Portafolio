@@ -14,7 +14,7 @@
   "hero_image": "/assets/projects/mermis/dashboard.png",
   "blocks": [
     { "type": "section", "heading": "El reto", "text": "Pendiente." },
-    { "type": "gallery", "images": ["/assets/images/mermis/dashboard.png", "/assets/images/mermis/dashboard.png"] },
+    { "type": "gallery", "images": ["/assets/projects/mermis/dashboard.png", "/assets/projects/mermis/dashboard.png"] },
     { "type": "section", "heading": "El proceso", "text": "Pendiente." },
     { "type": "image", "src": "/assets/projects/mermis/dashboard.png", "caption": "Dashboard principal" },
     { "type": "section", "heading": "El resultado", "text": "Pendiente." }

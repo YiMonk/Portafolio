@@ -59,7 +59,13 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
 
     {despedidaPose?.src_png && (
       <div class="contacto__character" aria-hidden="true">
-        <img src={despedidaPose.src_png} alt="" loading="lazy" />
+        <picture>
+          {despedidaPose.src_mobile_webp && (
+            <source srcset={despedidaPose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />
+          )}
+          {despedidaPose.src_webp && <source srcset={despedidaPose.src_webp} type="image/webp" />}
+          <img src={despedidaPose.src_png} width={despedidaPose.width} height={despedidaPose.height} alt="" loading="lazy" />
+        </picture>
       </div>
     )}
   </div>

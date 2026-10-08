@@ -23,8 +23,8 @@ Only T1-T3 below. Everything else from the audit (modal, Tienda hover, theme tra
 `ask-on-risk`. Push/PR/merge are the user's decisions.
 
 ## Tasks
-- [ ] T1 Fix dark-mode overlay text contrast in Proyectos (route: inline, 1 file)
-- [ ] T2 Optimize character/project images: generate AVIF/WebP + mobile variants with sharp script, wire `character.json` + `Character.astro` `<picture>`, add width/height, remove duplicate Mermis assets (route: delegated writer, multi-file)
+- [x] T1 Fix dark-mode overlay text contrast in Proyectos (route: inline, 1 file)
+- [x] T2 Optimize character/project images: generate AVIF/WebP + mobile variants with sharp script, wire `character.json` + `Character.astro` `<picture>`, add width/height, remove duplicate Mermis assets (route: delegated writer, multi-file)
 - [ ] T3 Scroll-reveal system: motion tokens (easing/duration/distance), one IntersectionObserver in global script, `data-reveal` on section content and images (clip-path + scale), reduced-motion safe (route: delegated writer, multi-file)
 
 ## Acceptance
@@ -33,7 +33,8 @@ Only T1-T3 below. Everything else from the audit (modal, Tienda hover, theme tra
 - T3: reveals trigger once on enter, no layout shift, disabled under reduced motion; `pnpm build` passes.
 
 ## Progress / evidence
-(none yet)
+- T1 done, commit bdf29d0: Proyectos overlay title/tags use hardcoded light colors so dark mode stays readable. Route: inline (1 file). No runnable test; structural check only. Visual check in browser pending.
+- T2 done: character assets 21.4 MB PNG -> 370 KB WebP desktop / 116 KB mobile; <picture> + width/height wired in Character/Hero/Stack/Servicios/Contacto/Mermis; Mermis duplicate dir removed (mermis.json repointed). Route: delegated writer + parent finish. Checks: pnpm optimize:images ok, pnpm build ok, path existence ok (only pre-existing hidden 02-bifurcacion.png missing). No test runner -> structural exception. Also added Grafana/Zabbix to stack.json (user request).
 
 ## Next step
-T1.
+T2.

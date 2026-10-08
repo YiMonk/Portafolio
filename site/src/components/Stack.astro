@@ -27,7 +27,13 @@ const groups = [...stackData.groups]
       </div>
       {herramientasPose?.src_png && (
         <div class="stack__header-character" aria-hidden="true">
-          <img src={herramientasPose.src_png} alt="" loading="lazy" />
+          <picture>
+            {herramientasPose.src_mobile_webp && (
+              <source srcset={herramientasPose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />
+            )}
+            {herramientasPose.src_webp && <source srcset={herramientasPose.src_webp} type="image/webp" />}
+            <img src={herramientasPose.src_png} width={herramientasPose.width} height={herramientasPose.height} alt="" loading="lazy" />
+          </picture>
         </div>
       )}
     </header>

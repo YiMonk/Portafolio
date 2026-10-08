@@ -180,7 +180,13 @@ const { poses } = characterData;
     .character--full    { width: clamp(140px, 50vw, 240px); }
     .character--partial { width: clamp(100px, 35vw, 180px); }
     .character--peek    { width: clamp(80px, 28vw, 140px); }
-    .character[data-section="09"] { width: clamp(100px, 35vw, 180px); }
+
+    /* Partial poses (03, 08, 09) always cross text on narrow screens: keep them in
+       layout (so dash vectors still resolve) but never paint or capture them. */
+    .character--partial,
+    .character[data-section="09"] {
+      visibility: hidden;
+    }
 
     .character.is-active .character__anim,
     .character.is-entering .character__anim { opacity: 0.35; }

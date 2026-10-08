@@ -127,14 +127,19 @@ const items = proyectosData.items
     color: var(--color-black);
   }
 
+  /* Auto-fit grid: 1 card fills the row, 2+ share it. The featured card always spans the full row. */
   .proyectos__grid {
-    columns: 3;
-    column-gap: var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: var(--space-3);
+    align-items: start;
+  }
+
+  .proyectos__card--featured {
+    grid-column: 1 / -1;
   }
 
   .proyectos__card {
-    break-inside: avoid;
-    margin-bottom: var(--space-3);
     position: relative;
     overflow: hidden;
     border-radius: var(--radius-md);
@@ -143,11 +148,8 @@ const items = proyectosData.items
   }
 
   .proyectos__card.is-hidden {
-    opacity: 0;
-    visibility: hidden;
-    height: 0;
-    margin: 0;
-    overflow: hidden;
+    /* Removed from the grid flow so filtering never leaves gaps */
+    display: none;
   }
 
   .proyectos__cover {
@@ -155,6 +157,11 @@ const items = proyectosData.items
     position: relative;
     overflow: hidden;
     background-color: var(--color-gray-10);
+  }
+
+  /* Featured: cover keeps its real ratio (inline aspect-ratio); only capped on very tall viewports */
+  .proyectos__card--featured .proyectos__cover {
+    max-height: 75vh;
   }
 
   .proyectos__cover-placeholder {
@@ -253,19 +260,9 @@ const items = proyectosData.items
     outline-offset: 4px;
   }
 
-  @media (max-width: 1199px) {
-    .proyectos__grid {
-      columns: 2;
-    }
-  }
-
   @media (max-width: 767px) {
     .proyectos {
       padding: var(--space-4);
-    }
-
-    .proyectos__grid {
-      columns: 1;
     }
 
     /* Overlay siempre visible en touch — no hay hover */

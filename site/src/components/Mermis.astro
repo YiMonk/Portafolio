@@ -11,7 +11,7 @@ const tipeandoPose = characterData.poses.find((p) => p.section === '01');
     <p class="mermis__section-label" data-reveal>§ {section_number} · {section_label}</p>
     <p class="mermis__status-label" data-reveal>{status_label}</p>
     {tipeandoPose?.src_png && (
-      <div class="mermis__character" aria-hidden="true" data-reveal>
+      <div class="mermis__character portrait" aria-hidden="true" data-reveal>
         <picture>
           {tipeandoPose.src_mobile_webp && (
             <source srcset={tipeandoPose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />

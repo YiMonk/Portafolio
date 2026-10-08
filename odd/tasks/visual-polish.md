@@ -26,7 +26,7 @@ Only T1-T3 below. Everything else from the audit (modal, Tienda hover, theme tra
 - [x] T1 Fix dark-mode overlay text contrast in Proyectos (route: inline, 1 file)
 - [x] T2 Optimize character/project images: generate AVIF/WebP + mobile variants with sharp script, wire `character.json` + `Character.astro` `<picture>`, add width/height, remove duplicate Mermis assets (route: delegated writer, multi-file)
 - [x] T3 Scroll-reveal system: motion tokens (easing/duration/distance), one IntersectionObserver in global script, `data-reveal` on section content and images (clip-path + scale), reduced-motion safe (route: delegated writer, multi-file)
-- [ ] T4 Unify portrait treatment: consistent frame (border, radius, shadow, tint) for the rectangular character photos across Hero/SobreMi/Stack/Servicios/Educacion/Ahora/Contacto/Mermis (route: delegated writer)
+- [x] T4 Unify portrait treatment: consistent frame (border, radius, shadow, tint) for the rectangular character photos across Hero/SobreMi/Stack/Servicios/Educacion/Ahora/Contacto/Mermis (route: delegated writer)
 - [x] T5 Proyectos layout: full-width featured card, uncropped image (aspect-ratio), no empty 2/3 when few projects (route: delegated writer)
 - [x] T6 Reveal polish: remove data-reveal from Hero h1 (LCP), earlier trigger (rootMargin), shorter title duration (route: delegated writer)
 
@@ -41,6 +41,7 @@ Only T1-T3 below. Everything else from the audit (modal, Tienda hover, theme tra
 - T3 done: motion tokens, reveal.css, reveal.ts (single IntersectionObserver, html.js-reveal set by inline head script, data-reveal removed after transition), 74 data-reveal tags across 12 components. Route: delegated writer. Checks: pnpm build ok (parent re-ran), structural dist check ok. Not verified visually in a browser.
 - T6 done: Hero has no data-reveal (h1 visible on load), observer rootMargin -4% + 10% ratio, elements already in the initial viewport reveal immediately, --reveal-duration-title 500ms for h1-h3. Route: delegated writer. Checks: pnpm build ok; visual check at 1440x900: hero h1 visible immediately. No test runner -> structural exception.
 - T5 done: Proyectos grid is CSS grid auto-fit (minmax 320px), featured card spans full row, cover uses real ratio (Login.png is 1286:673, json aspect_ratio fixed from 4:5), .is-hidden uses display:none so filters leave no gaps. Reasoned for 1/2/6 cards; verified with 1 real card at 1440x900 (uncropped, full width). pnpm build ok. No test runner -> structural exception.
+- T4 done: shared `.portrait` frame in global.css (1px border, radius-md, overflow hidden, shadow, blue tint overlay) applied to Hero/Stack/Servicios/Contacto/Mermis wrappers and to the fixed layer's `.character__anim` (visual-only, no transform changes). Hero height = 100dvh - nav and portrait height capped so feet are visible. Checks: pnpm build ok; visual check at 1440x900 for Hero, Servicios, Ahora (fixed layer framed). Ahora spacing to title left as is (fixed layer position owned by character.json). No test runner -> structural exception.
 
 ## Next step
 Visual check in browser, then native review decision (assessment was unassessable due to untracked root files, treated as high risk).

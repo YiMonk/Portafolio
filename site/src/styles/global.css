@@ -33,6 +33,34 @@ section {
   scroll-margin-top: var(--nav-height);
 }
 
+/*
+ * Shared portrait frame for the rectangular character photos. Put it on the
+ * element that wraps the <picture>/<img>. Visual only: it never sets transform
+ * or position offsets, so outer-position / inner-animation rules still apply.
+ * The tint uses the theme blue, so it harmonizes the different studio
+ * backdrops in both light and dark themes.
+ */
+.portrait {
+  position: relative;
+  border: 1px solid var(--color-gray-30);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(10, 10, 10, 0.22);
+  background-color: var(--color-gray-10);
+}
+
+.portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--color-blue) 22%, transparent),
+    color-mix(in srgb, var(--color-blue) 8%, transparent)
+  );
+  pointer-events: none;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

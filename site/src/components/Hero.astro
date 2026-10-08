@@ -19,6 +19,7 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
 
   {saludoPose?.src_png && (
     <div class="hero__character" aria-hidden="true">
+      <div class="portrait hero__portrait">
       <picture>
         {saludoPose.src_mobile_webp && (
           <source srcset={saludoPose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />
@@ -35,6 +36,7 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
           decoding="async"
         />
       </picture>
+      </div>
     </div>
   )}
 
@@ -51,7 +53,9 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
 <style>
   .hero {
     position: relative;
-    height: 100vh;
+    /* Nav is fixed above the page: size the hero to what is actually visible */
+    height: calc(100vh - var(--nav-height));
+    height: calc(100dvh - var(--nav-height));
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -122,11 +126,17 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
     z-index: 2;
   }
 
+  .hero__portrait {
+    margin-bottom: var(--space-6);
+    max-width: 100%;
+  }
+
+  /* Fit the portrait between the nav and the bottom edge so the feet are never cut */
   .hero__character img {
-    width: clamp(260px, 44vw, 580px);
-    height: auto;
-    max-height: 90vh;
-    object-fit: contain;
+    width: auto;
+    max-width: 100%;
+    height: min(calc(100dvh - var(--nav-height) - var(--space-12) - var(--space-6)), calc(44vw * 1.2414), 720px);
+    object-fit: cover;
     display: block;
   }
 
@@ -193,6 +203,7 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
 
     .hero__character img {
       width: clamp(180px, 50vw, 260px);
+      height: auto;
       max-height: 55vh;
     }
 

@@ -146,10 +146,11 @@ const { poses } = characterData;
     top: 50%;
     transform: translateY(-50%);
   }
+  /* Peek: tucked into the bottom-right corner so it never covers centered content */
   .character--pos-bottom {
-    left: 50%;
+    right: var(--space-8);
     bottom: 0;
-    transform: translateX(-50%) translateY(var(--peek-offset, 40%));
+    transform: translateY(var(--peek-offset, 62%));
   }
   .character--pos-center {
     left: 50%;
@@ -166,11 +167,20 @@ const { poses } = characterData;
     bottom: var(--space-4);
   }
 
+  /* Ahora (09): anchor under the nav, in the right gutter, so it clears the
+     centered title and the status rows below it (outer = position only). */
+  .character[data-section="09"] {
+    top: calc(var(--nav-height, 3rem) + var(--space-4));
+    width: clamp(160px, 21vw, 300px);
+    transform: none;
+  }
+
   /* ── Mobile ── */
   @media (max-width: 767px) {
     .character--full    { width: clamp(140px, 50vw, 240px); }
     .character--partial { width: clamp(100px, 35vw, 180px); }
     .character--peek    { width: clamp(80px, 28vw, 140px); }
+    .character[data-section="09"] { width: clamp(100px, 35vw, 180px); }
 
     .character.is-active .character__anim,
     .character.is-entering .character__anim { opacity: 0.35; }

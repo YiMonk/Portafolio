@@ -6,15 +6,15 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
 ---
 
 <section id="section-00" data-section-number="00" class="hero">
-  <div class="hero__left" data-reveal-group>
-    <p class="hero__label" data-reveal>§ {heroData.section_number} · {heroData.section_label}</p>
-    <h1 class="hero__tagline" data-reveal>
+  <div class="hero__left">
+    <p class="hero__label">§ {heroData.section_number} · {heroData.section_label}</p>
+    <h1 class="hero__tagline">
       <span class="hero__tagline-line">{heroData.tagline.line_1}</span>
       <span class={`hero__tagline-line${heroData.tagline.highlight === 'line_2' ? ' hero__tagline-line--highlight' : ''}`}>
         {heroData.tagline.line_2}
       </span>
     </h1>
-    <p class="hero__subtitle" data-reveal>{heroData.subtitle}</p>
+    <p class="hero__subtitle">{heroData.subtitle}</p>
   </div>
 
   {saludoPose?.src_png && (
@@ -38,7 +38,7 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
     </div>
   )}
 
-  <div class="hero__identity" data-reveal>
+  <div class="hero__identity">
     <p>{heroData.identity.greeting}</p>
     <p>{heroData.identity.role}</p>
     <p>{heroData.identity.location}</p>

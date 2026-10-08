@@ -3,7 +3,7 @@
 // so hidden states only exist when this script can actually reveal them.
 
 const MAX_STAGGER = 6;
-const VISIBLE_RATIO = 0.15;
+const VISIBLE_RATIO = 0.1;
 
 function revealAll(): void {
   document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => el.classList.add('is-revealed'));
@@ -67,10 +67,26 @@ function init(): void {
           reveal(el, index);
         }
       },
-      { rootMargin: '0px 0px -8% 0px', threshold: [0, 0.05, 0.15, 0.3, 0.6] },
+      { rootMargin: '0px 0px -4% 0px', threshold: [0, 0.05, 0.1, 0.3, 0.6] },
     );
 
-    targets.forEach((el) => io.observe(el));
+    // Elements already inside the initial viewport reveal right away,
+    // without waiting for scroll-snap or the first observer callback.
+    const initialGroups = new Map<Element, number>();
+    targets.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.96 && rect.bottom > 0) {
+        const group = el.closest('[data-reveal-group]');
+        let index = 0;
+        if (group) {
+          index = Math.min(initialGroups.get(group) ?? 0, MAX_STAGGER);
+          initialGroups.set(group, (initialGroups.get(group) ?? 0) + 1);
+        }
+        reveal(el, index);
+      } else {
+        io.observe(el);
+      }
+    });
   } catch {
     revealAll();
   }

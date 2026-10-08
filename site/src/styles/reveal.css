@@ -22,6 +22,11 @@ html.js-reveal [data-reveal].is-revealed {
   transform: none;
 }
 
+/* ── Headings: shorter duration so titles never feel late ── */
+html.js-reveal :is(h1, h2, h3)[data-reveal] {
+  transition-duration: var(--reveal-duration-title);
+}
+
 /* ── Image variant: clip wipe + inner scale settle ── */
 html.js-reveal [data-reveal="image"] {
   opacity: 1;

@@ -157,12 +157,21 @@ const sectionsJson = JSON.stringify(nav.center.sections);
       padding: 0 var(--space-2);
     }
 
-    .nav__right :not(.nav__theme-toggle) {
+    /* Only the text links are hidden; the toggle (and its icon) must stay */
+    .nav__right > .nav__link {
       display: none;
     }
 
-    .nav__name {
+    /* Clock/location collides with the centered section label on narrow screens */
+    .nav__name,
+    .nav__clock {
       display: none;
+    }
+
+    .nav__theme-toggle {
+      min-width: 40px;
+      min-height: 40px;
+      justify-content: center;
     }
   }
 </style>

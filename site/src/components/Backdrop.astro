@@ -4,7 +4,8 @@
  * Ridgelines are generated at build time with a seeded midpoint-displacement
  * function (deterministic, no Math.random). Each profile is tileable: the
  * first and last heights are equal, and two copies sit side by side so a
- * translateX(-50%) loop is seamless.
+ * translateX(-50%) loop is seamless. Lit faces: a copy of each silhouette
+ * shifted toward the sun (left) peeks out above the real one on slopes facing it.
  */
 function mulberry32(seed: number) {
   let a = seed >>> 0;
@@ -59,11 +60,13 @@ const defs: LayerDef[] = [
 const layers = defs.map((d, idx) => {
   const p = profile(d.seed, d.roughness);
   const pts: string[] = [];
+  const xy: Array<[number, number]> = [];
   for (let c = 0; c < 2; c++) {
     for (let i = c === 0 ? 0 : 1; i <= STEPS; i++) {
       const x = c * PERIOD_W + (i / STEPS) * PERIOD_W;
       const y = VIEW_H - VIEW_H * (d.lo + (d.hi - d.lo) * p[i]);
       pts.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+      xy.push([x, y]);
     }
   }
   return {
@@ -79,6 +82,7 @@ const layers = defs.map((d, idx) => {
 
 <div class="backdrop" aria-hidden="true">
   <div class="backdrop__glow"></div>
+  <div class="backdrop__sun"></div>
   {layers.map((l) => (
     <>
       <svg
@@ -88,10 +92,14 @@ const layers = defs.map((d, idx) => {
         preserveAspectRatio="none"
         focusable="false"
       >
+        <g class="backdrop__lit-face" transform="translate(-22 0)">
+          <path class="backdrop__fill" d={l.fill}></path>
+          <path class="backdrop__lit" d={l.fill}></path>
+        </g>
         <path class="backdrop__fill" d={l.fill}></path>
-        {l.rim && <path class="backdrop__rim" d={l.ridge} vector-effect="non-scaling-stroke"></path>}
+        <path class="backdrop__rim" d={l.ridge} vector-effect="non-scaling-stroke"></path>
       </svg>
-      {l.n <= 2 && <div class={`backdrop__haze backdrop__haze--${l.n}`}></div>}
+      {l.n <= 3 && <div class={`backdrop__haze backdrop__haze--${l.n}`}></div>}
     </>
   ))}
 </div>
@@ -103,17 +111,34 @@ const layers = defs.map((d, idx) => {
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
+    opacity: var(--bd-opacity);
   }
 
-  /* Faint cold rim light sitting just above the farthest ridge */
+  /* Wide faint halo around the star (left of centre, behind the far ridge) */
   .backdrop__glow {
     position: absolute;
     left: -10%;
     right: -10%;
     bottom: 0;
-    height: 46vh;
-    background: radial-gradient(ellipse 60% 70% at 50% 100%, var(--bd-glow), transparent 70%);
+    height: 62vh;
+    background: radial-gradient(ellipse 34% 80% at 32% 100%, var(--bd-glow), transparent 72%);
     animation: backdrop-breathe 14s ease-in-out infinite alternate;
+  }
+
+  /* Blue dwarf: small soft-edged disc + corona, partially hidden by layer 1 */
+  .backdrop__sun {
+    --sun-r: clamp(24px, 2.6vw, 40px);
+    position: absolute;
+    left: 32%;
+    bottom: 26vh;
+    width: calc(var(--sun-r) * 2);
+    height: calc(var(--sun-r) * 2);
+    margin-left: calc(var(--sun-r) * -1);
+    margin-bottom: calc(var(--sun-r) * -1);
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--bd-sun-core) 0 62%, var(--bd-sun-edge) 82%, transparent 100%);
+    box-shadow: 0 0 calc(var(--sun-r) * 1.5) calc(var(--sun-r) * 0.4) var(--bd-sun-halo);
+    animation: backdrop-breathe 10s ease-in-out infinite alternate;
   }
 
   .backdrop__layer {
@@ -135,15 +160,21 @@ const layers = defs.map((d, idx) => {
   .backdrop__layer--3 .backdrop__fill { fill: var(--bd-ridge-3); }
   .backdrop__layer--4 .backdrop__fill { fill: var(--bd-ridge-4); }
 
+  .backdrop__lit { fill: var(--bd-lit); }
+  .backdrop__layer--1 .backdrop__lit { opacity: 0.5; }
+  .backdrop__layer--2 .backdrop__lit { opacity: 0.65; }
+  .backdrop__layer--3 .backdrop__lit { opacity: 0.8; }
+
+  /* Rim gets crisper toward the viewer */
   .backdrop__rim {
     fill: none;
     stroke: var(--bd-rim);
-    stroke-width: 1px;
     stroke-linejoin: round;
   }
-  .backdrop__layer--2 .backdrop__rim {
-    opacity: 0.45;
-  }
+  .backdrop__layer--1 .backdrop__rim { stroke-width: 1.5px; opacity: 0.45; }
+  .backdrop__layer--2 .backdrop__rim { stroke-width: 1.25px; opacity: 0.55; }
+  .backdrop__layer--3 .backdrop__rim { stroke-width: 1px; opacity: 0.75; }
+  .backdrop__layer--4 .backdrop__rim { stroke-width: 0.75px; opacity: 1; }
 
   .backdrop__haze {
     position: absolute;
@@ -152,8 +183,10 @@ const layers = defs.map((d, idx) => {
     bottom: 0;
     background: linear-gradient(to top, var(--bd-haze), transparent);
   }
-  .backdrop__haze--1 { height: 30vh; }
-  .backdrop__haze--2 { height: 22vh; }
+  /* Fog bands: thicker between far layers */
+  .backdrop__haze--1 { height: 34vh; }
+  .backdrop__haze--2 { height: 26vh; opacity: 0.8; }
+  .backdrop__haze--3 { height: 18vh; opacity: 0.6; }
 
   @keyframes backdrop-drift {
     from { transform: translate3d(0, 0, 0); }
@@ -167,6 +200,7 @@ const layers = defs.map((d, idx) => {
 
   @media (prefers-reduced-motion: reduce) {
     .backdrop__layer,
+    .backdrop__sun,
     .backdrop__glow {
       animation: none;
     }

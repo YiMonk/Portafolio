@@ -56,12 +56,18 @@
   --nav-height: 3rem;
 
   /* Backdrop (light): misty blue-grey ridges, slightly darker than cream, fading with distance */
-  --bd-ridge-1: #dde0e6;
-  --bd-ridge-2: #d6dbe3;
-  --bd-ridge-3: #cfd4de;
-  --bd-ridge-4: #c8cfda;
+  --bd-ridge-1: #e3e5e9;
+  --bd-ridge-2: #dadee5;
+  --bd-ridge-3: #cdd3dd;
+  --bd-ridge-4: #bfc8d5;
   --bd-haze: rgba(237, 234, 227, 0.45);
-  --bd-glow: rgba(44, 95, 246, 0.10);
+  --bd-glow: rgba(44, 95, 246, 0.14);
+  --bd-lit: rgba(255, 255, 255, 0.35);
+  --bd-shade: rgba(40, 60, 100, 0.10);
+  --bd-sun-core: #f4f7ff;
+  --bd-sun-edge: rgba(170, 195, 255, 0.6);
+  --bd-sun-halo: rgba(90, 130, 255, 0.25);
+  --bd-opacity: 0.6;
   --bd-rim: rgba(44, 95, 246, 0.22);
 }
 
@@ -81,11 +87,17 @@
   --color-cream-30: rgba(14, 14, 14, 0.30);
 
   /* Backdrop (dark): dim planet, near-black blue-greys with a faint cold rim */
-  --bd-ridge-1: #1a2233;
-  --bd-ridge-2: #141b28;
-  --bd-ridge-3: #0f141d;
-  --bd-ridge-4: #0a0d13;
+  --bd-ridge-1: #1e2a42;
+  --bd-ridge-2: #162033;
+  --bd-ridge-3: #0f1624;
+  --bd-ridge-4: #090c12;
   --bd-haze: rgba(40, 60, 110, 0.14);
-  --bd-glow: rgba(44, 95, 246, 0.18);
+  --bd-glow: rgba(60, 110, 255, 0.22);
+  --bd-lit: rgba(120, 160, 255, 0.18);
+  --bd-shade: rgba(0, 0, 0, 0.35);
+  --bd-sun-core: #dfe8ff;
+  --bd-sun-edge: rgba(150, 185, 255, 0.6);
+  --bd-sun-halo: rgba(80, 120, 255, 0.35);
+  --bd-opacity: 0.6;
   --bd-rim: rgba(91, 126, 255, 0.30);
 }

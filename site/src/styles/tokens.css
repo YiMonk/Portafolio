@@ -54,6 +54,15 @@
 
   /* Nav */
   --nav-height: 3rem;
+
+  /* Backdrop (light): misty blue-grey ridges, slightly darker than cream, fading with distance */
+  --bd-ridge-1: #dde0e6;
+  --bd-ridge-2: #d6dbe3;
+  --bd-ridge-3: #cfd4de;
+  --bd-ridge-4: #c8cfda;
+  --bd-haze: rgba(237, 234, 227, 0.45);
+  --bd-glow: rgba(44, 95, 246, 0.10);
+  --bd-rim: rgba(44, 95, 246, 0.22);
 }
 
 [data-theme="dark"] {
@@ -70,4 +79,13 @@
   --color-cream-60: rgba(14, 14, 14, 0.60);
   --color-cream-50: rgba(14, 14, 14, 0.50);
   --color-cream-30: rgba(14, 14, 14, 0.30);
+
+  /* Backdrop (dark): dim planet, near-black blue-greys with a faint cold rim */
+  --bd-ridge-1: #1a2233;
+  --bd-ridge-2: #141b28;
+  --bd-ridge-3: #0f141d;
+  --bd-ridge-4: #0a0d13;
+  --bd-haze: rgba(40, 60, 110, 0.14);
+  --bd-glow: rgba(44, 95, 246, 0.18);
+  --bd-rim: rgba(91, 126, 255, 0.30);
 }

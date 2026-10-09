@@ -50,10 +50,10 @@ interface LayerDef {
 }
 
 const defs: LayerDef[] = [
-  { seed: 1187, roughness: 0.55, heightVh: 48, lo: 0.52, hi: 1.0, duration: 240, rim: true },
-  { seed: 4093, roughness: 0.58, heightVh: 40, lo: 0.4, hi: 0.92, duration: 190, rim: true },
-  { seed: 7741, roughness: 0.6, heightVh: 32, lo: 0.32, hi: 0.88, duration: 150, rim: false },
-  { seed: 9311, roughness: 0.62, heightVh: 22, lo: 0.36, hi: 0.92, duration: 120, rim: false },
+  { seed: 1187, roughness: 0.48, heightVh: 36, lo: 0.52, hi: 1.0, duration: 240, rim: true },
+  { seed: 4093, roughness: 0.5, heightVh: 30, lo: 0.4, hi: 0.92, duration: 190, rim: true },
+  { seed: 7741, roughness: 0.52, heightVh: 24, lo: 0.32, hi: 0.88, duration: 150, rim: false },
+  { seed: 9311, roughness: 0.54, heightVh: 17, lo: 0.36, hi: 0.92, duration: 120, rim: false },
 ];
 
 const layers = defs.map((d, idx) => {
@@ -111,7 +111,7 @@ const layers = defs.map((d, idx) => {
     left: -10%;
     right: -10%;
     bottom: 0;
-    height: 62vh;
+    height: 46vh;
     background: radial-gradient(ellipse 60% 70% at 50% 100%, var(--bd-glow), transparent 70%);
     animation: backdrop-breathe 14s ease-in-out infinite alternate;
   }
@@ -121,6 +121,7 @@ const layers = defs.map((d, idx) => {
     left: 0;
     bottom: 0;
     width: 200%;
+    max-width: none; /* reset.css caps svg at 100% */
     height: var(--bd-h);
     will-change: transform;
     animation: backdrop-drift var(--bd-dur) linear infinite;
@@ -151,8 +152,8 @@ const layers = defs.map((d, idx) => {
     bottom: 0;
     background: linear-gradient(to top, var(--bd-haze), transparent);
   }
-  .backdrop__haze--1 { height: 38vh; }
-  .backdrop__haze--2 { height: 30vh; }
+  .backdrop__haze--1 { height: 30vh; }
+  .backdrop__haze--2 { height: 22vh; }
 
   @keyframes backdrop-drift {
     from { transform: translate3d(0, 0, 0); }

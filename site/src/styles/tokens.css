@@ -69,6 +69,16 @@
   --bd-sun-halo: rgba(90, 130, 255, 0.25);
   --bd-opacity: 0.6;
   --bd-rim: rgba(44, 95, 246, 0.22);
+
+  /* Backdrop3D (light): misty blue-grey terrain, cool sun glow; fog uses --color-cream */
+  --bd3-shadow: #bdc8d8;
+  --bd3-mid: #cfd6e2;
+  --bd3-lit: #f4f8ff;
+  --bd3-sun: #eaf1ff;
+  --bd3-halo: #7fa0ff;
+  --bd3-lit-k: 0.7;
+  --bd3-rim-k: 0.6;
+  --bd3-halo-alpha: 0.35;
 }
 
 [data-theme="dark"] {
@@ -100,4 +110,14 @@
   --bd-sun-halo: rgba(80, 120, 255, 0.35);
   --bd-opacity: 0.6;
   --bd-rim: rgba(91, 126, 255, 0.30);
+
+  /* Backdrop3D (dark): near-black blue-grey terrain, cold blue rim; fog uses --color-cream */
+  --bd3-shadow: #06080d;
+  --bd3-mid: #101828;
+  --bd3-lit: #5878d8;
+  --bd3-sun: #86a0e6; /* capped so text over the disc stays >= AA */
+  --bd3-halo: #4f7bff;
+  --bd3-lit-k: 0.6;
+  --bd3-rim-k: 0.7;
+  --bd3-halo-alpha: 0.55;
 }

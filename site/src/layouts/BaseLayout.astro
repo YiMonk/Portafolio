@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Character from '../components/Character.astro';
 import Backdrop from '../components/Backdrop.astro';
+import Backdrop3D from '../components/Backdrop3D.astro';
 import Footer from '../components/Footer.astro';
 import seoData from '../../content/global/seo.json';
 
@@ -69,6 +70,7 @@ const fullTitle = `${title} — Jesús Calles`;
     <a href="#main-content" class="skip-link">Saltar al contenido</a>
     <Nav />
     <Backdrop />
+    <Backdrop3D />
     <Character />
     <main id="main-content">
       <slot />

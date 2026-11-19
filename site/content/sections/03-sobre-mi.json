@@ -1,0 +1,28 @@
+{
+  "id": "sobre-mi",
+  "section_number": "03",
+  "section_label": "BIO",
+  "title": {
+    "line_1": "Construyo la capa visible",
+    "line_2": "del software.",
+    "highlight_text": "capa visible",
+    "highlight_line": "line_1"
+  },
+  "columns": [
+    {
+      "id": "codigo",
+      "heading": "CÓDIGO",
+      "text": "Limpio, legible, comentado cuando hace falta. Sin atajos que duelan después."
+    },
+    {
+      "id": "diseno",
+      "heading": "DISEÑO",
+      "text": "El front-end no es solo HTML — es la primera capa de UX. Diseño y código viven juntos."
+    },
+    {
+      "id": "detalle",
+      "heading": "DETALLE",
+      "text": "Micro-interacciones, spacing, contraste. Ahí vive la diferencia entre algo que funciona y algo bueno."
+    }
+  ]
+}

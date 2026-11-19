@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
+  <rect width="300" height="400" fill="#EDEAE3" rx="4"/>
+  <rect width="300" height="400" fill="none" stroke="rgba(10,10,10,0.15)" stroke-width="1" rx="4"/>
+  <!-- Iconos de herramientas flotando alrededor -->
+  <!-- HTML -->
+  <rect x="18" y="50" width="36" height="36" rx="4" fill="none" stroke="#2C5FF6" stroke-width="1.5" opacity="0.5"/>
+  <text x="36" y="73" font-family="monospace" font-size="9" fill="#2C5FF6" text-anchor="middle" opacity="0.7">HTML</text>
+  <!-- CSS -->
+  <rect x="18" y="110" width="36" height="36" rx="4" fill="none" stroke="#2C5FF6" stroke-width="1.5" opacity="0.5"/>
+  <text x="36" y="133" font-family="monospace" font-size="9" fill="#2C5FF6" text-anchor="middle" opacity="0.7">CSS</text>
+  <!-- JS -->
+  <rect x="18" y="170" width="36" height="36" rx="4" fill="none" stroke="#2C5FF6" stroke-width="1.5" opacity="0.5"/>
+  <text x="36" y="193" font-family="monospace" font-size="9" fill="#2C5FF6" text-anchor="middle" opacity="0.7">JS</text>
+  <!-- Figma derecha -->
+  <rect x="248" y="60" width="36" height="36" rx="4" fill="none" stroke="#2C5FF6" stroke-width="1.5" opacity="0.5"/>
+  <text x="266" y="83" font-family="monospace" font-size="8" fill="#2C5FF6" text-anchor="middle" opacity="0.7">FIGMA</text>
+  <!-- React derecha -->
+  <rect x="248" y="120" width="36" height="36" rx="4" fill="none" stroke="#2C5FF6" stroke-width="1.5" opacity="0.5"/>
+  <text x="266" y="143" font-family="monospace" font-size="8" fill="#2C5FF6" text-anchor="middle" opacity="0.7">REACT</text>
+  <!-- Cabeza -->
+  <circle cx="150" cy="100" r="44" fill="none" stroke="#0A0A0A" stroke-width="2.5"/>
+  <!-- Cuello -->
+  <line x1="150" y1="144" x2="150" y2="175" stroke="#0A0A0A" stroke-width="2.5"/>
+  <!-- Cuerpo -->
+  <rect x="105" y="175" width="90" height="110" rx="8" fill="none" stroke="#0A0A0A" stroke-width="2.5"/>
+  <!-- Brazos abiertos / extendidos -->
+  <line x1="105" y1="200" x2="58" y2="200" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="195" y1="200" x2="242" y2="200" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Etiqueta -->
+  <text x="150" y="358" font-family="monospace" font-size="11" fill="#2C5FF6" text-anchor="middle" letter-spacing="2">HERRAMIENTAS · §05</text>
+  <text x="150" y="376" font-family="monospace" font-size="9" fill="rgba(10,10,10,0.4)" text-anchor="middle" letter-spacing="1">PLACEHOLDER</text>
+</svg>

@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "id": "react-cero-experto",
+      "order": 1,
+      "year": 2025,
+      "title": "React: De cero a experto",
+      "platform": "Udemy",
+      "description": "Hooks, context, performance, patrones avanzados, testing con React Testing Library.",
+      "link": { "url": null, "label": "Ver certificado" },
+      "visible": true
+    },
+    {
+      "id": "bacula-backup",
+      "order": 2,
+      "year": 2025,
+      "title": "Bacula Backup & Recovery",
+      "platform": null,
+      "description": "Administración y configuración de sistemas de backup empresarial con Bacula.",
+      "link": { "url": null, "label": "Ver certificado" },
+      "visible": true
+    },
+    {
+      "id": "javascript-moderno-es6",
+      "order": 3,
+      "year": 2024,
+      "title": "JavaScript Moderno ES6+",
+      "platform": null,
+      "description": "ES6+, promesas, async/await, módulos, patrones funcionales y buenas prácticas modernas.",
+      "link": { "url": null, "label": "Ver certificado" },
+      "visible": true
+    },
+    {
+      "id": "diseno-ux-ui-figma",
+      "order": 4,
+      "year": 2024,
+      "title": "Diseño UX/UI con Figma",
+      "platform": null,
+      "description": "Research, wireframes, prototipado, sistemas de diseño y handoff con Figma.",
+      "link": { "url": null, "label": "Ver certificado" },
+      "visible": true
+    }
+  ]
+}

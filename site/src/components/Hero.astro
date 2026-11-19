@@ -1,0 +1,193 @@
+---
+import heroData from '../../content/sections/00-hero.json';
+import characterData from '../../content/global/character.json';
+
+const saludoPose = characterData.poses.find((p) => p.section === '00');
+---
+
+<section id="section-00" data-section-number="00" class="hero">
+  <div class="hero__left">
+    <p class="hero__label">§ {heroData.section_number} · {heroData.section_label}</p>
+    <h1 class="hero__tagline">
+      <span class="hero__tagline-line">{heroData.tagline.line_1}</span>
+      <span class={`hero__tagline-line${heroData.tagline.highlight === 'line_2' ? ' hero__tagline-line--highlight' : ''}`}>
+        {heroData.tagline.line_2}
+      </span>
+    </h1>
+    <p class="hero__subtitle">{heroData.subtitle}</p>
+  </div>
+
+  {saludoPose?.src_png && (
+    <div class="hero__character" aria-hidden="true">
+      <img src={saludoPose.src_png} alt="" draggable="false" loading="eager" />
+    </div>
+  )}
+
+  <div class="hero__identity">
+    <p>{heroData.identity.greeting}</p>
+    <p>{heroData.identity.role}</p>
+    <p>{heroData.identity.location}</p>
+    <p class="hero__identity-availability">{heroData.identity.availability}</p>
+  </div>
+
+  <span class="hero__scroll">{heroData.scroll_indicator}</span>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 var(--space-8);
+    padding-top: 0;
+  }
+
+  /* ── Izquierda: tagline ── */
+  .hero__left {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    z-index: 2;
+    padding-bottom: clamp(5rem, 12vh, 9rem);
+  }
+
+  .hero__label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-gray-60);
+    margin: 0;
+  }
+
+  .hero__tagline {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6.5vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--color-black);
+    text-wrap: balance;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.06em;
+  }
+
+  .hero__tagline-line {
+    display: block;
+  }
+
+  .hero__tagline-line--highlight {
+    color: var(--color-blue);
+  }
+
+  .hero__subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(0.625rem, 1.1vw, 0.8rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gray-60);
+    margin: 0;
+  }
+
+  /* ── Derecha: personaje ── */
+  .hero__character {
+    grid-column: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .hero__character img {
+    width: clamp(260px, 44vw, 580px);
+    max-height: 90vh;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* ── Info inferior ── */
+  .hero__identity {
+    position: absolute;
+    bottom: var(--space-6);
+    left: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    z-index: 2;
+  }
+
+  .hero__identity p {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .hero__identity-availability {
+    color: var(--color-gray-60) !important;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: var(--space-6);
+    right: var(--space-8);
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gray-60);
+    z-index: 2;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .hero {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr auto;
+      padding: 0 var(--space-4);
+      padding-top: 0;
+    }
+
+    .hero__left {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: center;
+    }
+
+    .hero__character {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 55vh;
+      grid-column: unset;
+      opacity: 0.18;
+    }
+
+    .hero__character img {
+      width: clamp(180px, 50vw, 260px);
+      max-height: 55vh;
+    }
+
+    .hero__identity {
+      left: var(--space-4);
+      bottom: var(--space-4);
+    }
+
+    .hero__scroll {
+      right: var(--space-4);
+      bottom: var(--space-4);
+    }
+  }
+</style>

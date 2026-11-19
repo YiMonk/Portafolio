@@ -1,0 +1,136 @@
+---
+import sobreMiData from '../../content/sections/03-sobre-mi.json';
+
+const { section_number, section_label, title, columns } = sobreMiData;
+
+// Extraer el antes, highlight y después del título
+const line1Parts = title.line_1.split(title.highlight_text);
+const before = line1Parts[0];
+const after = line1Parts[1] || '';
+---
+
+<section id="section-03" data-section-number="03" class="sobre-mi">
+  <div class="sobre-mi__content">
+    <p class="sobre-mi__section-label">§ {section_number} · {section_label}</p>
+
+    <h2 class="sobre-mi__title">
+      <span class="sobre-mi__title-line">
+        {before}<span class="sobre-mi__highlight">{title.highlight_text}</span>{after}
+      </span>
+      <span class="sobre-mi__title-line">{title.line_2}</span>
+    </h2>
+
+    <div class="sobre-mi__columns">
+      {columns.map((col) => (
+        <div class="sobre-mi__col">
+          <h3 class="sobre-mi__col-heading">{col.heading}</h3>
+          <p class="sobre-mi__col-text">{col.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .sobre-mi {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: var(--space-8);
+    background-color: var(--color-cream);
+  }
+
+  .sobre-mi__content {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-width: min(640px, calc(55vw - var(--space-8)));
+  }
+
+  .sobre-mi__section-label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-gray-60);
+    margin: 0;
+  }
+
+  .sobre-mi__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5.5vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--color-black);
+    text-wrap: balance;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2em;
+  }
+
+  .sobre-mi__title-line {
+    display: block;
+  }
+
+  .sobre-mi__highlight {
+    color: var(--color-blue);
+  }
+
+  .sobre-mi__columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    border-top: 1px solid var(--color-gray-10);
+    padding-top: var(--space-4);
+  }
+
+  .sobre-mi__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .sobre-mi__col-heading {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-black);
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .sobre-mi__col-text {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-gray-60);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .sobre-mi {
+      grid-template-columns: 1fr;
+      padding: var(--space-4);
+    }
+
+    .sobre-mi__content {
+      grid-column: 1;
+      max-width: 100%;
+    }
+
+    .sobre-mi__title {
+      font-size: clamp(1.8rem, 7vw, 3rem);
+    }
+
+    .sobre-mi__columns {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+      padding-top: var(--space-3);
+    }
+  }
+</style>

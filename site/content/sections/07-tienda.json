@@ -1,0 +1,10 @@
+{
+  "id": "tienda",
+  "section_number": "07",
+  "section_label": "TIENDA",
+  "title": {
+    "line_1": "Recursos listos",
+    "line_2": "para usar."
+  },
+  "filters": ["TODOS", "DISEÑO", "DEV", "DISPONIBLE AHORA", "POR ENCARGO"]
+}

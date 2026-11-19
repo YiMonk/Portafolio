@@ -1,0 +1,338 @@
+---
+import mermisData from '../../content/sections/01-mermis.json';
+import characterData from '../../content/global/character.json';
+
+const { section_number, section_label, status_label, title, pitch, spec_sheet, waitlist, media } = mermisData;
+const tipeandoPose = characterData.poses.find((p) => p.section === '01');
+---
+
+<section id="section-01" data-section-number="01" class="mermis">
+  <div class="mermis__left">
+    <p class="mermis__section-label">§ {section_number} · {section_label}</p>
+    <p class="mermis__status-label">{status_label}</p>
+    {tipeandoPose?.src_png && (
+      <div class="mermis__character" aria-hidden="true">
+        <img src={tipeandoPose.src_png} alt="" loading="lazy" />
+      </div>
+    )}
+  </div>
+
+  <div class="mermis__right">
+    <h2 class="mermis__title">
+      <span class="mermis__title-line">{title.line_1}</span>
+      <span class={`mermis__title-line${title.highlight === 'line_2' ? ' mermis__title-line--highlight' : ''}`}>
+        {title.line_2}
+      </span>
+    </h2>
+
+    <p class="mermis__pitch">{pitch}</p>
+
+    <dl class="mermis__spec">
+      {spec_sheet.map((item) => (
+        <div class="mermis__spec-row">
+          <dt>{item.label}</dt>
+          <dd>{item.value}</dd>
+        </div>
+      ))}
+    </dl>
+
+    {media.src !== null ? (
+      <img src={media.src} alt={media.alt} class="mermis__media" />
+    ) : (
+      <div class="mermis__media-placeholder">
+        <span>{media.alt}</span>
+      </div>
+    )}
+
+    {waitlist.enabled && (
+      <div class="mermis__form-wrapper">
+        <p class="mermis__form-title">{waitlist.title}</p>
+        <form class="mermis__form" novalidate>
+          <label for="mermis-email" class="sr-only">{waitlist.placeholder}</label>
+          <div class="mermis__form-row">
+            <input
+              id="mermis-email"
+              class="mermis__input"
+              type="email"
+              placeholder={waitlist.placeholder}
+              autocomplete="email"
+              required
+            />
+            <button class="mermis__submit" type="submit">{waitlist.button} ↗</button>
+          </div>
+          <p class="mermis__error" role="alert" aria-live="polite" hidden>Por favor ingresa un correo válido.</p>
+          <p class="mermis__disclaimer">{waitlist.disclaimer}</p>
+        </form>
+        <p class="mermis__success" hidden>Listo. Te avisamos el día del lanzamiento.</p>
+      </div>
+    )}
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector('.mermis__form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = form.querySelector('.mermis__input') as HTMLInputElement;
+      const errorMsg = form.querySelector('.mermis__error');
+      if (!input.validity.valid) {
+        input.classList.add('mermis__input--error');
+        input.setAttribute('aria-invalid', 'true');
+        if (errorMsg) errorMsg.hidden = false;
+        return;
+      }
+      input.classList.remove('mermis__input--error');
+      input.removeAttribute('aria-invalid');
+      if (errorMsg) errorMsg.hidden = true;
+      const wrapper = form.closest('.mermis__form-wrapper');
+      wrapper?.querySelector('.mermis__form')?.setAttribute('style', 'display: none');
+      wrapper?.querySelector('.mermis__success')?.removeAttribute('hidden');
+    });
+  }
+</script>
+
+<style>
+  .mermis {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: var(--space-8);
+    gap: var(--space-8);
+    background-color: var(--color-cream);
+  }
+
+  .mermis__left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    align-items: flex-start;
+  }
+
+  .mermis__character {
+    width: clamp(160px, 22vw, 300px);
+    pointer-events: none;
+    margin-top: var(--space-4);
+    align-self: center;
+  }
+
+  .mermis__character img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .mermis__section-label,
+  .mermis__status-label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-gray-60);
+    margin: 0;
+    text-align: center;
+  }
+
+  .mermis__status-label {
+    color: var(--color-gray-60);
+  }
+
+  .mermis__right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .mermis__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5.5vw, 6rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--color-black);
+    text-wrap: balance;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .mermis__title-line {
+    display: block;
+  }
+
+  .mermis__title-line--highlight {
+    color: var(--color-blue);
+  }
+
+  .mermis__pitch {
+    font-family: var(--font-body);
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    color: var(--color-gray-60);
+    max-width: 40ch;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .mermis__spec {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mermis__spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-2) 0;
+    border-top: 1px solid var(--color-gray-10);
+  }
+
+  .mermis__spec-row dt {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gray-60);
+  }
+
+  .mermis__spec-row dd {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-black);
+    margin: 0;
+  }
+
+  .mermis__media {
+    width: 100%;
+    height: auto;
+  }
+
+  .mermis__media-placeholder {
+    aspect-ratio: 16 / 9;
+    border: 1px dashed var(--color-gray-30);
+    background: var(--color-gray-10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mermis__media-placeholder span {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    color: var(--color-gray-60);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .mermis__form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .mermis__form-title {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-black);
+    margin: 0;
+  }
+
+  .mermis__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .mermis__form-row {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .mermis__input {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    border: 1px solid var(--color-gray-30);
+    background: transparent;
+    padding: var(--space-1) var(--space-2);
+    flex: 1;
+    color: var(--color-black);
+    outline: none;
+  }
+
+  .mermis__input:focus {
+    border-color: var(--color-black);
+  }
+
+  .mermis__input--error {
+    border-color: var(--color-error);
+  }
+
+  .mermis__error {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    color: var(--color-error);
+    margin: 0;
+  }
+
+  .mermis__submit {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--color-black);
+    color: var(--color-cream);
+    border: none;
+    padding: var(--space-1) var(--space-3);
+    cursor: pointer;
+    transition: background var(--transition-base);
+    white-space: nowrap;
+  }
+
+  .mermis__submit:hover {
+    background: var(--color-blue);
+  }
+
+  .mermis__disclaimer {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    color: var(--color-gray-60);
+    margin: 0;
+  }
+
+  .mermis__success {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-black);
+  }
+
+  @media (max-width: 768px) {
+    .mermis {
+      grid-template-columns: 1fr;
+      padding: var(--space-4);
+      gap: var(--space-4);
+    }
+
+    .mermis__left {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .mermis__character {
+      width: clamp(80px, 20vw, 120px);
+      margin-top: 0;
+      align-self: auto;
+      flex-shrink: 0;
+    }
+
+    .mermis__form-row {
+      flex-direction: column;
+    }
+  }
+</style>

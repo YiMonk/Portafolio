@@ -1,0 +1,47 @@
+{
+  "site_title": "Jesús Calles",
+  "site_subtitle": "Frontend Developer & Diseñador UX/UI",
+  "tagline": "Piensas el qué. Resuelvo el cómo.",
+  "tagline_sub": "Frontend, UX/UI y diseño visual.",
+  "location": "Venezuela",
+  "availability": "Disponible para proyectos · 2026",
+  "nav": {
+    "left": {
+      "name": "JESÚS CALLES — FRONTEND",
+      "clock": true,
+      "timezone": "GMT-4",
+      "country": "VENEZUELA"
+    },
+    "center": {
+      "sections": [
+        { "number": "00", "label": "INICIO" },
+        { "number": "01", "label": "PRÓXIMAMENTE" },
+        { "number": "02", "label": "RUTAS" },
+        { "number": "03", "label": "BIO" },
+        { "number": "04", "label": "PROYECTOS" },
+        { "number": "05", "label": "STACK" },
+        { "number": "06", "label": "SERVICIOS" },
+        { "number": "07", "label": "TIENDA" },
+        { "number": "08", "label": "EDUCACIÓN" },
+        { "number": "09", "label": "AHORA" },
+        { "number": "10", "label": "CONTACTO" }
+      ]
+    },
+    "right": [
+      { "label": "PROYECTOS", "href": "#section-04" },
+      { "label": "ACERCA", "href": "#section-03" },
+      { "label": "EDUCACIÓN", "href": "#section-08" },
+      { "label": "AHORA", "href": "#section-09" },
+      { "label": "CONTRATAR", "href": "#section-10", "highlight": true }
+    ]
+  },
+  "contact_channels": [
+    { "id": "email", "label": "Correo", "icon": "mail", "value": "jactcalles@gmail.com", "type": "prefill", "method": "mailto" },
+    { "id": "whatsapp", "label": "WhatsApp", "icon": "whatsapp", "value": "584241306265", "type": "prefill", "method": "wa.me" },
+    { "id": "telegram", "label": "Telegram", "icon": "telegram", "value": "", "type": "prefill", "method": "t.me" },
+    { "id": "github", "label": "GitHub", "icon": "github", "value": "https://github.com/YiMonk", "type": "link", "method": "direct" }
+  ],
+  "footer": {
+    "copy": "© 2026 Jesús Calles. Hecho con Astro."
+  }
+}

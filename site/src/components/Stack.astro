@@ -1,0 +1,256 @@
+---
+import { Icon } from 'astro-icon/components';
+import stackSeccion from '../../content/sections/05-stack.json';
+import stackData from '../../content/collections/stack.json';
+import characterData from '../../content/global/character.json';
+
+const { section_number, section_label, title } = stackSeccion;
+const herramientasPose = characterData.poses.find((p) => p.section === '05');
+
+const groups = [...stackData.groups]
+  .sort((a, b) => a.order - b.order)
+  .map((g) => ({
+    ...g,
+    tools: [...g.tools].sort((a, b) => a.order - b.order),
+  }));
+---
+
+<section id="section-05" data-section-number="05" class="stack">
+  <div class="stack__inner">
+    <header class="stack__header">
+      <div class="stack__header-text">
+        <p class="stack__label">§ {section_number} · {section_label}</p>
+        <h2 class="stack__title">
+          <span class="stack__title-line">{title.line_1}</span>
+          <span class="stack__title-line stack__highlight">{title.line_2}</span>
+        </h2>
+      </div>
+      {herramientasPose?.src_png && (
+        <div class="stack__header-character" aria-hidden="true">
+          <img src={herramientasPose.src_png} alt="" loading="lazy" />
+        </div>
+      )}
+    </header>
+
+    <div class="stack__table">
+      {
+        groups.map((group) => (
+          <div class="stack__row">
+            <span class="stack__row-label">{group.label}</span>
+            <ul class="stack__row-tools">
+              {group.tools.map((tool, i) => (
+                <li class:list={['stack__row-tool', { 'stack__row-tool--accent': i === 0 }]}>
+                  <Icon name={tool.icon} class="stack__icon" aria-hidden="true" />
+                  <span>{tool.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .stack {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-12) var(--space-8);
+    background-color: var(--color-cream);
+    /* Allow content to push section taller than 100vh without forcing next snap */
+    scroll-snap-stop: normal;
+  }
+
+  .stack__inner {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  /* ── Header ── */
+  .stack__header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: var(--space-6);
+  }
+
+  .stack__header-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .stack__header-character {
+    width: clamp(160px, 20vw, 280px);
+    flex-shrink: 0;
+    pointer-events: none;
+    align-self: flex-end;
+  }
+
+  .stack__header-character img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .stack__label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-gray-60);
+    margin: 0;
+  }
+
+  .stack__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5.5vw, 6rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--color-black);
+    text-wrap: balance;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+  }
+
+  .stack__title-line {
+    display: block;
+  }
+
+  .stack__highlight {
+    color: var(--color-blue);
+  }
+
+  /* ── Tabla editorial ── */
+  .stack__table {
+    display: flex;
+    flex-direction: column;
+    border-top: 2px solid var(--color-black);
+  }
+
+  .stack__row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-6);
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--color-gray-10);
+  }
+
+  .stack__row-label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-gray-60);
+    width: 10rem;
+    flex-shrink: 0;
+    padding-top: 0.25em;
+  }
+
+  .stack__row-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+  }
+
+  .stack__row-tool {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--font-body);
+    font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+    color: var(--color-black);
+    padding: 0.1em 0.6em;
+    cursor: default;
+    position: relative;
+  }
+
+  .stack__row-tool span {
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition-fast);
+  }
+
+  .stack__row-tool:hover span {
+    text-decoration: underline;
+    text-decoration-color: var(--color-blue);
+  }
+
+  .stack__row-tool--accent {
+    color: var(--color-blue);
+  }
+
+  /* Separador · entre tools */
+  .stack__row-tool::after {
+    content: "·";
+    color: var(--color-gray-30);
+    margin-left: 0.6em;
+    font-size: 1.1em;
+    line-height: 1;
+  }
+
+  .stack__row-tool:last-child::after {
+    display: none;
+  }
+
+  .stack__icon {
+    width: 1em;
+    height: 1em;
+    color: inherit;
+    flex-shrink: 0;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .stack {
+      padding: var(--space-4);
+    }
+
+    .stack__inner {
+      gap: var(--space-8);
+    }
+
+    .stack__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .stack__header-character {
+      width: clamp(100px, 28vw, 160px);
+      align-self: flex-end;
+    }
+
+    .stack__title {
+      font-size: clamp(1.8rem, 7vw, 3rem);
+    }
+
+    .stack__row {
+      flex-direction: column;
+      gap: var(--space-2);
+      align-items: flex-start;
+    }
+
+    .stack__row-label {
+      width: auto;
+    }
+
+    .stack__row-tool {
+      font-size: clamp(0.8rem, 3.5vw, 1rem);
+    }
+  }
+</style>

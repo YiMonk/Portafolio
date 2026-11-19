@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import proyectosData from '../../../content/collections/proyectos.json';
+
+export function getStaticPaths() {
+  const slugs = (proyectosData as any).items
+    .filter((p: any) => p.case_study?.enabled && p.case_study?.slug)
+    .map((p: any) => ({ params: { slug: p.case_study.slug } }));
+  return slugs;
+}
+
+const { slug } = Astro.params;
+const project = (proyectosData as any).items.find((p: any) => p.case_study?.slug === slug);
+const title = project?.title ?? slug;
+---
+
+<BaseLayout title={`${title} — Caso de estudio`} description={`Caso de estudio: ${title}`}>
+  <div class="case-study">
+    <nav class="case-study__nav">
+      <a href="/#section-04" class="case-study__back">← PROYECTOS</a>
+    </nav>
+    <div class="case-study__content">
+      <p class="case-study__label">§ CASO DE ESTUDIO</p>
+      <h1 class="case-study__title">{title}</h1>
+      <p class="case-study__body">Próximamente.</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .case-study {
+    min-height: calc(100vh - var(--nav-height));
+    padding: var(--space-8);
+    background-color: var(--color-cream);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .case-study__nav {
+    margin-bottom: var(--space-8);
+  }
+
+  .case-study__back {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-black);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-black);
+    padding-bottom: 2px;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .case-study__back:hover {
+    color: var(--color-blue);
+    border-color: var(--color-blue);
+  }
+
+  .case-study__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 800px;
+  }
+
+  .case-study__label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-gray-60);
+    margin: 0 0 var(--space-2);
+  }
+
+  .case-study__title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--color-black);
+    margin: 0 0 var(--space-4);
+    line-height: 1;
+  }
+
+  .case-study__body {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-gray-60);
+    margin: 0;
+  }
+</style>

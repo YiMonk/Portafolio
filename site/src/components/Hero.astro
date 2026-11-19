@@ -1,0 +1,226 @@
+---
+import heroData from '../../content/sections/00-hero.json';
+---
+
+<section id="section-00" data-section-number="00" class="hero">
+  <div class="hero__left">
+    <p class="hero__label">§ {heroData.section_number} · {heroData.section_label}</p>
+    <h1 class="hero__tagline">
+      <span class="hero__tagline-line">{heroData.tagline.line_1}</span>
+      <span class={`hero__tagline-line${heroData.tagline.highlight === 'line_2' ? ' hero__tagline-line--highlight' : ''}`}>
+        {heroData.tagline.line_2}
+      </span>
+    </h1>
+    <p class="hero__subtitle">{heroData.subtitle}</p>
+  </div>
+
+    <div class="hero__character" aria-hidden="true">
+      <div class="hero__portrait">
+      <picture>
+        <source srcset="/assets/character/00-saludo-relaxed-mobile.webp" media="(max-width: 767px)" type="image/webp" />
+        <source srcset="/assets/character/00-saludo-relaxed.webp" type="image/webp" />
+        <img
+          src="/assets/character/00-saludo-relaxed.png"
+          width="1125"
+          height="1398"
+          alt=""
+          draggable="false"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+      </div>
+    </div>
+
+  <div class="hero__identity">
+    <p>{heroData.identity.greeting}</p>
+    <p>{heroData.identity.role}</p>
+    <p>{heroData.identity.location}</p>
+    <p class="hero__identity-availability">{heroData.identity.availability}</p>
+  </div>
+
+  <span class="hero__scroll">{heroData.scroll_indicator}</span>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    /* Nav is fixed above the page: size the hero to what is actually visible */
+    height: calc(100vh - var(--nav-height));
+    height: calc(100dvh - var(--nav-height));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 var(--space-8);
+    padding-top: 0;
+  }
+
+  /* ── Izquierda: tagline ── */
+  .hero__left {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    z-index: 2;
+    padding-bottom: clamp(5rem, 12vh, 9rem);
+  }
+
+  .hero__label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-gray-60);
+    margin: 0;
+  }
+
+  .hero__tagline {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6.5vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--color-black);
+    text-wrap: balance;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.06em;
+  }
+
+  .hero__tagline-line {
+    display: block;
+  }
+
+  .hero__tagline-line--highlight {
+    color: var(--color-blue);
+  }
+
+  .hero__subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(0.625rem, 1.1vw, 0.8rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gray-60);
+    margin: 0;
+  }
+
+  /* ── Derecha: personaje ── */
+  .hero__character {
+    grid-column: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .hero__portrait {
+    margin-bottom: var(--space-6);
+    max-width: 100%;
+  }
+
+  /* Fit the portrait between the nav and the bottom edge so the feet are never cut */
+  .hero__character img {
+    width: auto;
+    max-width: 100%;
+    height: min(calc(100dvh - var(--nav-height) - var(--space-12) - var(--space-6)), calc(44vw * 1.2414), 720px);
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── Info inferior ── */
+  .hero__identity {
+    position: absolute;
+    bottom: var(--space-6);
+    left: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    z-index: 2;
+  }
+
+  .hero__identity p {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .hero__identity-availability {
+    color: var(--color-gray-60) !important;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: var(--space-6);
+    right: var(--space-8);
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gray-60);
+    z-index: 2;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    /* Stacked rows: tagline / portrait (fills what is left) / identity. Nothing overlaps. */
+    .hero {
+      height: auto;
+      min-height: calc(100dvh - var(--nav-height));
+      grid-template-columns: 1fr;
+      grid-template-rows: auto minmax(12rem, 1fr) auto;
+      align-items: stretch;
+      row-gap: var(--space-2);
+      padding: var(--space-3) var(--space-4) var(--space-4);
+    }
+
+    .hero__left {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: start;
+      padding-bottom: 0;
+    }
+
+    .hero__tagline { font-size: clamp(2rem, 8vw, 3rem); }
+    .hero__subtitle { font-size: 0.75rem; line-height: 1.5; }
+
+    .hero__character {
+      grid-column: 1;
+      grid-row: 2;
+      height: auto;
+      min-height: 0;
+      justify-content: flex-end;
+      align-items: stretch;
+    }
+
+    .hero__portrait {
+      height: 100%;
+      margin-bottom: 0;
+    }
+
+    .hero__character img {
+      width: auto;
+      height: min(40vh, 24rem);
+      max-width: 100%;
+    }
+
+    .hero__identity {
+      position: static;
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    .hero__scroll {
+      display: none;
+    }
+  }
+</style>

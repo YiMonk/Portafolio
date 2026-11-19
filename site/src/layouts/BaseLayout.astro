@@ -1,0 +1,92 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Character from '../components/Character.astro';
+import Backdrop from '../components/Backdrop.astro';
+import Backdrop3D from '../components/Backdrop3D.astro';
+import Footer from '../components/Footer.astro';
+import seoData from '../../content/global/seo.json';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
+const fullTitle = title.includes('Jesús Calles') ? title : `${title} — Jesús Calles`;
+const canonicalUrl = new URL(Astro.url.pathname, seoData.url).href;
+const socialImage = new URL(ogImage || seoData.og_image, seoData.url).href;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Anti-flicker: aplica el tema antes del primer paint -->
+    <script is:inline>
+      (function() {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+    <!-- Scroll reveal: hide [data-reveal] only when JS + IntersectionObserver are available and motion is allowed -->
+    <script is:inline>
+      (function() {
+        if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('js-reveal');
+        }
+      })();
+    </script>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- OG -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content="Jesús Calles — Frontend, UX/UI y diseño visual" />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {seoData.twitter_handle && <meta name="twitter:site" content={seoData.twitter_handle} />}
+
+    <!-- Google Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+    />
+
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido</a>
+    <Nav />
+    <Backdrop />
+    <Backdrop3D />
+    <Character />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/reveal.ts';
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  body {
+    padding-top: var(--nav-height);
+  }
+</style>

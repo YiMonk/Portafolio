@@ -1,0 +1,591 @@
+---
+import contactoData from '../../content/sections/10-contacto.json';
+import siteData from '../../content/global/site.json';
+import characterData from '../../content/global/character.json';
+
+const { section_number, section_label, marquee_words, email, cta } = contactoData;
+const channels = siteData.contact_channels;
+
+const filledWord = 'TU PRODUCTO';
+const words = marquee_words ?? ['CONSTRUYAMOS', 'TU IDEA', 'TU PRODUCTO', 'TU MARCA', 'TRABAJEMOS', 'JUNTOS'];
+const emailChannel = siteData.contact_channels.find((c: any) => c.id === 'email');
+const githubChannel = siteData.contact_channels.find((c: any) => c.id === 'github');
+
+const despedidaPose = characterData.poses.find((p) => p.section === '10');
+---
+
+<section id="section-10" data-section-number="10" class="contacto">
+
+  <!-- Marquee fila 1 — izquierda -->
+  <div class="contacto__marquee-wrapper" aria-hidden="true">
+    <div class="contacto__marquee">
+      {[...words, ...words].map((word) => (
+        <span class:list={['contacto__marquee-word', { 'contacto__marquee-word--filled': word === filledWord }]}>{word}</span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Marquee fila 2 — derecha -->
+  <div class="contacto__marquee-wrapper" aria-hidden="true">
+    <div class="contacto__marquee contacto__marquee--reverse">
+      {[...words, ...words].map((word) => (
+        <span class:list={['contacto__marquee-word', { 'contacto__marquee-word--filled': word === filledWord }]}>{word}</span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Cuerpo: datos de contacto izquierda + personaje derecha -->
+  <div class="contacto__body">
+    <div class="contacto__center" data-reveal>
+      <button class="contacto__pill" id="open-modal-pill" type="button">
+        {cta?.text ?? 'Hablemos'} ↗
+      </button>
+      <button class="contacto__email" id="open-modal-email" type="button">
+        {email ?? 'jactcalles@gmail.com'}
+      </button>
+      <div class="contacto__links">
+        {emailChannel?.value && (
+          <a href={`mailto:${emailChannel.value}`} class="contacto__direct-link">
+            {emailChannel.value}
+          </a>
+        )}
+        {githubChannel?.value && (
+          <a href={githubChannel.value} target="_blank" rel="noopener noreferrer" class="contacto__direct-link">
+            {githubChannel.value} ↗
+          </a>
+        )}
+      </div>
+    </div>
+
+    {despedidaPose?.src_png && (
+      <div class="contacto__character silhouette" aria-hidden="true" data-reveal>
+        <picture>
+          {despedidaPose.src_mobile_webp && (
+            <source srcset={despedidaPose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />
+          )}
+          {despedidaPose.src_webp && <source srcset={despedidaPose.src_webp} type="image/webp" />}
+          <img src={despedidaPose.src_png} width={despedidaPose.width} height={despedidaPose.height} alt="" loading="lazy" />
+        </picture>
+      </div>
+    )}
+  </div>
+
+  <!-- Marquee fila 3 — izquierda lento -->
+  <div class="contacto__marquee-wrapper" aria-hidden="true">
+    <div class="contacto__marquee contacto__marquee--slow">
+      {[...words, ...words].map((word) => (
+        <span class:list={['contacto__marquee-word', { 'contacto__marquee-word--filled': word === filledWord }]}>{word}</span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <dialog id="contact-modal" class="contacto__modal" aria-labelledby="modal-title" aria-modal="true">
+    <button class="contacto__modal-close" id="close-modal" type="button" aria-label="Cerrar">×</button>
+    <div class="contacto__modal-body">
+      <p class="contacto__modal-title" id="modal-title">Escríbeme</p>
+      <form id="contact-form" class="contacto__form" novalidate>
+        <div class="contacto__form-group">
+          <label for="contact-subject" class="sr-only">Asunto</label>
+          <input id="contact-subject" name="subject" type="text" placeholder="Asunto" class="contacto__input" autocomplete="off" />
+        </div>
+        <div class="contacto__form-group">
+          <label for="contact-name" class="sr-only">Tu nombre</label>
+          <input id="contact-name" name="name" type="text" placeholder="Tu nombre" class="contacto__input" autocomplete="name" />
+        </div>
+        <div class="contacto__form-group">
+          <label for="contact-message" class="sr-only">Mensaje</label>
+          <textarea id="contact-message" name="message" placeholder="Tu mensaje" class="contacto__input contacto__textarea"></textarea>
+        </div>
+      </form>
+      <div class="contacto__channels">
+        {channels.map((ch) => (
+          ch.type === 'link'
+            ? (
+              <a
+                class="contacto__channel-btn"
+                href={`https://${ch.value}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-channel={ch.id}
+                data-channel-type={ch.type}
+              >
+                Ver en {ch.label} ↗
+              </a>
+            )
+            : (
+              <button
+                class="contacto__channel-btn"
+                type="button"
+                data-channel={ch.id}
+                data-channel-type={ch.type}
+                data-method={ch.method}
+                data-value={ch.value}
+              >
+                Enviar por {ch.label}
+              </button>
+            )
+        ))}
+      </div>
+      <p class="contacto__modal-feedback" id="modal-feedback" hidden></p>
+    </div>
+  </dialog>
+
+</section>
+
+<script>
+  const modal = document.getElementById('contact-modal') as HTMLDialogElement | null;
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const feedback = document.getElementById('modal-feedback') as HTMLElement | null;
+  const subjectInput = document.getElementById('contact-subject') as HTMLInputElement | null;
+
+  let modalOpener: HTMLElement | null = null;
+
+  function showFeedback(msg: string) {
+    if (!feedback) return;
+    feedback.textContent = msg;
+    feedback.hidden = false;
+    setTimeout(() => { feedback.hidden = true; }, 4000);
+  }
+
+  function getFocusableEls(): HTMLElement[] {
+    if (!modal) return [];
+    return Array.from(modal.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), a[href]'
+    ));
+  }
+
+  function trapFocus(e: KeyboardEvent) {
+    if (e.key !== 'Tab') return;
+    const focusable = getFocusableEls();
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+
+  function openModal(prefillSubject?: string, opener?: HTMLElement | null) {
+    if (!modal) return;
+    modalOpener = opener ?? null;
+    if (subjectInput && prefillSubject) subjectInput.value = prefillSubject;
+    document.body.style.overflow = 'hidden';
+    modal.showModal();
+    modal.addEventListener('keydown', trapFocus);
+    getFocusableEls()[0]?.focus();
+  }
+
+  // Cleanup al cerrar (cualquier medio: ×, backdrop, Escape)
+  modal?.addEventListener('close', () => {
+    modal!.removeEventListener('keydown', trapFocus);
+    document.body.style.overflow = '';
+    form?.reset();
+    modalOpener?.focus();
+    modalOpener = null;
+  });
+
+  // Abrir desde pill
+  document.getElementById('open-modal-pill')?.addEventListener('click', (e) => {
+    openModal(undefined, e.currentTarget as HTMLElement);
+  });
+
+  // Abrir desde email
+  document.getElementById('open-modal-email')?.addEventListener('click', (e) => {
+    openModal(undefined, e.currentTarget as HTMLElement);
+  });
+
+  // Cerrar con botón ×
+  document.getElementById('close-modal')?.addEventListener('click', () => modal?.close());
+
+  // Cerrar con click en backdrop
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) modal!.close();
+  });
+
+  // Abrir desde CTAs de §06/§07 (delegación en document)
+  document.addEventListener('click', (e) => {
+    const trigger = (e.target as HTMLElement).closest<HTMLElement>('[data-prefill-subject]');
+    if (trigger) {
+      e.preventDefault();
+      openModal(trigger.dataset.prefillSubject ?? '', trigger);
+    }
+  });
+
+  // Envío por canal
+  document.querySelectorAll<HTMLElement>('.contacto__channel-btn[data-channel-type="prefill"]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const nameEl = document.getElementById('contact-name') as HTMLInputElement | null;
+      const msgEl = document.getElementById('contact-message') as HTMLTextAreaElement | null;
+
+      const name = nameEl?.value.trim() ?? '';
+      const message = msgEl?.value.trim() ?? '';
+      const subject = subjectInput?.value.trim() ?? '';
+
+      if (!name || !message) {
+        showFeedback('Por favor completa tu nombre y mensaje.');
+        return;
+      }
+
+      const channel = btn.dataset.channel ?? '';
+      const value = btn.dataset.value ?? '';
+      const body = `Asunto: ${subject || '(sin asunto)'}\nDe: ${name}\n\n${message}`;
+
+      if (channel === 'email') {
+        const url = `mailto:${value}?subject=${encodeURIComponent(subject || 'Contacto desde portafolio')}&body=${encodeURIComponent(body)}`;
+        window.location.href = url;
+        modal?.close();
+      } else if (channel === 'whatsapp') {
+        if (!value) { showFeedback('Canal no disponible aún.'); return; }
+        window.open(`https://wa.me/${value}?text=${encodeURIComponent(body)}`, '_blank', 'noopener');
+        modal?.close();
+      } else if (channel === 'telegram') {
+        if (!value) { showFeedback('Telegram no está configurado aún.'); return; }
+        navigator.clipboard.writeText(body).then(() => {
+          showFeedback('Mensaje copiado. Abriendo Telegram...');
+          setTimeout(() => window.open(`https://t.me/${value}`, '_blank', 'noopener'), 1200);
+          modal?.close();
+        }).catch(() => {
+          showFeedback('No se pudo copiar. Abre Telegram y pega el mensaje manualmente.');
+        });
+      }
+    });
+  });
+</script>
+
+<style>
+  /* ── Sección ── */
+  .contacto {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-8);
+    background-color: transparent;
+    overflow: hidden;
+    position: relative;
+    gap: 0;
+  }
+
+  /* ── Marquee ── */
+  .contacto__marquee-wrapper {
+    overflow: hidden;
+    width: 100%;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @keyframes marquee-scroll-reverse {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+  }
+
+  .contacto__marquee {
+    display: flex;
+    gap: var(--space-6);
+    white-space: nowrap;
+    animation: marquee-scroll 26s linear infinite;
+  }
+
+  .contacto__marquee--reverse {
+    animation-name: marquee-scroll-reverse;
+    animation-duration: 34s;
+  }
+
+  .contacto__marquee--slow {
+    animation-duration: 40s;
+  }
+
+  .contacto__marquee-word {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6.5vw, 6rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--color-black);
+    flex-shrink: 0;
+    line-height: 1.1;
+  }
+
+  .contacto__marquee-word--filled {
+    color: var(--color-blue);
+    -webkit-text-stroke: 0;
+  }
+
+  /* ── Cuerpo: personaje + centro en fila ── */
+  .contacto__body {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    gap: var(--space-8);
+    padding: var(--space-4) var(--space-8);
+  }
+
+  /* Personaje izquierda: en flujo normal, anclado al borde inferior del body */
+  .contacto__character {
+    width: clamp(180px, 22vw, 320px);
+    flex-shrink: 0;
+    pointer-events: none;
+    align-self: flex-end;
+  }
+
+  .contacto__character img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Zona central ── */
+  .contacto__center {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding-bottom: var(--space-4);
+    position: relative;
+    z-index: 3;
+    flex: 1;
+    max-width: 560px;
+  }
+
+  /* ── Links directos ── */
+  .contacto__links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+    margin-top: var(--space-2);
+  }
+
+  .contacto__direct-link {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gray-60);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    display: inline-block;
+    padding: 0.5rem 0;
+    min-height: 1.5rem;
+  }
+
+  .contacto__direct-link:hover {
+    color: var(--color-blue);
+  }
+
+  .contacto__pill {
+    background-color: var(--color-blue);
+    color: var(--color-cream);
+    border: none;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: var(--space-2) var(--space-6);
+    cursor: pointer;
+    transition: filter var(--transition-fast);
+  }
+
+  .contacto__pill:hover {
+    filter: brightness(1.15);
+  }
+
+  .contacto__pill:focus-visible {
+    outline: 2px solid var(--color-black);
+    outline-offset: 3px;
+  }
+
+  .contacto__email {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 3vw, 2.5rem);
+    font-weight: 900;
+    color: var(--color-black);
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--color-black);
+    padding: 0;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+    margin: 0;
+    user-select: none;
+  }
+
+  .contacto__email:hover {
+    color: var(--color-blue);
+    border-color: var(--color-blue);
+  }
+
+  .contacto__email:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 3px;
+  }
+
+  /* ── Modal ── */
+  .contacto__modal {
+    background-color: var(--color-cream);
+    color: var(--color-black);
+    border: 1px solid var(--color-gray-30);
+    border-radius: var(--radius-lg);
+    max-width: 520px;
+    width: 90vw;
+    padding: var(--space-6);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .contacto__modal::backdrop {
+    background: rgba(10, 10, 10, 0.75);
+    backdrop-filter: blur(2px);
+  }
+
+  .contacto__modal-close {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--color-black);
+    cursor: pointer;
+    padding: var(--space-1);
+    transition: color var(--transition-fast);
+  }
+
+  .contacto__modal-close:hover {
+    color: var(--color-blue);
+  }
+
+  .contacto__modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .contacto__modal-title {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-black);
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .contacto__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .contacto__form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contacto__input {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-black);
+    background: transparent;
+    border: 1px solid var(--color-gray-30);
+    border-radius: var(--radius-sm);
+    padding: var(--space-1) var(--space-2);
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .contacto__input:focus {
+    border-color: var(--color-black);
+  }
+
+  .contacto__textarea {
+    min-height: 7rem;
+    resize: vertical;
+  }
+
+  .contacto__channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .contacto__channel-btn {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-black);
+    background: transparent;
+    border: 1px solid var(--color-gray-30);
+    border-radius: var(--radius-sm);
+    padding: var(--space-1) var(--space-2);
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .contacto__channel-btn:hover {
+    border-color: var(--color-black);
+  }
+
+  .contacto__channel-btn:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+  }
+
+  .contacto__modal-feedback {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    color: var(--color-gray-75);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .contacto__marquee-word {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+    }
+
+    .contacto__body {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4);
+    }
+
+    .contacto__character {
+      width: clamp(140px, 40vw, 220px);
+      align-self: center;
+    }
+
+    .contacto__center {
+      align-items: center;
+      padding: 0 var(--space-4) var(--space-4);
+      max-width: 100%;
+    }
+
+    .contacto__links {
+      align-items: center;
+    }
+
+    .contacto__email {
+      font-size: clamp(1rem, 5vw, 1.6rem);
+      text-align: center;
+    }
+  }
+</style>

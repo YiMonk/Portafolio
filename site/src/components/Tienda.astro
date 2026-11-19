@@ -1,0 +1,401 @@
+---
+import tiendaSeccion from '../../content/sections/07-tienda.json';
+import productosData from '../../content/collections/productos.json';
+
+const { section_number, section_label, title, filters } = tiendaSeccion;
+
+function formatPrice(pricing: { type: string; amount: number | null; currency: string | null }): string {
+  if (pricing.type === 'consult' || pricing.amount === null) {
+    return 'A CONSULTAR';
+  }
+  if (pricing.type === 'from') {
+    return `DESDE $${pricing.amount}`;
+  }
+  if (pricing.type === 'fixed') {
+    return `$${pricing.amount}`;
+  }
+  return 'A CONSULTAR';
+}
+
+const productos = productosData.items
+  .filter((p) => p.visible)
+  .sort((a, b) => a.order - b.order)
+  .map((p) => ({
+    ...p,
+    priceLabel: formatPrice(p.pricing),
+    cssAspectRatio: p.preview.aspect_ratio.replace(':', ' / '),
+    usePlaceholder: !p.preview.image,
+    badgeType: p.status === 'available' ? 'available' : 'on_request',
+  }));
+---
+
+<section id="section-07" data-section-number="07" class="tienda">
+  <div class="tienda__inner">
+    <p class="tienda__section-label" data-reveal>§ {section_number} · {section_label}</p>
+    <h2 class="tienda__title" data-reveal>
+      <span class="tienda__title-line">{title.line_1}</span>
+      <span class="tienda__title-line">{title.line_2}</span>
+    </h2>
+
+    <div class="tienda__filters" role="group" aria-label="Filtrar recursos" data-reveal>
+      {filters.map((f: string) => (
+        <button
+          class:list={['tienda__filter-btn', { 'is-active': f === 'TODOS' }]}
+          data-filter={f}
+          aria-pressed={f === 'TODOS' ? 'true' : 'false'}
+          type="button"
+        >
+          {f}
+        </button>
+      ))}
+    </div>
+
+    <div class="tienda__list" id="tienda-grid" data-reveal-group>
+      {productos.map((p, index) => (
+        <article
+          class="tienda__row"
+          data-categories={p.categories.join(',')}
+          data-badge-type={p.badgeType}
+          data-reveal
+        >
+          <span class="tienda__row-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <div class="tienda__row-info">
+            <p class="tienda__row-type">{p.type}</p>
+            <h3 class="tienda__row-name">{p.name}</h3>
+            <p class="tienda__row-includes">{p.includes}</p>
+          </div>
+          <div class="tienda__row-meta">
+            <span class="tienda__row-price">{p.priceLabel}</span>
+            <span class="tienda__row-badge">{p.badge}</span>
+          </div>
+          <a
+            class="tienda__row-cta"
+            href="#section-10"
+            data-prefill-subject={p.cta.prefill_subject}
+          >
+            {p.cta.text} ↗
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tienda {
+    min-height: 100vh;
+    padding: var(--space-8);
+    padding-bottom: var(--space-16);
+    background-color: transparent;
+  }
+
+  .tienda__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .tienda__section-label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-gray-60);
+    margin: 0;
+    text-align: center;
+  }
+
+  .tienda__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5.5vw, 6rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--color-black);
+    text-wrap: balance;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .tienda__title-line {
+    display: block;
+  }
+
+  .tienda__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tienda__filter-btn {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid var(--color-gray-30);
+    border-radius: var(--radius-sm);
+    color: var(--color-gray-60);
+    padding: 0.4em 1em;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .tienda__filter-btn.is-active,
+  .tienda__filter-btn[aria-pressed="true"] {
+    background-color: var(--color-black);
+    color: var(--color-cream);
+    border-color: var(--color-black);
+  }
+
+  .tienda__filter-btn:hover:not(.is-active) {
+    border-color: var(--color-black);
+    color: var(--color-black);
+  }
+
+  .tienda__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 2px solid var(--color-black);
+  }
+
+  .tienda__row {
+    display: grid;
+    grid-template-columns: 7rem 1fr auto auto;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--color-gray-10);
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent;
+    transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease, border-bottom-color 200ms ease;
+  }
+
+  .tienda__row.is-hidden {
+    display: none;
+  }
+
+  .tienda__row:hover {
+    background-color: var(--color-black);
+    box-shadow: var(--space-3) 0 0 0 var(--color-black), calc(-1 * var(--space-3)) 0 0 0 var(--color-black);
+    border-radius: 2px;
+    border-bottom-color: transparent;
+  }
+
+  .tienda__row-num {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-black);
+    user-select: none;
+    pointer-events: none;
+    transition: -webkit-text-stroke-color 200ms ease;
+  }
+
+  .tienda__row:hover .tienda__row-num {
+    -webkit-text-stroke-color: var(--color-cream-30);
+  }
+
+  .tienda__row-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .tienda__row-type {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-gray-60);
+    margin: 0;
+    transition: color 200ms ease;
+  }
+
+  .tienda__row:hover .tienda__row-type {
+    color: var(--color-cream-50);
+  }
+
+  .tienda__row-name {
+    font-family: var(--font-display);
+    font-size: clamp(0.875rem, 1.6vw, 1.25rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-black);
+    margin: 0;
+    line-height: 1.1;
+    transition: color 200ms ease;
+  }
+
+  .tienda__row:hover .tienda__row-name {
+    color: var(--color-cream);
+  }
+
+  .tienda__row-includes {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    color: var(--color-gray-60);
+    line-height: 1.5;
+    margin: 0;
+    transition: color 200ms ease;
+  }
+
+  .tienda__row:hover .tienda__row-includes {
+    color: var(--color-cream-50);
+  }
+
+  .tienda__row-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-1);
+  }
+
+  .tienda__row-price {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-black);
+    transition: color 200ms ease;
+    white-space: nowrap;
+  }
+
+  .tienda__row:hover .tienda__row-price {
+    color: var(--color-cream);
+  }
+
+  .tienda__row-badge {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.25em 0.75em;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    transition: border-color 200ms ease, color 200ms ease;
+  }
+
+  [data-badge-type="available"] .tienda__row-badge {
+    border: 1px solid var(--color-blue);
+    color: var(--color-blue);
+  }
+
+  [data-badge-type="on_request"] .tienda__row-badge {
+    border: 1px solid var(--color-black);
+    color: var(--color-black);
+  }
+
+  .tienda__row:hover .tienda__row-badge {
+    border-color: var(--color-cream-50);
+    color: var(--color-cream-75);
+  }
+
+  .tienda__row-cta {
+    display: inline-flex;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-black);
+    text-decoration: none;
+    border: 1px solid var(--color-black);
+    padding: 0.5em 1.25em;
+    white-space: nowrap;
+    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+  }
+
+  .tienda__row:hover .tienda__row-cta {
+    background-color: var(--color-blue);
+    color: var(--color-cream);
+    border-color: var(--color-blue);
+  }
+
+  .tienda__row-cta:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 767px) {
+    .tienda {
+      padding: var(--space-4);
+      padding-bottom: var(--space-12);
+    }
+
+    .tienda__row {
+      grid-template-columns: 4rem 1fr;
+      grid-template-rows: auto auto;
+      gap: var(--space-2);
+      padding: var(--space-3) 0;
+    }
+
+    .tienda__row-num {
+      grid-row: 1 / 3;
+      font-size: clamp(2.5rem, 14vw, 4.5rem);
+    }
+
+    .tienda__row-info {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .tienda__row-meta {
+      grid-column: 2;
+      grid-row: 2;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .tienda__row-cta {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      justify-content: center;
+    }
+
+    .tienda__row:hover {
+      box-shadow: var(--space-2) 0 0 0 var(--color-black), calc(-1 * var(--space-2)) 0 0 0 var(--color-black);
+    }
+  }
+</style>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.tienda__filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.tienda__row');
+
+  btns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btns.forEach((b) => {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      const filter = btn.dataset.filter ?? 'TODOS';
+
+      cards.forEach((card) => {
+        if (filter === 'TODOS') {
+          card.classList.remove('is-hidden');
+          card.removeAttribute('aria-hidden');
+        } else {
+          const cats = card.dataset.categories ?? '';
+          if (cats.split(',').includes(filter)) {
+            card.classList.remove('is-hidden');
+            card.removeAttribute('aria-hidden');
+          } else {
+            card.classList.add('is-hidden');
+            card.setAttribute('aria-hidden', 'true');
+          }
+        }
+      });
+    });
+  });
+</script>

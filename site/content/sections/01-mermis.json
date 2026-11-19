@@ -1,0 +1,29 @@
+{
+  "id": "mermis",
+  "section_number": "01",
+  "section_label": "PRÓXIMAMENTE",
+  "status_label": "PROYECTO EN DESARROLLO · 2026",
+  "title": {
+    "line_1": "Mermis.",
+    "line_2": "Llega este año.",
+    "highlight": "line_2"
+  },
+  "pitch": "Tu pasión por la cocina es grande. ¿Y las mermas? Ese enemigo silencioso que drena la rentabilidad de tu negocio.",
+  "spec_sheet": [
+    { "label": "TIPO", "value": "SaaS web para gastronomía" },
+    { "label": "ROL", "value": "Co-fundador · Frontend & UX/UI" },
+    { "label": "ESTADO", "value": "En desarrollo · Lanza 2026" }
+  ],
+  "waitlist": {
+    "enabled": true,
+    "title": "Sé el primero en saber cuándo lanzamos.",
+    "placeholder": "tu@email.com",
+    "button": "AVÍSAME",
+    "disclaimer": "Sin spam. Solo el día del lanzamiento."
+  },
+  "media": {
+    "type": "placeholder",
+    "src": null,
+    "alt": "Mockup de Mermis (próximamente)"
+  }
+}

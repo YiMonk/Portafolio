@@ -1,0 +1,10 @@
+{
+  "id": "proyectos",
+  "section_number": "04",
+  "section_label": "PROYECTOS",
+  "filters": ["TODOS", "DEV", "UX/UI", "BRANDING", "ICONOS"],
+  "layout": {
+    "type": "masonry",
+    "columns": { "desktop": 3, "tablet": 2, "mobile": 1 }
+  }
+}

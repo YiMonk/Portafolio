@@ -1,0 +1,128 @@
+@import './reset.css';
+@import './tokens.css';
+@import './reveal.css';
+
+html {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-black);
+  font-family: var(--font-body);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+::selection {
+  background-color: var(--color-blue);
+  color: var(--color-cream);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+}
+
+/* Las secciones siempre por encima del personaje */
+section {
+  position: relative;
+  z-index: 2;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  scroll-margin-top: var(--nav-height);
+}
+
+/*
+ * Shared portrait frame for the rectangular character photos. Put it on the
+ * element that wraps the <picture>/<img>. Visual only: it never sets transform
+ * or position offsets, so outer-position / inner-animation rules still apply.
+ * The tint uses the theme blue, so it harmonizes the different studio
+ * backdrops in both light and dark themes.
+ */
+.portrait {
+  position: relative;
+  border: 1px solid var(--color-gray-30);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(10, 10, 10, 0.22);
+  background-color: var(--color-gray-10);
+}
+
+.portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--color-blue) 22%, transparent),
+    color-mix(in srgb, var(--color-blue) 8%, transparent)
+  );
+  pointer-events: none;
+}
+
+.silhouette img {
+  filter: drop-shadow(0 4px 8px rgba(10, 10, 10, 0.18));
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 200;
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-blue);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-0.5rem);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.skip-link:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  outline: 2px solid var(--color-cream);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  /* El marquee se pausa en lugar de desaparecer para preservar el layout */
+  .contacto__marquee {
+    animation: marquee-scroll 26s linear infinite !important;
+    animation-play-state: paused !important;
+  }
+  .contacto__marquee--reverse {
+    animation: marquee-scroll-reverse 34s linear infinite !important;
+    animation-play-state: paused !important;
+  }
+  .contacto__marquee--slow {
+    animation: marquee-scroll 40s linear infinite !important;
+    animation-play-state: paused !important;
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "groups": [
+    {
+      "id": "desarrollo",
+      "label": "DESARROLLO",
+      "order": 1,
+      "tools": [
+        { "name": "HTML", "icon": "simple-icons:html5", "order": 1 },
+        { "name": "CSS", "icon": "simple-icons:css3", "order": 2 },
+        { "name": "JavaScript", "icon": "simple-icons:javascript", "order": 3 },
+        { "name": "React", "icon": "simple-icons:react", "order": 4 }
+      ]
+    },
+    {
+      "id": "diseno",
+      "label": "DISEÑO",
+      "order": 2,
+      "tools": [
+        { "name": "Figma", "icon": "simple-icons:figma", "order": 1 },
+        { "name": "Photoshop", "icon": "simple-icons:adobephotoshop", "order": 2 },
+        { "name": "Illustrator", "icon": "simple-icons:adobeillustrator", "order": 3 }
+      ]
+    },
+    {
+      "id": "herramientas",
+      "label": "HERRAMIENTAS",
+      "order": 3,
+      "tools": [
+        { "name": "Bacula", "icon": "mdi:database-outline", "order": 1 },
+        { "name": "Grafana", "icon": "simple-icons:grafana", "order": 2 },
+        { "name": "Zabbix", "icon": "mdi:server-network-outline", "order": 3 }
+      ]
+    }
+  ]
+}

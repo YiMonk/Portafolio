@@ -1,0 +1,35 @@
+{
+  "filters": ["TODOS", "DISEÑO", "DEV", "DISPONIBLE AHORA", "POR ENCARGO"],
+  "items": [
+    {
+      "id": "pack-iconos-linea",
+      "order": 1,
+      "name": "Pack de Iconos Línea",
+      "type": "Iconografía",
+      "categories": ["DISEÑO", "DISPONIBLE AHORA"],
+      "status": "available",
+      "includes": "120 iconos · SVG + PNG",
+      "preview": { "image": "/assets/products/pack-iconos-linea/preview.png", "aspect_ratio": "1:1" },
+      "gallery": [],
+      "pricing": { "type": "fixed", "amount": null, "currency": "USD" },
+      "cta": { "text": "Comprar", "action": "contact", "prefill_subject": "Compra · Pack de Iconos Línea" },
+      "badge": "DISPONIBLE",
+      "visible": false
+    },
+    {
+      "id": "plantilla-figma-dashboard",
+      "order": 2,
+      "name": "Plantilla Dashboard (Figma)",
+      "type": "Plantilla Figma",
+      "categories": ["DISEÑO", "DEV", "POR ENCARGO"],
+      "status": "on_request",
+      "includes": "Sistema de dashboard personalizable",
+      "preview": { "image": "/assets/products/plantilla-dashboard/preview.png", "aspect_ratio": "4:3" },
+      "gallery": [],
+      "pricing": { "type": "consult", "amount": null, "currency": null },
+      "cta": { "text": "Solicitar", "action": "contact", "prefill_subject": "Encargo · Plantilla Dashboard personalizada" },
+      "badge": "POR ENCARGO",
+      "visible": true
+    }
+  ]
+}

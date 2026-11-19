@@ -1,0 +1,54 @@
+{
+  "items": [
+    {
+      "id": "desarrollo-frontend",
+      "order": 1,
+      "name": "Desarrollo Frontend",
+      "for_whom": "Para founders y equipos que necesitan llevar su producto al navegador.",
+      "includes": [
+        "Maquetación responsive y accesible",
+        "Interfaces con React",
+        "Integración con APIs y datos",
+        "Productos con modelo de suscripción (SaaS)",
+        "Optimización de performance"
+      ],
+      "deliverables": "Código limpio, documentado y desplegado.",
+      "pricing": { "type": "from", "amount": null, "currency": "USD", "label": "Desde" },
+      "cta": { "text": "Cotizar desarrollo", "prefill_subject": "Cotización · Desarrollo Frontend" },
+      "visible": true
+    },
+    {
+      "id": "diseno-ux-ui",
+      "order": 2,
+      "name": "Diseño UX/UI",
+      "for_whom": "Para equipos y founders que necesitan diseñar la experiencia de su producto.",
+      "includes": [
+        "Research y wireframes",
+        "Diseño de interfaces en Figma",
+        "Prototipado interactivo",
+        "Sistema de diseño y componentes",
+        "Handoff para desarrollo"
+      ],
+      "deliverables": "Archivo Figma organizado, prototipo navegable y guía de estilos.",
+      "pricing": { "type": "from", "amount": null, "currency": "USD", "label": "Desde" },
+      "cta": { "text": "Cotizar diseño", "prefill_subject": "Cotización · Diseño UX/UI" },
+      "visible": true
+    },
+    {
+      "id": "identidad-visual",
+      "order": 3,
+      "name": "Identidad Visual",
+      "for_whom": "Para marcas y proyectos que necesitan presencia visual sólida.",
+      "includes": [
+        "Logotipo y variantes",
+        "Paleta de color y tipografía",
+        "Iconografía personalizada",
+        "Manual de marca básico"
+      ],
+      "deliverables": "Archivos vectoriales (AI, SVG, PDF), PNG en múltiples tamaños y manual de uso.",
+      "pricing": { "type": "consult", "amount": null, "currency": null, "label": "A consultar" },
+      "cta": { "text": "Consultar", "prefill_subject": "Consulta · Identidad Visual" },
+      "visible": true
+    }
+  ]
+}

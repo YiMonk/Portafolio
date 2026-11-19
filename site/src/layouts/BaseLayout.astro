@@ -14,7 +14,9 @@ interface Props {
 }
 
 const { title, description, ogImage } = Astro.props;
-const fullTitle = `${title} — Jesús Calles`;
+const fullTitle = title.includes('Jesús Calles') ? title : `${title} — Jesús Calles`;
+const canonicalUrl = new URL(Astro.url.pathname, seoData.url).href;
+const socialImage = new URL(ogImage || seoData.og_image, seoData.url).href;
 ---
 
 <!doctype html>
@@ -47,10 +49,11 @@ const fullTitle = `${title} — Jesús Calles`;
     <!-- OG -->
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content="Jesús Calles — Frontend, UX/UI y diseño visual" />
     <meta property="og:type" content="website" />
-    {seoData.url && <link rel="canonical" href={`${seoData.url}${Astro.url.pathname}`} />}
-    {seoData.url && <meta property="og:url" content={`${seoData.url}${Astro.url.pathname}`} />}
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta name="twitter:card" content="summary_large_image" />
     {seoData.twitter_handle && <meta name="twitter:site" content={seoData.twitter_handle} />}
 

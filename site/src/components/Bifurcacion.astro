@@ -147,7 +147,9 @@ const { cards } = bifurcacionData;
     }
 
     .bif-route__left {
-      max-width: 65%;
+      min-width: 0;
+      max-width: 100%;
+      flex: 1;
       gap: var(--space-1);
     }
 
@@ -156,7 +158,8 @@ const { cards } = bifurcacionData;
     }
 
     .bif-route__number {
-      font-size: clamp(3.5rem, 18vw, 6rem);
+      font-size: clamp(2.5rem, 13vw, 6rem);
+      margin-left: var(--space-2);
     }
   }
 </style>

@@ -4,7 +4,7 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jesuscalles.dev',
+  site: 'https://jesus-calles.vercel.app',
   output: 'static',
   image: {
     service: { entrypoint: 'astro/assets/services/sharp' }

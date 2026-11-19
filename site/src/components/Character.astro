@@ -16,7 +16,7 @@ const { poses } = characterData;
         data-section={pose.section}
       >
         {/* Inner: solo animación. El outer maneja el posicionamiento (transform de centrado). */}
-        <div class="character__anim portrait">
+        <div class:list={["character__anim", /-(?:cutout|relaxed)\.png$/.test(pose.src_png ?? "") ? "silhouette" : "portrait"]}>
           {hasAsset && (
             <picture>
               {pose.src_mobile_webp && (
@@ -150,7 +150,10 @@ const { poses } = characterData;
   .character--pos-bottom {
     right: var(--space-8);
     bottom: 0;
-    transform: translateY(var(--peek-offset, 46%));
+    transform: translateY(var(--peek-offset, 35%));
+  }
+  .character--peek img {
+    filter: drop-shadow(0 4px 8px rgba(10, 10, 10, 0.18));
   }
   .character--pos-center {
     left: 50%;
@@ -190,6 +193,8 @@ const { poses } = characterData;
 
     .character.is-active .character__anim,
     .character.is-entering .character__anim { opacity: 0.35; }
+    .character--peek.is-active .character__anim,
+    .character--peek.is-entering .character__anim { opacity: 0.92; }
   }
 
   .character img {

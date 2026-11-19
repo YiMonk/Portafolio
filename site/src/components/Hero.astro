@@ -1,8 +1,5 @@
 ---
 import heroData from '../../content/sections/00-hero.json';
-import characterData from '../../content/global/character.json';
-
-const saludoPose = characterData.poses.find((p) => p.section === '00');
 ---
 
 <section id="section-00" data-section-number="00" class="hero">
@@ -17,18 +14,15 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
     <p class="hero__subtitle">{heroData.subtitle}</p>
   </div>
 
-  {saludoPose?.src_png && (
     <div class="hero__character" aria-hidden="true">
-      <div class="portrait hero__portrait">
+      <div class="hero__portrait">
       <picture>
-        {saludoPose.src_mobile_webp && (
-          <source srcset={saludoPose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />
-        )}
-        {saludoPose.src_webp && <source srcset={saludoPose.src_webp} type="image/webp" />}
+        <source srcset="/assets/character/00-saludo-relaxed-mobile.webp" media="(max-width: 767px)" type="image/webp" />
+        <source srcset="/assets/character/00-saludo-relaxed.webp" type="image/webp" />
         <img
-          src={saludoPose.src_png}
-          width={saludoPose.width}
-          height={saludoPose.height}
+          src="/assets/character/00-saludo-relaxed.png"
+          width="1125"
+          height="1398"
           alt=""
           draggable="false"
           loading="eager"
@@ -38,7 +32,6 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
       </picture>
       </div>
     </div>
-  )}
 
   <div class="hero__identity">
     <p>{heroData.identity.greeting}</p>
@@ -181,8 +174,10 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
   @media (max-width: 767px) {
     /* Stacked rows: tagline / portrait (fills what is left) / identity. Nothing overlaps. */
     .hero {
+      height: auto;
+      min-height: calc(100dvh - var(--nav-height));
       grid-template-columns: 1fr;
-      grid-template-rows: auto minmax(0, 1fr) auto;
+      grid-template-rows: auto minmax(12rem, 1fr) auto;
       align-items: stretch;
       row-gap: var(--space-2);
       padding: var(--space-3) var(--space-4) var(--space-4);
@@ -194,6 +189,9 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
       align-self: start;
       padding-bottom: 0;
     }
+
+    .hero__tagline { font-size: clamp(2rem, 8vw, 3rem); }
+    .hero__subtitle { font-size: 0.75rem; line-height: 1.5; }
 
     .hero__character {
       grid-column: 1;
@@ -211,7 +209,7 @@ const saludoPose = characterData.poses.find((p) => p.section === '00');
 
     .hero__character img {
       width: auto;
-      height: 100%;
+      height: min(40vh, 24rem);
       max-width: 100%;
     }
 

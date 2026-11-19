@@ -61,6 +61,10 @@ section {
   pointer-events: none;
 }
 
+.silhouette img {
+  filter: drop-shadow(0 4px 8px rgba(10, 10, 10, 0.18));
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

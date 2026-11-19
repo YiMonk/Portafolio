@@ -40,12 +40,45 @@
   --transition-base: 250ms ease;
   --transition-slow: 400ms ease;
 
+  /* Motion: scroll reveal */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --reveal-duration: 700ms;
+  --reveal-duration-title: 500ms;
+  --reveal-distance: 16px;
+  --reveal-stagger: 80ms;
+
   /* Breakpoints (para uso en JS si hace falta; en CSS usar media queries directas) */
   --bp-tablet: 768px;
   --bp-desktop: 1200px;
 
   /* Nav */
   --nav-height: 3rem;
+
+  /* Backdrop (light): misty blue-grey ridges, slightly darker than cream, fading with distance */
+  --bd-ridge-1: #e3e5e9;
+  --bd-ridge-2: #dadee5;
+  --bd-ridge-3: #cdd3dd;
+  --bd-ridge-4: #bfc8d5;
+  --bd-haze: rgba(237, 234, 227, 0.45);
+  --bd-glow: rgba(44, 95, 246, 0.14);
+  --bd-lit: rgba(255, 255, 255, 0.35);
+  --bd-shade: rgba(40, 60, 100, 0.10);
+  --bd-sun-core: #f4f7ff;
+  --bd-sun-edge: rgba(170, 195, 255, 0.6);
+  --bd-sun-halo: rgba(90, 130, 255, 0.25);
+  --bd-opacity: 0.6;
+  --bd-rim: rgba(44, 95, 246, 0.22);
+
+  /* Backdrop3D (light): misty blue-grey terrain, cool sun glow; fog uses --color-cream */
+  --bd3-shadow: #bdc8d8;
+  --bd3-mid: #cfd6e2;
+  --bd3-lit: #f4f8ff;
+  --bd3-sun: #eaf1ff;
+  --bd3-halo: #7fa0ff;
+  --bd3-lit-k: 0.7;
+  --bd3-rim-k: 0.6;
+  --bd3-halo-alpha: 0.35;
 }
 
 [data-theme="dark"] {
@@ -62,4 +95,29 @@
   --color-cream-60: rgba(14, 14, 14, 0.60);
   --color-cream-50: rgba(14, 14, 14, 0.50);
   --color-cream-30: rgba(14, 14, 14, 0.30);
+
+  /* Backdrop (dark): dim planet, near-black blue-greys with a faint cold rim */
+  --bd-ridge-1: #1e2a42;
+  --bd-ridge-2: #162033;
+  --bd-ridge-3: #0f1624;
+  --bd-ridge-4: #090c12;
+  --bd-haze: rgba(40, 60, 110, 0.14);
+  --bd-glow: rgba(60, 110, 255, 0.22);
+  --bd-lit: rgba(120, 160, 255, 0.18);
+  --bd-shade: rgba(0, 0, 0, 0.35);
+  --bd-sun-core: #dfe8ff;
+  --bd-sun-edge: rgba(150, 185, 255, 0.6);
+  --bd-sun-halo: rgba(80, 120, 255, 0.35);
+  --bd-opacity: 0.6;
+  --bd-rim: rgba(91, 126, 255, 0.30);
+
+  /* Backdrop3D (dark): near-black blue-grey terrain, cold blue rim; fog uses --color-cream */
+  --bd3-shadow: #06080d;
+  --bd3-mid: #101828;
+  --bd3-lit: #5878d8;
+  --bd3-sun: #86a0e6; /* capped so text over the disc stays >= AA */
+  --bd3-halo: #4f7bff;
+  --bd3-lit-k: 0.6;
+  --bd3-rim-k: 0.7;
+  --bd3-halo-alpha: 0.55;
 }

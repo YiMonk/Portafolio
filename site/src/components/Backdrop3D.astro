@@ -1,0 +1,57 @@
+---
+/**
+ * Backdrop3D: fixed WebGL canvas (Three.js) with a procedural dim-planet valley.
+ * The SVG <Backdrop /> stays in the DOM as the fallback and is hidden only after
+ * the canvas has rendered its first frame (html.has-3d, then has-3d-done).
+ * three is loaded lazily after window.load + idle. Escape hatch: add `?no3d`
+ * to the URL to skip the 3D layer and keep the SVG backdrop.
+ */
+---
+
+<canvas id="backdrop3d" class="backdrop3d" aria-hidden="true"></canvas>
+
+<style is:global>
+  .backdrop3d {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 900ms ease;
+  }
+
+  html.has-3d .backdrop3d {
+    opacity: var(--bd-opacity);
+  }
+
+  /* SVG fallback is retired only once the canvas crossfade has finished */
+  html.has-3d-done .backdrop {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .backdrop3d {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('backdrop3d') as HTMLCanvasElement | null;
+
+  if (canvas && !new URLSearchParams(location.search).has('no3d')) {
+    const run = () => {
+      import('../scripts/backdrop3d.ts')
+        .then((m) => m.init(canvas))
+        .catch((err) => console.warn('[backdrop3d] falling back to the SVG backdrop:', err));
+    };
+    const kick = () => {
+      if ('requestIdleCallback' in window) window.requestIdleCallback(run, { timeout: 2500 });
+      else setTimeout(run, 600);
+    };
+    if (document.readyState === 'complete') kick();
+    else window.addEventListener('load', kick, { once: true });
+  }
+</script>

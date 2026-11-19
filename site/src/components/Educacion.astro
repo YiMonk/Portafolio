@@ -10,16 +10,16 @@ const cursos = educacionData.items
 
 <section id="section-08" data-section-number="08" class="educacion">
   <div class="educacion__content">
-    <p class="educacion__section-label">§ {section_number} · {section_label}</p>
+    <p class="educacion__section-label" data-reveal>§ {section_number} · {section_label}</p>
 
-    <h2 class="educacion__title">
+    <h2 class="educacion__title" data-reveal>
       <span class="educacion__title-line">{title.line_1}</span>
       <span class="educacion__title-line educacion__highlight">{title.line_2}</span>
     </h2>
 
-    <div class="educacion__list" role="list">
+    <div class="educacion__list" role="list" data-reveal-group>
       {cursos.map((curso) => (
-        <div class="educacion__row" role="listitem">
+        <div class="educacion__row" role="listitem" data-reveal>
           <span class="educacion__row-year">{curso.year}</span>
           <div class="educacion__row-info">
             <p class="educacion__row-title">{curso.title}</p>
@@ -54,7 +54,7 @@ const cursos = educacionData.items
     align-items: start;
     padding: var(--space-8);
     padding-top: var(--space-8);
-    background-color: var(--color-cream);
+    background-color: transparent;
   }
 
   .educacion__content {

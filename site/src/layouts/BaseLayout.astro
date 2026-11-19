@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Character from '../components/Character.astro';
+import Backdrop from '../components/Backdrop.astro';
+import Backdrop3D from '../components/Backdrop3D.astro';
 import Footer from '../components/Footer.astro';
 import seoData from '../../content/global/seo.json';
 
@@ -12,7 +14,9 @@ interface Props {
 }
 
 const { title, description, ogImage } = Astro.props;
-const fullTitle = `${title} — Jesús Calles`;
+const fullTitle = title.includes('Jesús Calles') ? title : `${title} — Jesús Calles`;
+const canonicalUrl = new URL(Astro.url.pathname, seoData.url).href;
+const socialImage = new URL(ogImage || seoData.og_image, seoData.url).href;
 ---
 
 <!doctype html>
@@ -29,6 +33,14 @@ const fullTitle = `${title} — Jesús Calles`;
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
+    <!-- Scroll reveal: hide [data-reveal] only when JS + IntersectionObserver are available and motion is allowed -->
+    <script is:inline>
+      (function() {
+        if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('js-reveal');
+        }
+      })();
+    </script>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -37,10 +49,11 @@ const fullTitle = `${title} — Jesús Calles`;
     <!-- OG -->
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content="Jesús Calles — Frontend, UX/UI y diseño visual" />
     <meta property="og:type" content="website" />
-    {seoData.url && <link rel="canonical" href={`${seoData.url}${Astro.url.pathname}`} />}
-    {seoData.url && <meta property="og:url" content={`${seoData.url}${Astro.url.pathname}`} />}
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta name="twitter:card" content="summary_large_image" />
     {seoData.twitter_handle && <meta name="twitter:site" content={seoData.twitter_handle} />}
 
@@ -59,11 +72,16 @@ const fullTitle = `${title} — Jesús Calles`;
   <body>
     <a href="#main-content" class="skip-link">Saltar al contenido</a>
     <Nav />
+    <Backdrop />
+    <Backdrop3D />
     <Character />
     <main id="main-content">
       <slot />
     </main>
     <Footer />
+    <script>
+      import '../scripts/reveal.ts';
+    </script>
   </body>
 </html>
 

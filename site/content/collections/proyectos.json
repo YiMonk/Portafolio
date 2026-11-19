@@ -10,7 +10,7 @@
       "year": 2026,
       "status": "in_progress",
       "featured": true,
-      "cover": { "image": "/assets/projects/mermis/Login.png", "aspect_ratio": "4:5" },
+      "cover": { "image": "/assets/projects/mermis/Login.png", "aspect_ratio": "1286:673" },
       "case_study": { "enabled": true, "slug": "mermis" },
       "links": { "live": null, "github": null },
       "visible": true

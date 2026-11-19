@@ -6,10 +6,12 @@
       "pose": "saludo",
       "mode": "hidden",
       "position": null,
-      "src_png": "/assets/character/00-saludo.png",
-      "src_webp": null,
+      "src_png": "/assets/character/00-saludo-relaxed.png",
+      "src_webp": "/assets/character/00-saludo-relaxed.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/00-saludo-relaxed-mobile.webp",
+      "width": 1125,
+      "height": 1398
     },
     {
       "section": "01",
@@ -17,10 +19,12 @@
       "pose": "tipeando",
       "mode": "hidden",
       "position": null,
-      "src_png": "/assets/character/01-tipeando.png",
-      "src_webp": null,
+      "src_png": "/assets/character/01-tipeando-relaxed.png",
+      "src_webp": "/assets/character/01-tipeando-relaxed.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/01-tipeando-relaxed-mobile.webp",
+      "width": 1126,
+      "height": 1397
     },
     {
       "section": "02",
@@ -39,10 +43,12 @@
       "pose": "pensativo",
       "mode": "partial",
       "position": "right",
-      "src_png": "/assets/character/03-pensativo.png",
-      "src_webp": null,
+      "src_png": "/assets/character/03-pensativo-relaxed.png",
+      "src_webp": "/assets/character/03-pensativo-relaxed.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/03-pensativo-relaxed-mobile.webp",
+      "width": 1126,
+      "height": 1397
     },
     {
       "section": "04",
@@ -50,10 +56,12 @@
       "pose": "asomado",
       "mode": "peek",
       "position": "bottom",
-      "src_png": "/assets/character/04-07-asomado.png",
-      "src_webp": null,
+      "src_png": "/assets/character/04-07-asomado-cutout.png",
+      "src_webp": "/assets/character/04-07-asomado-cutout.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/04-07-asomado-cutout-mobile.webp",
+      "width": 1126,
+      "height": 1397
     },
     {
       "section": "05",
@@ -61,10 +69,12 @@
       "pose": "rodeado-herramientas",
       "mode": "hidden",
       "position": null,
-      "src_png": "/assets/character/05-herramientas.png",
-      "src_webp": null,
+      "src_png": "/assets/character/05-herramientas-relaxed.png",
+      "src_webp": "/assets/character/05-herramientas-relaxed.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/05-herramientas-relaxed-mobile.webp",
+      "width": 1126,
+      "height": 1397
     },
     {
       "section": "06",
@@ -72,10 +82,12 @@
       "pose": "handshake",
       "mode": "hidden",
       "position": null,
-      "src_png": "/assets/character/06-handshake.png",
-      "src_webp": null,
+      "src_png": "/assets/character/06-handshake-relaxed.png",
+      "src_webp": "/assets/character/06-handshake-relaxed.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/06-handshake-relaxed-mobile.webp",
+      "width": 1126,
+      "height": 1397
     },
     {
       "section": "07",
@@ -83,10 +95,12 @@
       "pose": "asomado",
       "mode": "peek",
       "position": "bottom",
-      "src_png": "/assets/character/04-07-asomado.png",
-      "src_webp": null,
+      "src_png": "/assets/character/04-07-asomado-cutout.png",
+      "src_webp": "/assets/character/04-07-asomado-cutout.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/04-07-asomado-cutout-mobile.webp",
+      "width": 1126,
+      "height": 1397
     },
     {
       "section": "08",
@@ -94,10 +108,12 @@
       "pose": "leyendo",
       "mode": "partial",
       "position": "corner",
-      "src_png": "/assets/character/08-leyendo.png",
-      "src_webp": null,
+      "src_png": "/assets/character/08-leyendo-relaxed.png",
+      "src_webp": "/assets/character/08-leyendo-relaxed.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/08-leyendo-relaxed-mobile.webp",
+      "width": 1126,
+      "height": 1397
     },
     {
       "section": "09",
@@ -105,10 +121,12 @@
       "pose": "pose-actual",
       "mode": "partial",
       "position": "right",
-      "src_png": "/assets/character/09-pose-actual.png",
-      "src_webp": null,
+      "src_png": "/assets/character/09-pose-actual-relaxed.png",
+      "src_webp": "/assets/character/09-pose-actual-relaxed.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/09-pose-actual-relaxed-mobile.webp",
+      "width": 1126,
+      "height": 1397
     },
     {
       "section": "10",
@@ -116,10 +134,12 @@
       "pose": "despedida",
       "mode": "hidden",
       "position": null,
-      "src_png": "/assets/character/10-despedida.png",
-      "src_webp": null,
+      "src_png": "/assets/character/10-despedida-relaxed.png",
+      "src_webp": "/assets/character/10-despedida-relaxed.webp",
       "src_mobile_png": null,
-      "src_mobile_webp": null
+      "src_mobile_webp": "/assets/character/10-despedida-relaxed-mobile.webp",
+      "width": 1125,
+      "height": 1398
     }
   ]
 }

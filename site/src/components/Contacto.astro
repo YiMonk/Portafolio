@@ -36,7 +36,7 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
 
   <!-- Cuerpo: datos de contacto izquierda + personaje derecha -->
   <div class="contacto__body">
-    <div class="contacto__center">
+    <div class="contacto__center" data-reveal>
       <button class="contacto__pill" id="open-modal-pill" type="button">
         {cta?.text ?? 'Hablemos'} ↗
       </button>
@@ -58,8 +58,14 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
     </div>
 
     {despedidaPose?.src_png && (
-      <div class="contacto__character" aria-hidden="true">
-        <img src={despedidaPose.src_png} alt="" loading="lazy" />
+      <div class="contacto__character silhouette" aria-hidden="true" data-reveal>
+        <picture>
+          {despedidaPose.src_mobile_webp && (
+            <source srcset={despedidaPose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />
+          )}
+          {despedidaPose.src_webp && <source srcset={despedidaPose.src_webp} type="image/webp" />}
+          <img src={despedidaPose.src_png} width={despedidaPose.width} height={despedidaPose.height} alt="" loading="lazy" />
+        </picture>
       </div>
     )}
   </div>
@@ -258,7 +264,7 @@ const despedidaPose = characterData.poses.find((p) => p.section === '10');
     justify-content: center;
     padding-top: var(--space-4);
     padding-bottom: var(--space-8);
-    background-color: var(--color-cream);
+    background-color: transparent;
     overflow: hidden;
     position: relative;
     gap: 0;

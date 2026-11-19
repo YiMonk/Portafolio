@@ -15,9 +15,9 @@ const items = proyectosData.items
 
 <section id="section-04" data-section-number="04" class="proyectos">
   <div class="proyectos__inner">
-    <p class="proyectos__section-label">§ {section_number}</p>
+    <p class="proyectos__section-label" data-reveal>§ {section_number}</p>
 
-    <div class="proyectos__filters" role="group" aria-label="Filtrar proyectos">
+    <div class="proyectos__filters" role="group" aria-label="Filtrar proyectos" data-reveal>
       {filters.map((f: string) => (
         <button
           class:list={['proyectos__filter-btn', { 'is-active': f === 'TODOS' }]}
@@ -30,11 +30,12 @@ const items = proyectosData.items
       ))}
     </div>
 
-    <div class="proyectos__grid" id="proyectos-grid">
+    <div class="proyectos__grid" id="proyectos-grid" data-reveal-group>
       {items.map((item) => (
         <article
           class:list={['proyectos__card', { 'proyectos__card--featured': item.featured }]}
           data-categories={item.categories.join(',')}
+          data-reveal
         >
           <div class="proyectos__cover" style={`aspect-ratio: ${item.cssAspectRatio}`}>
             {item.usePlaceholder ? (
@@ -46,14 +47,15 @@ const items = proyectosData.items
             {item.status === 'in_progress' && (
               <span class="proyectos__badge">EN DESARROLLO</span>
             )}
+          </div>
 
-            <div class="proyectos__overlay" aria-hidden="true">
-              <p class="proyectos__overlay-category">{item.categories.join(' · ')}</p>
-              <h3 class="proyectos__overlay-title">{item.title}</h3>
-              <ul class="proyectos__overlay-tags">
-                {item.tags.map((t: string) => <li>{t}</li>)}
-              </ul>
-            </div>
+          {/* Sibling of the cover: absolute overlay on desktop, caption below the image on mobile */}
+          <div class="proyectos__overlay" aria-hidden="true">
+            <p class="proyectos__overlay-category">{item.categories.join(' · ')}</p>
+            <h3 class="proyectos__overlay-title">{item.title}</h3>
+            <ul class="proyectos__overlay-tags">
+              {item.tags.map((t: string) => <li>{t}</li>)}
+            </ul>
           </div>
 
           {item.case_study?.enabled && (
@@ -73,7 +75,7 @@ const items = proyectosData.items
   .proyectos {
     min-height: 100vh;
     padding: var(--space-8);
-    background-color: var(--color-cream);
+    background-color: transparent;
   }
 
   .proyectos__inner {
@@ -126,14 +128,19 @@ const items = proyectosData.items
     color: var(--color-black);
   }
 
+  /* Auto-fit grid: 1 card fills the row, 2+ share it. The featured card always spans the full row. */
   .proyectos__grid {
-    columns: 3;
-    column-gap: var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: var(--space-3);
+    align-items: start;
+  }
+
+  .proyectos__card--featured {
+    grid-column: 1 / -1;
   }
 
   .proyectos__card {
-    break-inside: avoid;
-    margin-bottom: var(--space-3);
     position: relative;
     overflow: hidden;
     border-radius: var(--radius-md);
@@ -142,11 +149,8 @@ const items = proyectosData.items
   }
 
   .proyectos__card.is-hidden {
-    opacity: 0;
-    visibility: hidden;
-    height: 0;
-    margin: 0;
-    overflow: hidden;
+    /* Removed from the grid flow so filtering never leaves gaps */
+    display: none;
   }
 
   .proyectos__cover {
@@ -154,6 +158,11 @@ const items = proyectosData.items
     position: relative;
     overflow: hidden;
     background-color: var(--color-gray-10);
+  }
+
+  /* Featured: cover keeps its real ratio (inline aspect-ratio); only capped on very tall viewports */
+  .proyectos__card--featured .proyectos__cover {
+    max-height: 75vh;
   }
 
   .proyectos__cover-placeholder {
@@ -215,7 +224,8 @@ const items = proyectosData.items
     font-family: var(--font-display);
     font-size: clamp(1rem, 2vw, 1.5rem);
     font-weight: 700;
-    color: var(--color-cream);
+    /* Overlay is always dark; hardcode light text so it survives dark mode */
+    color: #EDEAE3;
     margin: 0 0 var(--space-2) 0;
     line-height: 1.1;
   }
@@ -234,8 +244,8 @@ const items = proyectosData.items
     font-size: 0.625rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-cream-75);
-    border: 1px solid var(--color-cream-75);
+    color: rgba(237, 234, 227, 0.75);
+    border: 1px solid rgba(237, 234, 227, 0.75);
     border-radius: var(--radius-sm);
     padding: 0.15em 0.5em;
   }
@@ -251,24 +261,26 @@ const items = proyectosData.items
     outline-offset: 4px;
   }
 
-  @media (max-width: 1199px) {
-    .proyectos__grid {
-      columns: 2;
-    }
-  }
-
   @media (max-width: 767px) {
     .proyectos {
       padding: var(--space-4);
     }
 
-    .proyectos__grid {
-      columns: 1;
+    /* No hover on touch: show the cover clean and the info as a caption below it */
+    .proyectos__overlay {
+      position: static;
+      opacity: 1;
+      background: none;
+      padding: var(--space-2) 0 0;
     }
 
-    /* Overlay siempre visible en touch — no hay hover */
-    .proyectos__overlay {
-      opacity: 1;
+    .proyectos__overlay-title {
+      color: var(--color-black);
+    }
+
+    .proyectos__overlay-tags li {
+      color: var(--color-gray-60);
+      border-color: var(--color-gray-30);
     }
   }
 </style>

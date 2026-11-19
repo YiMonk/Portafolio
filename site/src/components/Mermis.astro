@@ -7,27 +7,33 @@ const tipeandoPose = characterData.poses.find((p) => p.section === '01');
 ---
 
 <section id="section-01" data-section-number="01" class="mermis">
-  <div class="mermis__left">
-    <p class="mermis__section-label">§ {section_number} · {section_label}</p>
-    <p class="mermis__status-label">{status_label}</p>
+  <div class="mermis__left" data-reveal-group>
+    <p class="mermis__section-label" data-reveal>§ {section_number} · {section_label}</p>
+    <p class="mermis__status-label" data-reveal>{status_label}</p>
     {tipeandoPose?.src_png && (
-      <div class="mermis__character" aria-hidden="true">
-        <img src={tipeandoPose.src_png} alt="" loading="lazy" />
+      <div class="mermis__character silhouette" aria-hidden="true" data-reveal>
+        <picture>
+          {tipeandoPose.src_mobile_webp && (
+            <source srcset={tipeandoPose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />
+          )}
+          {tipeandoPose.src_webp && <source srcset={tipeandoPose.src_webp} type="image/webp" />}
+          <img src={tipeandoPose.src_png} width={tipeandoPose.width} height={tipeandoPose.height} alt="" loading="lazy" />
+        </picture>
       </div>
     )}
   </div>
 
-  <div class="mermis__right">
-    <h2 class="mermis__title">
+  <div class="mermis__right" data-reveal-group>
+    <h2 class="mermis__title" data-reveal>
       <span class="mermis__title-line">{title.line_1}</span>
       <span class={`mermis__title-line${title.highlight === 'line_2' ? ' mermis__title-line--highlight' : ''}`}>
         {title.line_2}
       </span>
     </h2>
 
-    <p class="mermis__pitch">{pitch}</p>
+    <p class="mermis__pitch" data-reveal>{pitch}</p>
 
-    <dl class="mermis__spec">
+    <dl class="mermis__spec" data-reveal>
       {spec_sheet.map((item) => (
         <div class="mermis__spec-row">
           <dt>{item.label}</dt>
@@ -37,15 +43,15 @@ const tipeandoPose = characterData.poses.find((p) => p.section === '01');
     </dl>
 
     {media.src !== null ? (
-      <img src={media.src} alt={media.alt} class="mermis__media" />
+      <img src={media.src} alt={media.alt} class="mermis__media" data-reveal="image" />
     ) : (
-      <div class="mermis__media-placeholder">
+      <div class="mermis__media-placeholder" data-reveal="image">
         <span>{media.alt}</span>
       </div>
     )}
 
     {waitlist.enabled && (
-      <div class="mermis__form-wrapper">
+      <div class="mermis__form-wrapper" data-reveal>
         <p class="mermis__form-title">{waitlist.title}</p>
         <form class="mermis__form" novalidate>
           <label for="mermis-email" class="sr-only">{waitlist.placeholder}</label>
@@ -100,7 +106,7 @@ const tipeandoPose = characterData.poses.find((p) => p.section === '01');
     align-items: center;
     padding: var(--space-8);
     gap: var(--space-8);
-    background-color: var(--color-cream);
+    background-color: transparent;
   }
 
   .mermis__left {

@@ -6,9 +6,9 @@ const { section_number, section_label, title, intro, updated, location, states }
 
 <section id="section-09" data-section-number="09" class="ahora">
   <div class="ahora__content">
-    <p class="ahora__section-label">§ {section_number} · {section_label}</p>
+    <p class="ahora__section-label" data-reveal>§ {section_number} · {section_label}</p>
 
-    <h2 class="ahora__title">
+    <h2 class="ahora__title" data-reveal>
       <span class="ahora__title-line">{title.line_1}</span>
       <span class="ahora__title-line">
         {(() => {
@@ -22,7 +22,7 @@ const { section_number, section_label, title, intro, updated, location, states }
       </span>
     </h2>
 
-    <div class="ahora__intro">
+    <div class="ahora__intro" data-reveal>
       <p class="ahora__intro-text">
         Una página corta sobre lo que <em class="ahora__intro-em">{intro.highlight}</em> estoy haciendo ahora mismo.
       </p>
@@ -30,9 +30,9 @@ const { section_number, section_label, title, intro, updated, location, states }
       <p class="ahora__meta">{location}</p>
     </div>
 
-    <div class="ahora__states">
+    <div class="ahora__states" data-reveal-group>
       {states.map((state) => (
-        <div class="ahora__state">
+        <div class="ahora__state" data-reveal>
           <span class="ahora__state-label">{state.label}</span>
           <p class="ahora__state-text">{state.text}</p>
         </div>
@@ -49,7 +49,7 @@ const { section_number, section_label, title, intro, updated, location, states }
     align-items: start;
     padding: var(--space-8);
     padding-top: var(--space-8);
-    background-color: var(--color-cream);
+    background-color: transparent;
   }
 
   .ahora__content {

@@ -16,15 +16,20 @@ const { poses } = characterData;
         data-section={pose.section}
       >
         {/* Inner: solo animación. El outer maneja el posicionamiento (transform de centrado). */}
-        <div class="character__anim">
+        <div class:list={["character__anim", /-(?:cutout|relaxed)\.png$/.test(pose.src_png ?? "") ? "silhouette" : "portrait"]}>
           {hasAsset && (
             <picture>
+              {pose.src_mobile_webp && (
+                <source srcset={pose.src_mobile_webp} media="(max-width: 767px)" type="image/webp" />
+              )}
               {pose.src_webp && (
                 <source srcset={pose.src_webp} type="image/webp" />
               )}
               {pose.src_png && (
                 <img
                   src={pose.src_png}
+                  width={pose.width}
+                  height={pose.height}
                   alt=""
                   aria-hidden="true"
                   draggable="false"
@@ -141,10 +146,14 @@ const { poses } = characterData;
     top: 50%;
     transform: translateY(-50%);
   }
+  /* Peek: tucked into the bottom-right corner so it never covers centered content */
   .character--pos-bottom {
-    left: 50%;
+    right: var(--space-8);
     bottom: 0;
-    transform: translateX(-50%) translateY(var(--peek-offset, 40%));
+    transform: translateY(var(--peek-offset, 35%));
+  }
+  .character--peek img {
+    filter: drop-shadow(0 4px 8px rgba(10, 10, 10, 0.18));
   }
   .character--pos-center {
     left: 50%;
@@ -161,14 +170,31 @@ const { poses } = characterData;
     bottom: var(--space-4);
   }
 
+  /* Ahora (09): anchor under the nav, in the right gutter, so it clears the
+     centered title and the status rows below it (outer = position only). */
+  .character[data-section="09"] {
+    top: calc(var(--nav-height, 3rem) + var(--space-4));
+    width: clamp(160px, 21vw, 300px);
+    transform: none;
+  }
+
   /* ── Mobile ── */
   @media (max-width: 767px) {
     .character--full    { width: clamp(140px, 50vw, 240px); }
     .character--partial { width: clamp(100px, 35vw, 180px); }
     .character--peek    { width: clamp(80px, 28vw, 140px); }
 
+    /* Partial poses (03, 08, 09) always cross text on narrow screens: keep them in
+       layout (so dash vectors still resolve) but never paint or capture them. */
+    .character--partial,
+    .character[data-section="09"] {
+      visibility: hidden;
+    }
+
     .character.is-active .character__anim,
     .character.is-entering .character__anim { opacity: 0.35; }
+    .character--peek.is-active .character__anim,
+    .character--peek.is-entering .character__anim { opacity: 0.92; }
   }
 
   .character img {
@@ -212,7 +238,11 @@ const { poses } = characterData;
     const nextNum = String(parseInt(num) + 1).padStart(2, '0');
     const nextEl = sectionMap.get(nextNum);
     if (!nextEl) return;
-    const src = nextEl.querySelector('img')?.src;
+    // Prefetch the WebP variant for the current viewport, never the heavy PNG fallback.
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const sources = nextEl.querySelectorAll<HTMLSourceElement>('source');
+    const match = isMobile ? sources[0] : sources[sources.length - 1];
+    const src = match?.srcset ?? nextEl.querySelector('img')?.src;
     if (src && !document.head.querySelector(`link[rel="prefetch"][href="${src}"]`)) {
       const link = document.createElement('link');
       link.rel = 'prefetch';

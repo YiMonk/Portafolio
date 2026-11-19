@@ -4,9 +4,9 @@ import bifurcacionData from '../../content/sections/02-bifurcacion.json';
 const { cards } = bifurcacionData;
 ---
 
-<section id="section-02" data-section-number="02" class="bifurcacion">
+<section id="section-02" data-section-number="02" class="bifurcacion" data-reveal-group>
   {cards.map((card) => (
-    <a class="bif-route" href={card.cta.href}>
+    <a class="bif-route" href={card.cta.href} data-reveal>
       <div class="bif-route__left">
         <p class="bif-route__headline">{card.headline}</p>
         <p class="bif-route__description">{card.description}</p>
@@ -23,7 +23,7 @@ const { cards } = bifurcacionData;
     display: flex;
     flex-direction: column;
     border-top: 2px solid var(--color-black);
-    background-color: var(--color-cream);
+    background-color: transparent;
   }
 
   .bif-route {
@@ -147,7 +147,9 @@ const { cards } = bifurcacionData;
     }
 
     .bif-route__left {
-      max-width: 65%;
+      min-width: 0;
+      max-width: 100%;
+      flex: 1;
       gap: var(--space-1);
     }
 
@@ -156,7 +158,8 @@ const { cards } = bifurcacionData;
     }
 
     .bif-route__number {
-      font-size: clamp(3.5rem, 18vw, 6rem);
+      font-size: clamp(2.5rem, 13vw, 6rem);
+      margin-left: var(--space-2);
     }
   }
 </style>

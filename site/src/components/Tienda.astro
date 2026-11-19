@@ -31,13 +31,13 @@ const productos = productosData.items
 
 <section id="section-07" data-section-number="07" class="tienda">
   <div class="tienda__inner">
-    <p class="tienda__section-label">§ {section_number} · {section_label}</p>
-    <h2 class="tienda__title">
+    <p class="tienda__section-label" data-reveal>§ {section_number} · {section_label}</p>
+    <h2 class="tienda__title" data-reveal>
       <span class="tienda__title-line">{title.line_1}</span>
       <span class="tienda__title-line">{title.line_2}</span>
     </h2>
 
-    <div class="tienda__filters" role="group" aria-label="Filtrar recursos">
+    <div class="tienda__filters" role="group" aria-label="Filtrar recursos" data-reveal>
       {filters.map((f: string) => (
         <button
           class:list={['tienda__filter-btn', { 'is-active': f === 'TODOS' }]}
@@ -50,12 +50,13 @@ const productos = productosData.items
       ))}
     </div>
 
-    <div class="tienda__list" id="tienda-grid">
+    <div class="tienda__list" id="tienda-grid" data-reveal-group>
       {productos.map((p, index) => (
         <article
           class="tienda__row"
           data-categories={p.categories.join(',')}
           data-badge-type={p.badgeType}
+          data-reveal
         >
           <span class="tienda__row-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
           <div class="tienda__row-info">
@@ -85,7 +86,7 @@ const productos = productosData.items
     min-height: 100vh;
     padding: var(--space-8);
     padding-bottom: var(--space-16);
-    background-color: var(--color-cream);
+    background-color: transparent;
   }
 
   .tienda__inner {

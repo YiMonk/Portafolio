@@ -11,18 +11,18 @@ const after = line1Parts[1] || '';
 
 <section id="section-03" data-section-number="03" class="sobre-mi">
   <div class="sobre-mi__content">
-    <p class="sobre-mi__section-label">§ {section_number} · {section_label}</p>
+    <p class="sobre-mi__section-label" data-reveal>§ {section_number} · {section_label}</p>
 
-    <h2 class="sobre-mi__title">
+    <h2 class="sobre-mi__title" data-reveal>
       <span class="sobre-mi__title-line">
         {before}<span class="sobre-mi__highlight">{title.highlight_text}</span>{after}
       </span>
       <span class="sobre-mi__title-line">{title.line_2}</span>
     </h2>
 
-    <div class="sobre-mi__columns">
+    <div class="sobre-mi__columns" data-reveal-group>
       {columns.map((col) => (
-        <div class="sobre-mi__col">
+        <div class="sobre-mi__col" data-reveal>
           <h3 class="sobre-mi__col-heading">{col.heading}</h3>
           <p class="sobre-mi__col-text">{col.text}</p>
         </div>
@@ -38,7 +38,7 @@ const after = line1Parts[1] || '';
     grid-template-columns: 1fr 1fr;
     align-items: center;
     padding: var(--space-8);
-    background-color: var(--color-cream);
+    background-color: transparent;
   }
 
   .sobre-mi__content {
